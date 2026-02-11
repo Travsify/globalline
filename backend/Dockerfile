@@ -4,10 +4,11 @@ FROM php:8.2-apache
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     libzip-dev \
+    libicu-dev \
     unzip \
     git \
     curl \
-    && docker-php-ext-install pdo_pgsql bcmath zip
+    && docker-php-ext-install pdo_pgsql bcmath zip intl
 
 # 2. Install Node.js (for building frontend assets)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
