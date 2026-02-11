@@ -75,6 +75,7 @@
             <!-- Desktop Nav -->
             <div class="hidden lg:flex items-center space-x-10 text-white/90 font-semibold tracking-wide text-sm">
                 <a href="{{ url('/') }}" class="hover:text-brand-gold transition-soft @if(Request::is('/')) text-brand-gold @endif">Home</a>
+                <a href="{{ route('marketplace.index') }}" class="hover:text-brand-gold transition-soft @if(Request::is('marketplace*')) text-brand-gold @endif">Marketplace</a>
                 <a href="{{ url('/services') }}" class="hover:text-brand-gold transition-soft @if(Request::is('services')) text-brand-gold @endif">Services</a>
                 <a href="{{ url('/how-it-works') }}" class="hover:text-brand-gold transition-soft @if(Request::is('how-it-works')) text-brand-gold @endif">How It Works</a>
                 <a href="{{ url('/about') }}" class="hover:text-brand-gold transition-soft @if(Request::is('about')) text-brand-gold @endif">About Us</a>
@@ -83,9 +84,18 @@
 
             <!-- CTA -->
             <div class="hidden lg:block">
-                <a href="/portal/dashboard" class="bg-brand-gold hover:bg-brand-goldHover text-white px-8 py-3 rounded-md font-bold text-sm tracking-widest uppercase shadow-xl transition-soft active:scale-95">
-                    Get Started
-                </a>
+                @auth
+                    <a href="{{ route('portal.dashboard') }}" class="bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-8 py-3 rounded-xl font-black text-xs tracking-widest uppercase shadow-xl transition-soft active:scale-95 italic">
+                        Terminal Dashboard
+                    </a>
+                @else
+                    <div class="flex items-center space-x-6">
+                        <a href="{{ route('login') }}" class="text-white/80 hover:text-brand-gold text-xs font-black uppercase tracking-widest transition-soft italic">Login</a>
+                        <a href="{{ route('register') }}" class="bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-8 py-3 rounded-xl font-black text-xs tracking-widest uppercase shadow-xl transition-soft active:scale-95 italic">
+                            Get Started
+                        </a>
+                    </div>
+                @endauth
             </div>
 
             <!-- Mobile Toggle -->
@@ -106,7 +116,13 @@
             <a href="{{ url('/how-it-works') }}" class="block text-white font-bold py-2">How It Works</a>
             <a href="{{ url('/about') }}" class="block text-white font-bold py-2">About Us</a>
             <a href="{{ url('/contact') }}" class="block text-white font-bold py-2">Contact</a>
-            <a href="/portal/dashboard" class="block bg-brand-gold text-white text-center py-4 rounded-md font-bold uppercase tracking-widest">Get Started</a>
+            
+            @auth
+                <a href="{{ route('portal.dashboard') }}" class="block bg-brand-gold text-brand-navy text-center py-4 rounded-xl font-black uppercase tracking-widest italic">Go to Portal</a>
+            @else
+                <a href="{{ route('login') }}" class="block text-white text-center py-4 font-bold border border-white/10 rounded-xl">Login</a>
+                <a href="{{ route('register') }}" class="block bg-brand-gold text-brand-navy text-center py-4 rounded-xl font-black uppercase tracking-widest italic">Get Started</a>
+            @endauth
         </div>
     </nav>
 
@@ -120,7 +136,7 @@
                 <div class="col-span-1 lg:col-span-1">
                     <div class="flex items-center space-x-3 mb-8">
                         <div class="w-10 h-10 bg-brand-gold rounded-full flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-brand-navy" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                             </svg>
                         </div>
@@ -130,29 +146,33 @@
                         Simplifying global sourcing and logistics. We bridge the gap between global manufacturers and your doorstep with enterprise speed and precision.
                     </p>
                     <div class="flex space-x-4">
-                        <!-- Socials placeholder -->
-                        <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft cursor-pointer"><div class="w-4 h-4 bg-white/40 rounded-sm"></div></div>
-                        <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft cursor-pointer"><div class="w-4 h-4 bg-white/40 rounded-sm"></div></div>
+                        <!-- Socials -->
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft">
+                             <span class="text-[8px] font-black italic">TW</span>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft">
+                             <span class="text-[8px] font-black italic">LN</span>
+                        </a>
                     </div>
                 </div>
 
                 <div>
                     <h4 class="text-brand-gold font-bold uppercase tracking-[0.2em] text-xs mb-8">Navigation</h4>
                     <ul class="space-y-4 text-sm text-white/60 font-medium">
-                        <li><a href="{{ url('/') }}" class="hover:text-white transition-soft">Home</a></li>
-                        <li><a href="{{ url('/services') }}" class="hover:text-white transition-soft">Services</a></li>
-                        <li><a href="{{ url('/how-it-works') }}" class="hover:text-white transition-soft">How It Works</a></li>
-                        <li><a href="{{ url('/about') }}" class="hover:text-white transition-soft">About Us</a></li>
+                        <li><a href="{{ url('/') }}" class="hover:text-white transition-soft">Home Feed</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-white transition-soft">Operational Services</a></li>
+                        <li><a href="{{ url('/how-it-works') }}" class="hover:text-white transition-soft">Protocol Manual</a></li>
+                        <li><a href="{{ url('/about') }}" class="hover:text-white transition-soft">Identity</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="text-brand-gold font-bold uppercase tracking-[0.2em] text-xs mb-8">Support & Legal</h4>
                     <ul class="space-y-4 text-sm text-white/60 font-medium">
-                        <li><a href="#" class="hover:text-white transition-soft">Track Shipment</a></li>
-                        <li><a href="#" class="hover:text-white transition-soft">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition-soft">Privacy Policy</a></li>
-                        <li><a href="{{ url('/contact') }}" class="hover:text-white transition-soft">Contact Us</a></li>
+                        <li><a href="{{ route('tracking') }}" class="hover:text-white transition-soft">Track Intel</a></li>
+                        <li><a href="{{ url('/faq') }}" class="hover:text-white transition-soft">Intelligence Base (FAQ)</a></li>
+                        <li><a href="#" class="hover:text-white transition-soft">Terms of Engagement</a></li>
+                        <li><a href="{{ url('/contact') }}" class="hover:text-white transition-soft">Direct Conduit</a></li>
                     </ul>
                 </div>
 
@@ -162,7 +182,10 @@
                         Serving over 120 countries with dedicated hubs in Guangzhou, Lagos, and New York.
                     </p>
                     <div class="py-4 border-t border-white/10">
-                        <p class="text-[10px] font-black uppercase tracking-widest text-brand-gold">Status: Online</p>
+                        <div class="flex items-center space-x-2">
+                             <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                             <p class="text-[10px] font-black uppercase tracking-widest text-brand-gold">Global Nodes: Online</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -11,6 +11,13 @@ class PortalController extends Controller
         return view('portal.dashboard');
     }
 
+    public function settings()
+    {
+        $user = auth()->user();
+        $verification = \App\Models\KycVerification::where('user_id', $user->id)->first();
+        return view('portal.settings', compact('user', 'verification'));
+    }
+
     public function shipments()
     {
         $shipments = \App\Models\Shipment::where('user_id', auth()->id())->latest()->get();

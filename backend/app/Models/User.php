@@ -94,4 +94,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(SourcingRequest::class);
     }
+
+    public function supportTickets(): HasMany
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
 }
