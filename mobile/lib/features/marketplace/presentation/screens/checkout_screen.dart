@@ -1,0 +1,253 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile/features/marketplace/presentation/providers/cart_provider.dart';
+
+class CheckoutScreen extends ConsumerStatefulWidget {
+  const CheckoutScreen({super.key});
+
+  @override
+  ConsumerState<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
+  bool _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final cartItems = ref.watch(cartProvider);
+    final total = ref.watch(cartTotalProvider);
+    final shippingFee = 15.0; // Mock shipping fee
+    final grandTotal = total + shippingFee;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF002366),
+      appBar: AppBar(
+        title: const Text('Checkout', style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () => context.pop(),
+        ),
+      ),
+      body: Stack(
+        children: [
+          // Background Gradient
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF002366),
+                    Color(0xFF001540),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                 // Order Summary
+                _buildSectionTitle("Order Summary"),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: Column(
+                    children: [
+                       ...cartItems.map((item) => Padding(
+                         padding: const EdgeInsets.only(bottom: 12.0),
+                         child: Row(
+                           children: [
+                             Text("${item.quantity}x ${item.product.title}", style: const TextStyle(fontSize: 14, color: Colors.white70, fontFamily: 'Outfit')),
+                             const Spacer(),
+                             Text(
+                               "${item.product.currency} ${item.total.toStringAsFixed(2)}",
+                               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                             ),
+                           ],
+                         ),
+                       )),
+                       Divider(color: Colors.white.withOpacity(0.1)),
+                       const SizedBox(height: 8),
+                       _buildSummaryRow("Subtotal", "\$${total.toStringAsFixed(2)}"),
+                       const SizedBox(height: 8),
+                       _buildSummaryRow("Estimated Shipping", "\$${shippingFee.toStringAsFixed(2)}"),
+                       const SizedBox(height: 12),
+                       Divider(color: Colors.white.withOpacity(0.1)),
+                       const SizedBox(height: 4),
+                       Row(
+                         children: [
+                           const Text("Total", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white, fontFamily: 'Outfit')),
+                           const Spacer(),
+                           Text("\$${grandTotal.toStringAsFixed(2)}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFFFFD700), fontFamily: 'Outfit')),
+                         ],
+                       ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Shipping Address (Mock)
+                _buildSectionTitle("Shipping Address"),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: ListTile(
+                    leading: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.location_on, color: Color(0xFFFFD700)),
+                    ),
+                    title: const Text("John Doe", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    subtitle: const Text("123 Main St, New York, NY 10001, USA", style: TextStyle(color: Colors.white70)),
+                    trailing: TextButton(
+                      onPressed: (){}, 
+                      child: const Text("Change", style: TextStyle(color: Color(0xFFFFD700)))
+                    ),
+                  ),
+                ),
+                 const SizedBox(height: 32),
+
+                // Payment Method
+                _buildSectionTitle("Payment Method"),
+                Container(
+                  decoration: BoxDecoration(
+                     color: Colors.white.withOpacity(0.05),
+                     borderRadius: BorderRadius.circular(20),
+                     border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: ListTile(
+                    leading: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.account_balance_wallet, color: Color(0xFFFFD700)),
+                    ),
+                    title: const Text("Wallet Balance", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    subtitle: const Text("Available: \$1250.00", style: TextStyle(color: Colors.white70)),
+                    trailing: const Icon(Icons.check_circle, color: Color(0xFFFFD700)),
+                  ),
+                ),
+                const SizedBox(height: 48),
+
+                SizedBox(
+                  height: 56,
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _placeOrder,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFFD700),
+                      foregroundColor: const Color(0xFF002366),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 5,
+                    ),
+                    child: _isLoading 
+                      ? const SizedBox(
+                          width: 24, 
+                          height: 24, 
+                          child: CircularProgressIndicator(color: Color(0xFF002366), strokeWidth: 3)
+                        )
+                      : Text(
+                          "PAY \$${grandTotal.toStringAsFixed(2)}", 
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 1),
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18, 
+          fontWeight: FontWeight.bold, 
+          color: Colors.white,
+          fontFamily: 'Outfit',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSummaryRow(String label, String value) {
+    return Row(
+      children: [
+        Text(label, style: const TextStyle(color: Colors.white70)),
+        const Spacer(),
+        Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+
+  void _placeOrder() async {
+    setState(() => _isLoading = true);
+    // Simulate API call
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (mounted) {
+      ref.read(cartProvider.notifier).clearCart();
+      setState(() => _isLoading = false);
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) => AlertDialog(
+          backgroundColor: const Color(0xFF002366),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.white.withOpacity(0.1))),
+          title: const Text("Order Placed!", style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontFamily: 'Outfit'), textAlign: TextAlign.center),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.check_circle, color: Color(0xFFFFD700), size: 48),
+              ),
+              const SizedBox(height: 16),
+              const Text("Your sourcing order has been created successfully.", textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
+            ],
+          ),
+          actions: [
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  context.go('/home');
+                },
+                child: const Text("Back to Home", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+}

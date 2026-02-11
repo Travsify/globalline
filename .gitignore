@@ -1,0 +1,51 @@
+# Root .gitignore for monorepo
+
+# Mobile flutter artifacts
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.pub-cache/
+mobile/.pub/
+mobile/android/app/debug
+mobile/android/app/profile
+mobile/android/app/release
+mobile/ios/Flutter/App.framework
+mobile/ios/Flutter/Flutter.framework
+mobile/ios/Flutter/Generated.xcconfig
+mobile/ios/Flutter/app.flx
+mobile/ios/Flutter/app.zip
+mobile/ios/ServiceDefinitions.json
+mobile/ios/Runner/GeneratedPluginRegistrant.h
+mobile/ios/Runner/GeneratedPluginRegistrant.m
+
+# Backend laravel artifacts
+backend/vendor/
+backend/node_modules/
+backend/public/build
+backend/public/hot
+backend/public/storage
+backend/storage/*.key
+backend/.env
+backend/.phpunit.result.cache
+
+# Large binary files
+backend/backend_deployment.zip
+backend/composer.phar
+backend/composer-setup.php
+backend/composer_local_log.txt
+backend/composer_log.txt
+backend/composer_retry_log.txt
+
+# Common
+.DS_Store
+*.log
+*.apk
+*.aab
+*.ipa
+*.zip
+
+# Mobile analysis/test output files
+mobile/*.txt
+mobile/*.json
+mobile/*.bat
