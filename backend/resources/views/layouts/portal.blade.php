@@ -89,10 +89,37 @@
             <header class="hidden lg:flex items-center justify-between px-10 py-6 bg-white border-b border-slate-200">
                 <h1 class="text-xl font-heading font-bold text-slate-800">@yield('page_title', 'Dashboard')</h1>
                 <div class="flex items-center space-x-6">
-                    <button class="relative text-slate-400 hover:text-brand-navy transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center text-[10px] text-white font-bold">2</span>
-                    </button>
+                    <!-- Notification Center -->
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open" class="relative text-slate-400 hover:text-brand-navy transition-colors focus:outline-none">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center text-[10px] text-white font-bold">2</span>
+                        </button>
+                        
+                        <div x-show="open" @click.away="open = false" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             class="absolute right-0 mt-3 w-80 bg-white rounded-3xl shadow-2xl border border-slate-100 z-50 overflow-hidden" x-cloak>
+                            <div class="px-6 py-4 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+                                <span class="text-sm font-bold text-slate-800">Notifications</span>
+                                <span class="text-[10px] bg-brand-gold/20 text-brand-navy px-2 py-1 rounded font-bold">2 NEW</span>
+                            </div>
+                            <div class="max-h-96 overflow-y-auto">
+                                <a href="#" class="block px-6 py-4 hover:bg-slate-50 border-b border-slate-50 transition-colors">
+                                    <p class="text-xs font-bold text-slate-800">Shipment GL-82941 Updated</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">Cargo has arrived at Guangzhou warehouse.</p>
+                                    <p class="text-[10px] text-brand-navy font-bold mt-2 uppercase tracking-widest">2 MINS AGO</p>
+                                </a>
+                                <a href="#" class="block px-6 py-4 hover:bg-slate-50 transition-colors">
+                                    <p class="text-xs font-bold text-slate-800">Supplier Payment Verified</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">Your payment to Alibaba Sourcing has been processed.</p>
+                                    <p class="text-[10px] text-brand-navy font-bold mt-2 uppercase tracking-widest">1 HOUR AGO</p>
+                                </a>
+                            </div>
+                            <a href="#" class="block text-center py-4 text-xs font-bold text-slate-400 hover:text-brand-navy bg-slate-50/50">View all notifications &rarr;</a>
+                        </div>
+                    </div>
                     <div class="flex items-center space-x-3 pl-6 border-l border-slate-200">
                         <div class="text-right">
                             <p class="text-sm font-bold text-slate-800">{{ auth()->user()->name ?? 'Guest User' }}</p>

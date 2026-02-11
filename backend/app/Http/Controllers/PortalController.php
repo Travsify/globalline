@@ -90,4 +90,40 @@ class PortalController extends Controller
         $user = auth()->user();
         return view('portal.wallet', compact('transactions', 'user'));
     }
+
+    public function addresses()
+    {
+        $addresses = \App\Models\Address::where('user_id', auth()->id())->latest()->get();
+        return view('portal.addresses', compact('addresses'));
+    }
+
+    public function storeAddress(Request $request)
+    {
+        $request->validate([
+            'label' => 'required|string',
+            'recipient_name' => 'required|string',
+            'street' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+
+        \App\Models\Address::create([
+            'user_id' => auth()->id() ?? 1,
+            'label' => $request->label,
+            'recipient_name' => $request->recipient_name,
+            'street' => $request->street,
+            'city' => $request->city,
+            'country' => $request->country,
+            'phone' => $request->phone,
+        ]);
+
+        return redirect()->back()->with('success', 'Address added to your book.');
+    }
+
+    public function notifications()
+    {
+        $notifications = \App\Models\Notification::where('user_id', auth()->id())->latest()->get();
+        return view('portal.notifications', compact('notifications'));
+    }
 }

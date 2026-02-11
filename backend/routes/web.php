@@ -16,4 +16,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/wallet', [App\Http\Controllers\PortalController::class, 'wallet'])->name('wallet');
     Route::post('/ship-for-me', [App\Http\Controllers\PortalController::class, 'shipForMe'])->name('ship-for-me');
     Route::post('/payments', [App\Http\Controllers\PortalController::class, 'storePayment'])->name('payments');
+    Route::get('/addresses', [App\Http\Controllers\PortalController::class, 'addresses'])->name('addresses');
+    Route::post('/addresses', [App\Http\Controllers\PortalController::class, 'storeAddress'])->name('addresses.store');
+    Route::get('/notifications', [App\Http\Controllers\PortalController::class, 'notifications'])->name('notifications');
 });
