@@ -14,6 +14,14 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/how-it-works', function () {
+    return view('how-it-works');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
 // Portal Routes
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\PortalController::class, 'dashboard'])->name('dashboard');
