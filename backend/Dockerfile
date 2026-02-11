@@ -47,6 +47,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # We'll use a custom script or just chain commands in CMD. 
 # For simplicity, we'll embed a script.
 RUN echo "#!/bin/sh\n" \
+    "php artisan migrate --force\n" \
     "php artisan config:cache\n" \
     "php artisan route:cache\n" \
     "php artisan view:cache\n" \
