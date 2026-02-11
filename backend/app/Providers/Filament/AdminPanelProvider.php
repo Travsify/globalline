@@ -27,8 +27,20 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('GlobalLine Admin')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => [
+                    '50' => '#f0f4f8',
+                    '100' => '#d1d9e6',
+                    '200' => '#a3b4ce',
+                    '300' => '#758fb6',
+                    '400' => '#47699e',
+                    '500' => '#002366', // Brand Navy
+                    '600' => '#001e5c',
+                    '700' => '#001952',
+                    '800' => '#001347',
+                    '900' => '#000e3d',
+                ],
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -38,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\StatsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,
