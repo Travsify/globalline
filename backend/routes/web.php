@@ -11,6 +11,7 @@ use App\Http\Controllers\GlobalMarketplaceController;
 */
 
 // Public Routes
+Route::get('/ping', fn() => 'GlobalLine Terminal: Online');
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/marketplace', [GlobalMarketplaceController::class, 'index'])->name('marketplace.index');
 Route::post('/marketplace/add', [GlobalMarketplaceController::class, 'addToCollective'])->name('marketplace.add');
