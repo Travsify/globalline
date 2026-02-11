@@ -9,6 +9,8 @@ services:
         generateValue: true
       - key: APP_DEBUG
         value: true
+      - key: APP_URL
+        value: https://globalline.onrender.com
       - key: APP_ENV
         value: production
       - key: DB_CONNECTION
