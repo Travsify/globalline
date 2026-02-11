@@ -54,106 +54,95 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-gradient pt-32 pb-20 px-6 md:px-12 relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-24 -left-24 w-72 h-72 bg-white/5 rounded-full blur-3xl"></div>
-        
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-            <div class="md:w-1/2 text-white z-10">
-                <span class="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/10 text-brand-gold text-sm font-bold border border-white/20 uppercase tracking-widest">Global Logistics Redefined</span>
-                <h1 class="text-5xl md:text-7xl font-heading font-bold leading-tight mb-8">
-                    Ship Anything, <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">Anywhere.</span>
-                </h1>
-                <p class="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-xl font-light">
-                    Join thousands of businesses and individuals sending packages to over 200 countries with real-time tracking and premium reliability.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button class="bg-brand-gold text-brand-navy px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-brand-gold/30 hover:-translate-y-1 transition-all">Download App</button>
-                    <button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"></path></svg>
-                        Watch Demo
-                    </button>
-                </div>
-            </div>
-            <!-- Interactive Card Preview -->
-            <div class="md:w-1/2 mt-16 md:mt-0 relative flex justify-center">
-                <div class="glass p-8 rounded-[2rem] border-white/20 shadow-2xl relative z-10 w-full max-w-md transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                    <div class="flex justify-between items-center mb-8">
-                        <div>
-                            <p class="text-white/60 text-xs uppercase tracking-widest font-bold">Estimated Delivery</p>
-                            <p class="text-white text-lg font-heading font-bold">Feb 14, 2026</p>
-                        </div>
-                        <div class="bg-brand-gold/20 p-3 rounded-2xl">
-                            <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-4 h-4 rounded-full bg-brand-gold mt-1.5 mr-4 shadow-lg shadow-brand-gold/50"></div>
-                            <div>
-                                <p class="text-white font-bold">Lagos, Nigeria</p>
-                                <p class="text-white/50 text-sm">Package received at facility</p>
-                            </div>
-                        </div>
-                        <div class="h-10 border-l border-dashed border-white/20 ml-2"></div>
-                        <div class="flex items-start">
-                            <div class="w-4 h-4 rounded-full bg-white/20 mt-1.5 mr-4"></div>
-                            <div>
-                                <p class="text-white/60 font-bold">London, UK</p>
-                                <p class="text-white/50 text-sm">Destination destination</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-center">
-                        <span class="text-white font-bold leading-none">Tracking: GL-882941</span>
-                        <span class="bg-brand-gold text-brand-navy px-3 py-1 rounded-lg text-xs font-bold uppercase">In Transit</span>
-                    </div>
-                </div>
-                <!-- Mini Stats Card -->
-                <div class="absolute -bottom-10 -right-5 md:-right-10 bg-white p-6 rounded-3xl shadow-2xl z-20 flex items-center space-x-4 animate-bounce hover:pause">
-                    <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <div>
-                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Delivered</p>
-                        <p class="text-brand-navy font-heading font-bold text-xl">1.2M+ Units</p>
-                    </div>
-                </div>
-            </div>
+    <header class="relative bg-brand-navy pt-40 pb-56 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-brand-gold/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-1/3 h-1/2 bg-blue-500/10 blur-[100px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-brand-navy font-heading text-4xl md:text-5xl font-bold mb-4">Everything You Need To Move Global</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto">Stop worrying about customs, tariffs, or missing packages. We've built an infrastructure designed for speed and clarity.</p>
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-5xl">
+            <span class="inline-block px-4 py-2 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-fade-in italic">Global Logistics · Manufacturer Sourcing · International Payments</span>
+            <h1 class="text-6xl md:text-8xl font-heading font-black text-white leading-tight mb-8">Move Cargo. <br><span class="text-brand-gold">Pay Factory.</span></h1>
+            <p class="text-xl text-white/50 leading-relaxed mb-12 max-w-3xl mx-auto">The vertically integrated ecosystem for global commerce. Ship from China, buy directly from manufacturers, and execute supplier wire transfers in 24 hours.</p>
+            
+            <!-- Global Tracking Bar -->
+            <div class="max-w-3xl mx-auto relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold to-brand-accent rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                <div class="relative flex flex-col md:flex-row bg-white rounded-[2rem] p-3 shadow-2xl">
+                    <div class="flex-1 flex items-center px-6">
+                        <svg class="w-6 h-6 text-slate-300 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" placeholder="Enter Global Tracking Number (GL-XXXXX)" class="w-full h-12 text-slate-800 font-bold focus:outline-none placeholder-slate-300">
+                    </div>
+                    <button class="bg-brand-navy text-white px-10 py-4 rounded-2xl font-bold hover:bg-brand-accent transition-all whitespace-nowrap shadow-xl">Track Shipment</button>
+                    <div class="w-px bg-slate-100 mx-2 hidden md:block"></div>
+                    <a href="/portal/marketplace" class="hidden md:flex items-center px-6 text-brand-navy font-bold hover:text-brand-accent transition-colors">
+                        Sourcing Search &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-10 flex items-center justify-center space-x-8 text-white/30">
+                <div class="flex items-center space-x-2 font-bold uppercase tracking-widest text-[10px]">
+                    <svg class="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    <span>1688 Verified</span>
+                </div>
+                <div class="flex items-center space-x-2 font-bold uppercase tracking-widest text-[10px]">
+                    <svg class="w-4 h-4 text-brand-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    <span>Alibaba Partner</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div class="bg-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-2 transition-transform duration-300 border border-slate-100 group">
-                <div class="w-16 h-16 bg-brand-navy rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-gold transition-colors duration-300">
-                    <svg class="w-8 h-8 text-white group-hover:text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                </div>
-                <h3 class="text-2xl font-heading font-bold mb-4 text-brand-navy">Fast Shipping</h3>
-                <p class="text-slate-500 leading-relaxed">Air and sea freight options optimized for your budget. Door-to-door delivery in as little as 3 business days.</p>
+    </header>
+
+    <!-- Services Grid v2 -->
+    <section id="features" class="py-32 bg-white relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <h2 class="text-4xl md:text-5xl font-heading font-black text-brand-navy mb-6 tracking-tight">One Robust System.<br>Total Global Control.</h2>
+                <div class="w-20 h-1.5 bg-brand-gold mx-auto rounded-full mb-8"></div>
+                <p class="text-slate-500 text-lg">We've bridged the gap between Chinese manufacturing and the global market with four core pillars of excellence.</p>
             </div>
-            <!-- Feature 2 -->
-            <div class="bg-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-2 transition-transform duration-300 border border-slate-100 group">
-                <div class="w-16 h-16 bg-brand-navy rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-gold transition-colors duration-300">
-                    <svg class="w-8 h-8 text-white group-hover:text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Air Logistics -->
+                <div class="group p-10 bg-slate-50 rounded-[3rem] border border-transparent hover:border-brand-gold/30 hover:bg-white hover:shadow-2xl hover:shadow-brand-gold/5 transition-all duration-500">
+                    <div class="w-16 h-16 bg-blue-50 text-brand-navy rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-navy mb-4">Express Air</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Daily flights from Guangzhou & Shenzhen. Delivery in 5-7 business days with GL-Tracking.</p>
+                    <a href="/portal/dashboard" class="text-sm font-bold text-brand-navy flex items-center group-hover:translate-x-2 transition-transform">Get Started <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
                 </div>
-                <h3 class="text-2xl font-heading font-bold mb-4 text-brand-navy">Secured Payments</h3>
-                <p class="text-slate-500 leading-relaxed">Integrated wallet system allows you to pay in your local currency while we handle international wire transfers.</p>
-            </div>
-            <!-- Feature 3 -->
-            <div class="bg-white p-8 rounded-[2rem] shadow-xl hover:-translate-y-2 transition-transform duration-300 border border-slate-100 group">
-                <div class="w-16 h-16 bg-brand-navy rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-gold transition-colors duration-300">
-                    <svg class="w-8 h-8 text-white group-hover:text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+
+                <!-- Sea Logistics -->
+                <div class="group p-10 bg-slate-50 rounded-[3rem] border border-transparent hover:border-brand-gold/30 hover:bg-white hover:shadow-2xl hover:shadow-brand-gold/5 transition-all duration-500">
+                    <div class="w-16 h-16 bg-blue-50 text-brand-navy rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-navy mb-4">Cargo Sea</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Cost-effective groupage and full-container solutions for heavy machinery and bulk orders.</p>
+                    <a href="/portal/dashboard" class="text-sm font-bold text-brand-navy flex items-center group-hover:translate-x-2 transition-transform">Ship Bulk <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
                 </div>
-                <h3 class="text-2xl font-heading font-bold mb-4 text-brand-navy">China Sourcing</h3>
-                <p class="text-slate-500 leading-relaxed">Buy directly from top manufacturers in China. We handle the pickup, inspection, and international shipping.</p>
+
+                <!-- Procurement -->
+                <div class="group p-10 bg-brand-gold/5 rounded-[3rem] border border-brand-gold/10 hover:bg-white hover:shadow-2xl hover:shadow-brand-gold/5 transition-all duration-500">
+                    <div class="w-16 h-16 bg-brand-gold text-brand-navy rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-navy mb-4">Procurement</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Direct 1688, Taobao & Tmall sourcing. Our team in China buys, inspects, and consolidates for you.</p>
+                    <a href="/portal/marketplace" class="text-sm font-bold text-brand-navy flex items-center group-hover:translate-x-2 transition-transform">Start Sourcing <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                </div>
+
+                <!-- Global Payment -->
+                <div class="group p-10 bg-slate-50 rounded-[3rem] border border-transparent hover:border-brand-gold/30 hover:bg-white hover:shadow-2xl hover:shadow-brand-gold/5 transition-all duration-500">
+                    <div class="w-16 h-16 bg-blue-50 text-brand-navy rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-brand-navy mb-4">Wire Transfers</h3>
+                    <p class="text-slate-500 leading-relaxed mb-8">Securely pay factories in Yuan or USD. Swift wire transfers completed within 24 hours.</p>
+                    <a href="/portal/payments" class="text-sm font-bold text-brand-navy flex items-center group-hover:translate-x-2 transition-transform">Learn More <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a>
+                </div>
             </div>
         </div>
     </section>

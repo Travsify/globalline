@@ -25,4 +25,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Marketplace
     Route::get('/marketplace/products', [App\Http\Controllers\Api\MarketplaceController::class, 'search']);
     Route::get('/marketplace/products/{id}', [App\Http\Controllers\Api\MarketplaceController::class, 'show']);
+
+    // Enterprise v4 Routes
+    Route::group(['prefix' => 'enterprise'], function () {
+        Route::get('/wallets', [App\Http\Controllers\Api\EnterpriseController::class, 'wallets']);
+        Route::get('/consolidations', [App\Http\Controllers\Api\EnterpriseController::class, 'consolidations']);
+        Route::post('/sourcing-request', [App\Http\Controllers\Api\EnterpriseController::class, 'storeSourcingRequest']);
+    });
 });

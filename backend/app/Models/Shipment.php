@@ -13,6 +13,7 @@ class Shipment extends Model
         'weight_unit', 'price', 'currency', 'receiver_name',
         'receiver_phone', 'receiver_email', 'description',
         'metadata', 'estimated_delivery', 'delivered_at',
+        'consolidation_id', 'is_insured', 'insurance_premium',
     ];
 
     protected $casts = [
@@ -26,6 +27,16 @@ class Shipment extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function consolidation(): BelongsTo
+    {
+        return $this->belongsTo(ShipmentConsolidation::class, 'consolidation_id');
+    }
+
+    public function packingList(): HasMany
+    {
+        return $this->hasMany(PackingListItem::class);
     }
 
     public static function generateTrackingNumber(): string

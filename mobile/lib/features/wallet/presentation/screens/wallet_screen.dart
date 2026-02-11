@@ -21,9 +21,16 @@ class WalletScreen extends ConsumerWidget {
           child: ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
-              _BalanceCard(
-                wallet: wallet,
-                onFund: () => ref.read(walletControllerProvider.notifier).fund(100.0), // Mock $100
+              SizedBox(
+                height: 180,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _BalanceCard(label: "USD Balance", amount: "\$1,245.00", color: Colors.blue[900]!),
+                    _BalanceCard(label: "CNY Balance", amount: "¥8,450.00", color: Colors.red[900]!),
+                    _BalanceCard(label: "NGN Balance", amount: "₦1,800,000", color: Colors.emerald[900]!),
+                  ],
+                ),
               ),
               const SizedBox(height: 24),
               const Text('Transactions', 
@@ -44,42 +51,30 @@ class WalletScreen extends ConsumerWidget {
 }
 
 class _BalanceCard extends StatelessWidget {
-  final Wallet wallet;
-  final VoidCallback onFund;
-  const _BalanceCard({required this.wallet, required this.onFund});
+  final String label;
+  final String amount;
+  final Color color;
+  const _BalanceCard({required this.label, required this.amount, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).colorScheme.primaryContainer,
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            const Text('Total Balance'),
-            const SizedBox(height: 8),
-            Text(
-              '${wallet.currency} ${wallet.balance.toStringAsFixed(2)}',
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FilledButton.icon(
-                  onPressed: onFund,
-                  icon: const Icon(Icons.add),
-                  label: const Text('Fund Wallet'),
-                ),
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.history),
-                  label: const Text('History'),
-                ),
-              ],
-            )
-          ],
-        ),
+    return Container(
+      width: 280,
+      margin: const EdgeInsets.only(right: 15),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [BoxShadow(color: color.withOpacity(0.3), blurRadius: 15, offset: const Offset(0, 8))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(label, style: const TextStyle(color: Colors.white60, fontWeight: FontWeight.bold, fontSize: 12)),
+          const SizedBox(height: 10),
+          Text(amount, style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
+        ],
       ),
     );
   }
