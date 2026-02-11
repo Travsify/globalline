@@ -46,8 +46,9 @@
             <span class="text-2xl font-bold font-heading text-white tracking-tight">GlobalLine</span>
         </div>
         <div class="hidden md:flex space-x-8 text-white/80 font-medium">
-            <a href="#features" class="hover:text-brand-gold transition-colors">Features</a>
-            <a href="#how-it-works" class="hover:text-brand-gold transition-colors">How it Works</a>
+            <a href="{{ url('/') }}" class="hover:text-brand-gold transition-colors">Home</a>
+            <a href="{{ url('/services') }}" class="hover:text-brand-gold transition-colors">Services</a>
+            <a href="{{ url('/about') }}" class="hover:text-brand-gold transition-colors">About Us</a>
             <a href="#contact" class="hover:text-brand-gold transition-colors">Support</a>
         </div>
         <a href="/admin" class="bg-brand-gold text-brand-navy px-6 py-2.5 rounded-full font-bold shadow-xl shadow-brand-gold/20 hover:scale-105 transition-transform">Get Started</a>
@@ -61,22 +62,41 @@
         </div>
 
         <div class="container mx-auto px-6 relative z-10 text-center max-w-5xl">
-            <span class="inline-block px-4 py-2 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-fade-in italic">Global Logistics · Manufacturer Sourcing · International Payments</span>
-            <h1 class="text-6xl md:text-8xl font-heading font-black text-white leading-tight mb-8">Move Cargo. <br><span class="text-brand-gold">Pay Factory.</span></h1>
-            <p class="text-xl text-white/50 leading-relaxed mb-12 max-w-3xl mx-auto">The vertically integrated ecosystem for global commerce. Ship from China, buy directly from manufacturers, and execute supplier wire transfers in 24 hours.</p>
+            <span class="inline-block px-4 py-2 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold rounded-full text-xs font-bold uppercase tracking-[0.2em] mb-8 animate-fade-in italic">Multi-Currency Wallet · Global Logistics · Manufacturer Sourcing</span>
+            <h1 class="text-6xl md:text-8xl font-heading font-black text-white leading-tight mb-8">Move Cargo. <br><span class="text-brand-gold italic">Scale Globally.</span></h1>
+            <p class="text-xl text-white/50 leading-relaxed mb-12 max-w-3xl mx-auto">The vertically integrated ecosystem for global commerce. Ship from anywhere, source directly from factories, and manage your enterprise funds in USD, CNY, or NGN.</p>
             
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16">
+                <!-- App Store Badge -->
+                <a href="#" class="w-48 h-14 bg-black border border-white/20 rounded-xl flex items-center px-4 hover:border-brand-gold transition-colors group">
+                    <svg class="w-8 h-8 text-white group-hover:text-brand-gold transition-colors" fill="currentColor" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                    <div class="ml-3 text-left">
+                        <p class="text-[10px] text-white/60 font-medium uppercase tracking-tighter text-left">Download on the</p>
+                        <p class="text-lg text-white font-bold leading-tight -mt-1 font-heading">App Store</p>
+                    </div>
+                </a>
+                <!-- Play Store Badge -->
+                <a href="#" class="w-48 h-14 bg-black border border-white/20 rounded-xl flex items-center px-4 hover:border-brand-gold transition-colors group">
+                    <svg class="w-8 h-8 text-white group-hover:text-brand-gold transition-colors" fill="currentColor" viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L325.3 277.7 104.6 499z"/></svg>
+                    <div class="ml-3 text-left">
+                        <p class="text-[10px] text-white/60 font-medium uppercase tracking-tighter text-left">Get it on</p>
+                        <p class="text-lg text-white font-bold leading-tight -mt-1 font-heading">Google Play</p>
+                    </div>
+                </a>
+            </div>
+
             <!-- Global Tracking Bar -->
             <div class="max-w-3xl mx-auto relative group">
                 <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold to-brand-accent rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                 <div class="relative flex flex-col md:flex-row bg-white rounded-[2rem] p-3 shadow-2xl">
                     <div class="flex-1 flex items-center px-6">
                         <svg class="w-6 h-6 text-slate-300 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <input type="text" placeholder="Enter Global Tracking Number (GL-XXXXX)" class="w-full h-12 text-slate-800 font-bold focus:outline-none placeholder-slate-300">
+                        <input type="text" placeholder="Track Package (e.g. GL-82941)" class="w-full h-12 text-slate-800 font-bold focus:outline-none placeholder-slate-300">
                     </div>
                     <button class="bg-brand-navy text-white px-10 py-4 rounded-2xl font-bold hover:bg-brand-accent transition-all whitespace-nowrap shadow-xl">Track Shipment</button>
                     <div class="w-px bg-slate-100 mx-2 hidden md:block"></div>
-                    <a href="/portal/marketplace" class="hidden md:flex items-center px-6 text-brand-navy font-bold hover:text-brand-accent transition-colors">
-                        Sourcing Search &rarr;
+                    <a href="/portal/dashboard" class="hidden md:flex items-center px-6 text-brand-navy font-bold hover:text-brand-accent transition-colors">
+                        Enterprise Access &rarr;
                     </a>
                 </div>
             </div>
@@ -250,9 +270,9 @@
                 <div>
                     <h5 class="text-white mb-6 font-heading font-bold">Company</h5>
                     <ul class="space-y-4 text-white/50">
-                        <li><a href="#" class="hover:text-brand-gold">About Us</a></li>
-                        <li><a href="#" class="hover:text-brand-gold">Our Vision</a></li>
-                        <li><a href="#" class="hover:text-brand-gold">Contact</a></li>
+                        <li><a href="{{ url('/about') }}" class="hover:text-brand-gold">About Us</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-brand-gold">Our Services</a></li>
+                        <li><a href="#contact" class="hover:text-brand-gold">Contact</a></li>
                     </ul>
                 </div>
                 <div>

@@ -6,6 +6,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/services', function () {
+    return view('services');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
 // Portal Routes
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\PortalController::class, 'dashboard'])->name('dashboard');
