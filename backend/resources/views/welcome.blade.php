@@ -37,12 +37,12 @@
 
                 <!-- Glassmorphism 1688 Search Integration -->
                 <div class="max-w-4xl group">
-                    <form action="{{ route('portal.marketplace') }}" method="GET" class="relative flex flex-col md:flex-row bg-white/5 backdrop-blur-2xl p-3 rounded-[2.5rem] border border-white/10 shadow-2xl transition-soft group-hover:border-brand-gold/40">
+                    <form action="{{ route('marketplace.index') }}" method="GET" class="relative flex flex-col md:flex-row bg-white/5 backdrop-blur-2xl p-3 rounded-[2.5rem] border border-white/10 shadow-2xl transition-soft group-hover:border-brand-gold/40">
                         <div class="flex-1 flex items-center px-8 py-4">
                             <div class="bg-brand-gold/10 p-3 rounded-2xl mr-6">
                                 <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             </div>
-                            <input type="text" name="search"
+                            <input type="text" name="query"
                                    placeholder="Paste 1688.com or Alibaba URL to initiate sourcing..." 
                                    class="w-full bg-transparent text-white font-bold placeholder-white/20 focus:outline-none text-lg">
                         </div>
