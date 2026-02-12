@@ -8,7 +8,8 @@ class PortalController extends Controller
 {
     public function dashboard()
     {
-        return view('portal.dashboard');
+        $cart = session()->get('collective_cart', []);
+        return view('portal.dashboard', compact('cart'));
     }
 
     public function settings()

@@ -19,16 +19,27 @@
             <p class="text-4xl font-heading font-black text-brand-navy uppercase italic tracking-tighter">04</p>
         </div>
 
-        <!-- Sourcing Orders -->
-        <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 group hover:shadow-xl transition-soft">
+        <!-- Sourcing Collective (Dynamic Sync) -->
+        <div class="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100 group hover:shadow-xl transition-soft relative overflow-hidden">
+            @if(count($cart) > 0)
+                <div class="absolute top-0 right-0 p-4">
+                    <span class="flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-gold"></span>
+                    </span>
+                </div>
+            @endif
             <div class="flex items-center justify-between mb-6">
                 <div class="w-14 h-14 bg-slate-50 border border-slate-100 text-brand-navy rounded-2xl flex items-center justify-center group-hover:bg-brand-navy group-hover:text-brand-gold transition-soft">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                 </div>
-                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">Global Nodes</p>
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest italic">Inventory Grid</p>
             </div>
-            <p class="text-[10px] font-black text-slate-400 border-l-2 border-brand-gold pl-2 uppercase tracking-[0.2em] mb-2 italic">Sourcing Stream</p>
-            <p class="text-4xl font-heading font-black text-brand-navy uppercase italic tracking-tighter">12</p>
+            <p class="text-[10px] font-black text-slate-400 border-l-2 border-brand-gold pl-2 uppercase tracking-[0.2em] mb-2 italic">Collective Cart</p>
+            <p class="text-4xl font-heading font-black text-brand-navy uppercase italic tracking-tighter">{{ count($cart) }} <span class="text-slate-300 text-lg">Nodes</span></p>
+            @if(count($cart) > 0)
+                <a href="{{ route('portal.marketplace') }}" class="mt-4 block text-[9px] font-bold text-brand-gold uppercase tracking-widest hover:underline italic">Settle Synchronized Items &rarr;</a>
+            @endif
         </div>
 
         <!-- Global Payments -->

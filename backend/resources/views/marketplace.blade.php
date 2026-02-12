@@ -1,29 +1,44 @@
 @extends('layouts.public')
 
-@section('title', 'Marketplace Terminal | GlobalLine Intelligence')
+@section('title', 'Global Collective | Frontier Sourcing Hub')
 
 @section('content')
 <main class="bg-brand-navy min-h-screen pt-40 pb-32 overflow-hidden" x-data="marketplaceController()">
     <!-- Marketplace Header -->
-    <div class="container mx-auto px-6 relative z-10 mb-20 text-center">
-        <span class="inline-block px-4 py-1.5 bg-brand-gold/10 text-brand-gold rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-8 italic">Global Aggregate Node</span>
-        <h1 class="text-6xl md:text-8xl font-heading font-black text-white mb-12 uppercase italic tracking-tighter leading-none">
-            Enterprise <br><span class="gold-outline-text underline decoration-brand-gold/20">Marketplace</span>
-        </h1>
+    <div class="container mx-auto px-6 relative z-10 mb-20">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
+            <div class="text-left">
+                <span class="inline-block px-4 py-1.5 bg-brand-gold/10 text-brand-gold rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-4 italic">Global Collective v2.1</span>
+                <h1 class="text-5xl md:text-7xl font-heading font-black text-white uppercase italic tracking-tighter leading-none">
+                    Verified <br><span class="gold-outline-text underline decoration-brand-gold/20">Supply Nodes</span>
+                </h1>
+            </div>
+
+            <!-- Currency Switcher Terminal -->
+            <div class="bg-white/5 p-2 rounded-2xl border border-white/10 flex items-center gap-2">
+                @foreach($availableCurrencies as $curr)
+                <a href="?currency={{ $curr }}&node={{ request('node', 'all') }}&query={{ request('query') }}" 
+                   class="px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-soft {{ $selectedCurrency == $curr ? 'bg-brand-gold text-brand-navy' : 'text-white/40 hover:text-white' }}">
+                    {{ $curr }}
+                </a>
+                @endforeach
+            </div>
+        </div>
         
         <!-- Deep Search Form -->
         <div class="max-w-4xl mx-auto relative group">
             <div class="absolute -inset-4 bg-brand-gold/5 blur-[80px] rounded-full opacity-50"></div>
             <form action="{{ route('marketplace.index') }}" method="GET" class="relative flex flex-col md:flex-row bg-white/5 backdrop-blur-3xl p-3 rounded-[3rem] border border-white/10 shadow-2xl group-hover:border-brand-gold/40 transition-soft">
+                <input type="hidden" name="currency" value="{{ $selectedCurrency }}">
                 <div class="flex-1 flex items-center px-8 py-4">
                     <select name="node" class="bg-white/5 text-brand-gold font-black uppercase tracking-widest text-[10px] py-2 px-4 rounded-xl border-none focus:ring-0 cursor-pointer mr-6 outline-none italic">
-                        <option value="all" @if(request('node') == 'all') selected @endif>Universal</option>
-                        <option value="1688" @if(request('node') == '1688') selected @endif>1688 Node</option>
-                        <option value="alibaba" @if(request('node') == 'alibaba') selected @endif>Alibaba Node</option>
-                        <option value="taobao" @if(request('node') == 'taobao') selected @endif>Taobao Node</option>
+                        <option value="all" @if(request('node') == 'all') selected @endif>Universal Grid</option>
+                        <option value="1688" @if(request('node') == '1688') selected @endif>Node: Guangzhou</option>
+                        <option value="alibaba" @if(request('node') == 'alibaba') selected @endif>Node: Istanbul</option>
+                        <option value="taobao" @if(request('node') == 'taobao') selected @endif>Node: Tel Aviv</option>
                     </select>
                     <input type="text" name="query" value="{{ request('query') }}"
-                           placeholder="Scan millions of SKU points..." 
+                           placeholder="Scan millions of frontier SKU points..." 
                            class="w-full bg-transparent text-white font-bold placeholder-white/20 focus:outline-none text-xl uppercase italic">
                 </div>
                 <button type="submit" class="bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-16 py-7 rounded-[2.2rem] font-black uppercase tracking-[0.2em] text-xs transition-soft shadow-2xl active:scale-95 italic border-none outline-none">
@@ -40,7 +55,9 @@
             <div class="bg-white/5 border border-white/10 rounded-[4rem] overflow-hidden group hover:bg-white/10 transition-soft relative flex flex-col h-full shadow-2xl">
                 <!-- Node Identifier -->
                 <div class="absolute top-8 right-8 z-20">
-                    <span class="bg-brand-gold text-brand-navy text-[8px] font-black px-4 py-2 rounded-full uppercase italic tracking-widest shadow-xl">{{ $product['source'] }}</span>
+                    <span class="bg-brand-gold text-brand-navy text-[8px] font-black px-4 py-2 rounded-full uppercase italic tracking-widest shadow-xl">
+                        @if($product['source'] == '1688') Node: GZ @elseif($product['source'] == 'Alibaba') Node: IST @else Node: TLV @endif
+                    </span>
                 </div>
 
                 <div class="aspect-square relative overflow-hidden">
@@ -50,13 +67,13 @@
 
                 <div class="p-12 pt-8 flex-1 flex flex-col relative">
                     <h3 class="text-3xl font-heading font-black text-white mb-4 uppercase italic tracking-tighter leading-none line-clamp-2">{{ $product['name'] }}</h3>
-                    <p class="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-10 italic">MOQ: {{ $product['moq'] ?? 'Variable' }} Nodes</p>
+                    <p class="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-10 italic">MOQ: {{ $product['moq'] ?? 'Variable' }} Units</p>
                     
                     <div class="mt-auto flex items-center justify-between">
                         <div>
-                            <p class="text-[8px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1 italic">Unit Valuation</p>
+                            <p class="text-[8px] font-black text-brand-gold uppercase tracking-[0.3em] mb-1 italic">Collective Valuation</p>
                             <p class="text-4xl font-heading font-black text-white italic tracking-tighter uppercase leading-none">
-                                ¥{{ number_format($product['price']) }}
+                                {{ $product['symbol'] }}{{ number_format($product['display_price'], 2) }}
                             </p>
                         </div>
                         <button @click="addToCollective(@js($product))" 
@@ -100,8 +117,8 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="text-xs font-black text-white uppercase italic tracking-tighter line-clamp-1" x-text="item.name"></h4>
-                            <p class="text-[8px] font-black text-white/30 mt-1 uppercase italic tracking-widest" x-text="item.source + ' Node'"></p>
-                            <p class="text-lg font-heading font-black text-brand-gold mt-2 italic" x-text="'¥' + item.price"></p>
+                            <p class="text-[8px] font-black text-white/30 mt-1 uppercase italic tracking-widest" x-text="'Verified Node: ' + item.source"></p>
+                            <p class="text-lg font-heading font-black text-brand-gold mt-2 italic" x-text="item.symbol + numberFormat(item.display_price)"></p>
                         </div>
                         <div class="text-[10px] font-black text-white px-3 py-1 bg-white/5 rounded-lg italic" x-text="'x' + item.qty"></div>
                     </div>
@@ -110,7 +127,7 @@
                 <div class="pt-12 border-t border-white/5 mt-12">
                     <div class="flex justify-between items-center mb-12">
                         <span class="text-[10px] font-black text-white/40 uppercase tracking-widest">Aggregate Valuation</span>
-                        <span class="text-2xl font-black text-white italic" x-text="'¥' + totalCost"></span>
+                        <span class="text-2xl font-black text-white italic" x-text="cart[0].symbol + numberFormat(totalCost)"></span>
                     </div>
                     
                     @auth
@@ -156,8 +173,12 @@ function marketplaceController() {
             this.$watch('cart', () => this.calculateTotal());
         },
 
+        numberFormat(val) {
+            return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(val);
+        },
+
         calculateTotal() {
-            this.totalCost = this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            this.totalCost = this.cart.reduce((sum, item) => sum + (item.display_price * item.qty), 0);
         },
 
         async addToCollective(product) {
@@ -172,6 +193,8 @@ function marketplaceController() {
                         id: product.id,
                         name: product.name,
                         price: product.price,
+                        display_price: product.display_price,
+                        symbol: product.symbol,
                         source: product.source,
                         img: product.img,
                         qty: 1
@@ -180,19 +203,29 @@ function marketplaceController() {
                 
                 const data = await response.json();
                 if (data.success) {
-                    // Refresh cart locally for reactive UI
-                    this.syncCart();
+                    // Update local cart to match the new item
+                    const cartId = product.source + '_' + product.id;
+                    const index = this.cart.findIndex(i => i.source + '_' + i.id === cartId);
+                    
+                    if (index !== -1) {
+                        this.cart[index].qty++;
+                    } else {
+                        this.cart.push({
+                            id: product.id,
+                            name: product.name,
+                            display_price: product.display_price,
+                            symbol: product.symbol,
+                            source: product.source,
+                            img: product.img,
+                            qty: 1
+                        });
+                    }
+                    
                     this.cartOpen = true;
                 }
             } catch (error) {
                 console.error('Terminal sync error:', error);
             }
-        },
-
-        syncCart() {
-            // In a real app, you'd fetch the latest session data or update the local array
-            // Here we simply simulate the update for the demo
-            location.reload(); // Quickest way to sync session-based Blade cart with Alpine
         }
     }
 }

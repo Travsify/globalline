@@ -32,15 +32,23 @@
                         Solve sourcing, settlement, and logistics in one terminal. Direct factory access from Guangzhou to Lagos, powered by the GlobalLine Trade Protocol.
                     </p>
 
-                    <!-- Search Terminal -->
-                    <div class="max-w-xl mb-12">
-                        <form action="{{ route('marketplace.index') }}" method="GET" class="relative group">
-                            <input type="text" name="query" 
-                                   placeholder="Search global manufacturers..." 
-                                   class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl text-white focus:outline-none focus:border-brand-gold/40 transition-all placeholder-white/20">
-                            <button type="submit" class="absolute right-3 top-2 bottom-2 bg-brand-gold text-brand-navy px-8 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-white transition-colors">
-                                Search Nodes
-                            </button>
+                    <!-- Unified Search Terminal -->
+                    <div class="max-w-xl mb-12 relative group" data-aos="fade-up" data-aos-delay="200">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-transparent rounded-[2.5rem] blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                        <form action="{{ route('marketplace.index') }}" method="GET" class="relative bg-brand-navy border border-white/10 rounded-[2rem] overflow-hidden focus-within:border-brand-gold/50 transition-all shadow-2xl">
+                            <div class="flex items-center">
+                                <div class="pl-8 flex gap-4 opacity-30 group-focus-within:opacity-100 transition-opacity">
+                                    <span class="text-[10px] font-black text-brand-gold">1688</span>
+                                    <span class="text-[10px] font-black text-white">CNY</span>
+                                    <span class="text-[10px] font-black text-white">TRY</span>
+                                </div>
+                                <input type="text" name="query" 
+                                       placeholder="Paste manufacturing link or search intel..." 
+                                       class="w-full bg-transparent p-7 text-white focus:outline-none placeholder-white/20 font-medium text-sm">
+                                <button type="submit" class="bg-brand-gold text-brand-navy px-10 py-7 font-black uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-all italic border-none outline-none">
+                                    Search Nodes
+                                </button>
+                            </div>
                         </form>
                     </div>
 

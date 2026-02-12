@@ -7,15 +7,36 @@ use Illuminate\Support\Facades\Session;
 
 class GlobalMarketplaceController extends Controller
 {
+    protected $pricingService;
+    protected $currencyService;
+
+    public function __construct(\App\Services\PricingService $pricingService, \App\Services\CurrencyService $currencyService)
+    {
+        $this->pricingService = $pricingService;
+        $this->currencyService = $currencyService;
+    }
+
     /**
      * Display the public marketplace.
      */
     public function index(Request $request)
     {
+        $selectedCurrency = $request->get('currency', Session::get('currency', 'USD'));
+        Session::put('currency', $selectedCurrency);
+
         // Mock data representing aggregated response from Alibaba/1688/Taobao
         $products = $this->getMockProducts($request->query('node', 'all'), $request->query('query'));
         
-        return view('marketplace', compact('products'));
+        // Apply pricing logic and currency conversion
+        foreach ($products as &$product) {
+            $product['base_usd_price'] = $this->pricingService->applyMarkup($product['price']);
+            $product['display_price'] = $this->currencyService->convert($product['base_usd_price'], $selectedCurrency);
+            $product['symbol'] = $this->currencyService->getSymbol($selectedCurrency);
+        }
+
+        $availableCurrencies = $this->currencyService->getAvailableCurrencies();
+
+        return view('marketplace', compact('products', 'selectedCurrency', 'availableCurrencies'));
     }
 
     /**
@@ -39,7 +60,9 @@ class GlobalMarketplaceController extends Controller
         $item = [
             'id' => $request->id,
             'name' => $request->name,
-            'price' => $request->price,
+            'price' => $request->price, // Raw base
+            'display_price' => $request->display_price, // Marked up + Converted
+            'symbol' => $request->symbol,
             'source' => $request->source,
             'img' => $request->img,
             'qty' => $request->qty ?? 1
@@ -59,6 +82,7 @@ class GlobalMarketplaceController extends Controller
         return response()->json([
             'success' => true,
             'count' => count($cart),
+            'currency' => Session::get('currency', 'USD'),
             'message' => 'Node synchronized with Collective.'
         ]);
     }
