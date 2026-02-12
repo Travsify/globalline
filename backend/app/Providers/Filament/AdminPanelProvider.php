@@ -30,22 +30,10 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('filament.components.logo'))
             ->darkMode(false)
             ->colors([
-                'primary' => [
-                    50 => '#f0f4ff',
-                    100 => '#dbe3ff',
-                    200 => '#b3c4ff',
-                    300 => '#809fff',
-                    400 => '#4d7aff',
-                    500 => '#002366',
-                    600 => '#001e5c',
-                    700 => '#001952',
-                    800 => '#001347',
-                    900 => '#000e3d',
-                    950 => '#000927',
-                ],
+                'primary' => Color::Indigo,
                 'gray' => Color::Slate,
                 'danger' => Color::Rose,
-                'info' => Color::Blue,
+                'info' => Color::Sky,
                 'success' => Color::Emerald,
                 'warning' => Color::Amber,
             ])
