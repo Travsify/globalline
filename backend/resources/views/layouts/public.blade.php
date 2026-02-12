@@ -147,10 +147,10 @@
                     </p>
                     <div class="flex space-x-4">
                         <!-- Socials -->
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft">
+                        <a href="{{ route('register') }}" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft">
                              <span class="text-[8px] font-black italic">TW</span>
                         </a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft">
+                        <a href="{{ route('register') }}" class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold transition-soft">
                              <span class="text-[8px] font-black italic">LN</span>
                         </a>
                     </div>
@@ -171,8 +171,8 @@
                     <ul class="space-y-4 text-sm text-white/60 font-medium">
                         <li><a href="{{ route('tracking') }}" class="hover:text-white transition-soft">Track Intel</a></li>
                         <li><a href="{{ url('/faq') }}" class="hover:text-white transition-soft">Intelligence Base (FAQ)</a></li>
-                        <li><a href="#" class="hover:text-white transition-soft">Terms of Engagement</a></li>
-                        <li><a href="{{ url('/contact') }}" class="hover:text-white transition-soft">Direct Conduit</a></li>
+                        <li><a href="{{ route('register') }}" class="hover:text-white transition-soft">Terms of Engagement</a></li>
+                        <li><a href="{{ route('contact') }}" class="hover:text-white transition-soft">Direct Conduit</a></li>
                     </ul>
                 </div>
 

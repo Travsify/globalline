@@ -46,18 +46,18 @@
 
                     <!-- App Links -->
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="flex items-center bg-white text-brand-navy px-6 py-3 rounded-xl gap-3 hover:scale-105 transition-transform group">
+                        <a href="{{ route('register') }}" class="flex items-center bg-white text-brand-navy px-6 py-3 rounded-xl gap-3 hover:scale-105 transition-transform group shadow-xl">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.341c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1zm-4-10c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1zM20 2H4a2 2 0 00-2 2v16a2 2 0 002 2h16a2 2 0 002-2V4a2 2 0 00-2-2zM4 20V4h16v16H4z"/></svg>
                             <div class="text-left leading-none">
-                                <p class="text-[8px] uppercase tracking-tighter opacity-60">Download on the</p>
-                                <p class="text-sm font-bold">App Store</p>
+                                <p class="text-[8px] uppercase tracking-tighter opacity-60">Deployment</p>
+                                <p class="text-sm font-bold">iOS Store</p>
                             </div>
                         </a>
-                        <a href="#" class="flex items-center bg-white/10 border border-white/10 text-white px-6 py-3 rounded-xl gap-3 hover:scale-105 transition-transform">
+                        <a href="{{ route('register') }}" class="flex items-center bg-white/10 border border-white/10 text-white px-6 py-3 rounded-xl gap-3 hover:scale-105 transition-transform shadow-xl">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M3 21V3l18 9-18 9z"/></svg>
                             <div class="text-left leading-none">
-                                <p class="text-[8px] uppercase tracking-tighter opacity-60">Get it on</p>
-                                <p class="text-sm font-bold">Google Play</p>
+                                <p class="text-[8px] uppercase tracking-tighter opacity-60">Deployment</p>
+                                <p class="text-sm font-bold">Play Store</p>
                             </div>
                         </a>
                     </div>
@@ -65,11 +65,11 @@
 
                 <div class="lg:w-5/12 relative" data-aos="fade-left">
                     <div class="relative z-10 bg-gradient-to-br from-white/10 to-transparent p-1 rounded-[3rem] border border-white/20 backdrop-blur-xl shadow-3xl">
-                        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=800&q=80" 
-                             class="rounded-[2.8rem] w-full" alt="Global Trade Intelligence">
+                        <img src="https://images.unsplash.com/photo-1566633399518-d61500e4b512?auto=format&fit=crop&w=800&q=80" 
+                             class="rounded-[2.8rem] w-full" alt="Global Supply Pipeline">
                         <div class="absolute -bottom-10 -left-10 bg-brand-gold p-8 rounded-[2.5rem] shadow-2xl">
-                            <p class="text-brand-navy text-[10px] font-bold uppercase tracking-widest mb-1">Success Move</p>
-                            <span class="text-4xl font-bold text-brand-navy tracking-tighter">99.8%</span>
+                            <p class="text-brand-navy text-[10px] font-bold uppercase tracking-widest mb-1">Global Flow</p>
+                            <span class="text-4xl font-bold text-brand-navy tracking-tighter">Live Node</span>
                         </div>
                     </div>
                     <!-- Decorative Orbit -->
@@ -134,16 +134,15 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2" data-aos="fade-left">
-                    <div class="bg-slate-50 rounded-[3rem] p-12 border border-slate-100 flex flex-col gap-8">
-                        <div class="h-12 bg-white rounded-2xl border border-slate-200 w-full animate-pulse"></div>
-                        <div class="grid grid-cols-3 gap-6">
-                            <div class="aspect-square bg-brand-navy rounded-2xl flex items-center justify-center text-brand-gold font-bold">Node A</div>
-                            <div class="aspect-square bg-brand-gold rounded-2xl flex items-center justify-center text-brand-navy font-bold">Node B</div>
-                            <div class="aspect-square bg-slate-200 rounded-2xl"></div>
-                        </div>
-                        <div class="bg-brand-navy p-8 rounded-[2rem] text-center">
-                            <p class="text-white/50 text-[10px] uppercase font-bold tracking-widest mb-2">Consolidated Yield</p>
-                            <span class="text-3xl font-bold text-white tracking-tighter">+48% Efficiency</span>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80" 
+                             class="rounded-[3rem] shadow-2xl border border-slate-100" alt="Consolidation Hub">
+                        <div class="absolute -top-10 -right-10 bg-brand-navy p-10 rounded-[2.5rem] shadow-2xl border border-white/10 hidden md:block">
+                            <p class="text-white/40 text-[10px] uppercase font-bold tracking-widest mb-4">MasterMerge Metrics</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-bold text-white tracking-tighter">45%</span>
+                                <span class="text-brand-gold text-xs font-bold">Cost Saved</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -151,37 +150,54 @@
         </div>
     </section>
 
-    <!-- [SECTION 4] Global Verification : Factory Nodes -->
-    <section class="py-32 bg-slate-50 border-y border-slate-200">
+    <!-- [SECTION 4] The Global Network Domain -->
+    <section class="py-32 bg-slate-50 border-y border-slate-200 overflow-hidden">
         <div class="container mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-brand-navy leading-tight mb-8">We Are Where Your Goods Are.</h2>
-                <p class="text-slate-500 italic font-medium leading-relaxed">
-                    Sourcing isn't just an API call. It's about feet on the ground. Our own physical warehouse nodes in major manufacturing hubs ensure your goods exist and meet quality standards.
-                </p>
-            </div>
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="inline-flex items-center px-4 py-2 bg-brand-navy/5 border border-brand-navy/10 rounded-full mb-8">
+                        <p class="text-[10px] font-bold text-brand-navy uppercase tracking-[0.2em]">Global Trade Logistics OS</p>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-navy leading-tight mb-8">
+                        The Frontier is <span class="text-brand-gold italic">Everywhere.</span>
+                    </h2>
+                    <p class="text-slate-500 text-lg leading-relaxed mb-10">
+                        Sourcing isn't just an API call. It's about a physical, verified global presence. From our high-density consolidation nodes to your warehouse, we provide 100% visibility across all trade corridors.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-2xl font-bold text-brand-navy tracking-tighter">Active Corridor</p>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-widest mt-1">Movement Tracking</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-brand-navy tracking-tighter">Verified Node</p>
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-widest mt-1">Physical Presence</p>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="group p-1 bg-white rounded-[2rem] border border-slate-200 shadow-sm transition-all hover:shadow-xl" data-aos="zoom-in" data-aos-delay="0">
-                    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80" class="rounded-[1.8rem] w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Guangzhou Node">
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold text-brand-navy mb-2">Guangzhou Hub</h4>
-                        <p class="text-slate-500 text-sm">Main consolidation and quality terminal for East Asian sourcing.</p>
+                <div class="lg:w-1/2 relative" data-aos="zoom-in">
+                    <!-- Globe / Network Visual -->
+                    <div class="relative z-10 bg-brand-navy rounded-[4rem] p-4 shadow-4xl aspect-square flex items-center justify-center overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" 
+                             class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-[5s]" alt="Global Movement Globe">
+                        <div class="relative z-10 text-center p-12">
+                            <div class="w-20 h-20 border-2 border-brand-gold rounded-full mx-auto mb-8 flex items-center justify-center animate-pulse">
+                                <div class="w-3 h-3 bg-brand-gold rounded-full"></div>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Unified Global Grid</h3>
+                            <p class="text-white/40 text-sm font-medium">Real-time movement of goods across 12,000+ logistics pathways.</p>
+                        </div>
+                        <!-- Decorative Scanning Line -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent animate-[scan_3s_linear_infinite]"></div>
                     </div>
-                </div>
-                <div class="group p-1 bg-white rounded-[2rem] border border-slate-200 shadow-sm transition-all hover:shadow-xl" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1541339907198-e08756eaa539?auto=format&fit=crop&w=800&q=80" class="rounded-[1.8rem] w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Istanbul Node">
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold text-brand-navy mb-2">Istanbul Node</h4>
-                        <p class="text-slate-500 text-sm">Strategic gateway for Turkish textile and precision manufacturing.</p>
-                    </div>
-                </div>
-                <div class="group p-1 bg-white rounded-[2rem] border border-slate-200 shadow-sm transition-all hover:shadow-xl" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1510673398440-92f776226343?auto=format&fit=crop&w=800&q=80" class="rounded-[1.8rem] w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Tel Aviv Node">
-                    <div class="p-8">
-                        <h4 class="text-xl font-bold text-brand-navy mb-2">Tel Aviv Axis</h4>
-                        <p class="text-slate-500 text-sm">Innovation and high-tier tech manufacturing consolidation point.</p>
-                    </div>
+                    <style>
+                        @keyframes scan {
+                            0% { top: 0; }
+                            100% { top: 100%; }
+                        }
+                    </style>
                 </div>
             </div>
         </div>
@@ -294,7 +310,7 @@
                     </a>
                 </div>
                 <div class="absolute top-0 right-0 h-full w-1/2 opacity-20 hidden lg:block group-hover:scale-105 transition-transform duration-1000">
-                    <img src="https://images.unsplash.com/photo-1565891741441-649ea67889a8?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover rounded-l-[4rem]" alt="OEM Manufacturing">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover rounded-l-[4rem]" alt="OEM Industrial Manufacturing">
                 </div>
             </div>
         </div>
@@ -352,10 +368,10 @@
                 <!-- Store Badge CTAs -->
                 <div class="flex flex-col md:flex-row items-center justify-center gap-10 opacity-60">
                     <div class="flex items-center gap-10">
-                        <a href="#" class="hover:opacity-100 transition-opacity">
+                        <a href="{{ route('register') }}" class="hover:opacity-100 transition-opacity">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" class="h-10" alt="App Store">
                         </a>
-                        <a href="#" class="hover:opacity-100 transition-opacity">
+                        <a href="{{ route('register') }}" class="hover:opacity-100 transition-opacity">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" class="h-14" alt="Google Play">
                         </a>
                     </div>
