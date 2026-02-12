@@ -39,7 +39,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 RUN npm install && npm run build
 
 # 11. Set permissions for Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html
 
 # 12. Configure entrypoint to handle migrations and caching on startup
 # We'll use a custom script or just chain commands in CMD. 
