@@ -4,13 +4,11 @@ namespace App\Providers\Filament;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Filament\Navigation\NavigationGroup;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -24,37 +22,46 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->default()
             ->id('admin')
             ->path('admin')
             ->login(\App\Filament\Pages\Auth\CustomLogin::class)
-            ->brandName('GlobalLine Admin')
+            ->brandName('GlobalLine')
             ->brandLogo(fn () => view('filament.components.logo'))
-            ->brandLogoHeight('3rem')
+            ->darkMode(false)
             ->colors([
                 'primary' => [
-                    '50' => '#f0f4f8',
-                    '100' => '#d1d9e6',
-                    '200' => '#a3b4ce',
-                    '300' => '#758fb6',
-                    '400' => '#47699e',
-                    '500' => '#002366', // Brand Navy
-                    '600' => '#001e5c',
-                    '700' => '#001952',
-                    '800' => '#001347',
-                    '900' => '#000e3d',
+                    50 => '#f0f4ff',
+                    100 => '#dbe3ff',
+                    200 => '#b3c4ff',
+                    300 => '#809fff',
+                    400 => '#4d7aff',
+                    500 => '#002366',
+                    600 => '#001e5c',
+                    700 => '#001952',
+                    800 => '#001347',
+                    900 => '#000e3d',
+                    950 => '#000927',
                 ],
                 'gray' => Color::Slate,
+                'danger' => Color::Rose,
+                'info' => Color::Blue,
+                'success' => Color::Emerald,
+                'warning' => Color::Amber,
             ])
             ->font('Inter')
             ->sidebarCollapsibleOnDesktop()
             ->navigationGroups([
-                NavigationGroup::make('Dashboard')->icon('heroicon-o-home'),
-                NavigationGroup::make('Customers')->icon('heroicon-o-users'),
-                NavigationGroup::make('Compliance')->icon('heroicon-o-shield-check'),
-                NavigationGroup::make('Logistics')->icon('heroicon-o-truck'),
-                NavigationGroup::make('Finance')->icon('heroicon-o-banknotes'),
-                NavigationGroup::make('Support')->icon('heroicon-o-chat-bubble-left-right'),
-                NavigationGroup::make('Config & Platform')->icon('heroicon-o-cog-6-tooth'),
+                NavigationGroup::make('Dashboard'),
+                NavigationGroup::make('Customers'),
+                NavigationGroup::make('Marketplace'),
+                NavigationGroup::make('Compliance'),
+                NavigationGroup::make('Logistics'),
+                NavigationGroup::make('Finance'),
+                NavigationGroup::make('Support'),
+                NavigationGroup::make('Communications'),
+                NavigationGroup::make('System'),
+                NavigationGroup::make('Config & Platform'),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -75,7 +82,6 @@ class AdminPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-                DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([

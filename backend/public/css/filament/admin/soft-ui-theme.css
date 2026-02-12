@@ -1,54 +1,48 @@
-/* GlobalLine Soft UI Admin Theme */
+/* GlobalLine Admin — Soft UI Theme */
 
 :root {
     --brand-navy: #002366;
     --brand-gold: #C5A059;
     --brand-gold-light: rgba(197, 160, 89, 0.1);
-    --soft-ui-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
-    --soft-ui-card-radius: 1rem;
+    --soft-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
+    --card-radius: 1rem;
 }
 
-/* Dashboard Global Background */
-.fi-main-ctn {
+/* ── Global Background ─────────────────────────────── */
+.fi-body {
     background-color: #f8f9fa !important;
 }
 
-/* Soft UI Cards */
-.fi-wi-stats-overview-stat-ctn, 
-.fi-section, 
+/* ── Cards & Panels ───────────────────────────────── */
+.fi-wi-stats-overview-stat,
+.fi-section,
 .fi-ta-ctn {
     background: #ffffff !important;
     border: none !important;
-    box-shadow: var(--soft-ui-shadow) !important;
-    border-radius: var(--soft-ui-card-radius) !important;
+    box-shadow: var(--soft-shadow) !important;
+    border-radius: var(--card-radius) !important;
 }
 
-/* Stat Icon Refinement */
-.fi-wi-stats-overview-stat-icon-ctn {
-    background: linear-gradient(310deg, var(--brand-navy), #004080) !important;
-    color: white !important;
-    border-radius: 0.75rem !important;
-    padding: 0.75rem !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.07) !important;
+/* ── Stat Icon Styling ────────────────────────────── */
+.fi-wi-stats-overview-stat-icon {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
 }
 
-.fi-wi-stats-overview-stat-icon-ctn[data-color="warning"] {
-    background: linear-gradient(310deg, var(--brand-gold), #8e703f) !important;
-}
-
-.fi-wi-stats-overview-stat-icon-ctn[data-color="success"] {
-    background: linear-gradient(310deg, #17ad37, #98ec2d) !important;
-}
-
-.fi-wi-stats-overview-stat-icon-ctn[data-color="info"] {
-    background: linear-gradient(310deg, #2152ff, #21d4fd) !important;
-}
-
-/* Sidebar & Topbar */
+/* ── Sidebar ──────────────────────────────────────── */
 .fi-sidebar {
     background: #ffffff !important;
-    border: none !important;
-    box-shadow: var(--soft-ui-shadow) !important;
+    border-right: 1px solid #f1f5f9 !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar-nav-groups {
+    padding: 0.5rem !important;
+}
+
+.fi-sidebar-item {
+    border-radius: 0.5rem !important;
+    margin-bottom: 1px !important;
 }
 
 .fi-sidebar-item-active {
@@ -61,115 +55,108 @@
     font-weight: 700 !important;
 }
 
-.fi-topbar {
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(10px) !important;
-    border: none !important;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05) !important;
+.fi-sidebar-item-icon {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
 }
 
-/* Buttons */
+.fi-sidebar-group-button svg {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+/* ── Navigation Group Labels ──────────────────────── */
+.fi-sidebar-group-label {
+    font-size: 0.65rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: #94a3b8 !important;
+    padding-top: 1rem !important;
+}
+
+/* ── Topbar ───────────────────────────────────────── */
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    box-shadow: none !important;
+}
+
+/* ── Primary Buttons ──────────────────────────────── */
 .fi-btn-color-primary {
-    background: linear-gradient(310deg, var(--brand-navy), #004080) !important;
+    background: linear-gradient(135deg, var(--brand-navy), #003399) !important;
     border: none !important;
     border-radius: 0.5rem !important;
-    text-transform: uppercase !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.025em !important;
-    transition: all 0.2s ease-in-out !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 6px -1px rgba(0,35,102,0.2) !important;
 }
 
 .fi-btn-color-primary:hover {
-    transform: scale(1.02);
-    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08) !important;
-}
-/* Login Page: Argon Pro Style */
-.gl-login-container {
-    display: flex;
-    min-height: 100vh;
-    background-color: #ffffff;
-    width: 100%;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 7px 14px rgba(0,35,102,0.25) !important;
 }
 
-.gl-login-left {
-    position: relative;
-    display: none;
-    flex: 1;
-    background-color: var(--brand-navy);
-    overflow: hidden;
+/* ── Badge Colors ─────────────────────────────────── */
+.fi-badge {
+    font-weight: 600 !important;
+    font-size: 0.7rem !important;
 }
 
-@media (min-width: 1024px) {
-    .gl-login-left {
-        display: block;
-    }
+/* ── Tables ───────────────────────────────────────── */
+.fi-ta-header-cell {
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    color: #64748b !important;
 }
 
-.gl-login-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 3rem 1.5rem;
-    background-color: #ffffff;
+.fi-ta-row:hover {
+    background-color: #fafbfc !important;
 }
 
-@media (min-width: 1024px) {
-    .gl-login-right {
-        flex: 0 0 500px;
-        padding-left: 5rem;
-        padding-right: 5rem;
-    }
-}
-
-.gl-login-content {
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 3rem;
-    z-index: 10;
-    color: #ffffff;
-}
-
-.gl-login-title {
-    font-size: 3rem;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 2rem;
-}
-
-.gl-login-subtitle {
-    font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 450px;
-}
-
-/* Customizing Logo Size for Login */
-.gl-login-logo .w-10 {
-    width: 60px !important;
-    height: 60px !important;
-}
-
-.gl-login-logo .text-xl {
-    font-size: 2rem !important;
-}
-
-/* Form Styles */
-.fi-fo-field-ctn {
-    margin-top: 1rem !important;
-}
-
-.fi-input-wrp {
-    background-color: #f8f9fa !important;
-    border: 1px solid #e9ecef !important;
+/* ── Form inputs (scoped to main panel, not login) ── */
+.fi-main .fi-input-wrp {
+    background-color: #fafbfc !important;
+    border: 1.5px solid #e8ecf1 !important;
     border-radius: 0.75rem !important;
     transition: all 0.2s ease !important;
 }
 
-.fi-input-wrp:focus-within {
+.fi-main .fi-input-wrp:focus-within {
     background-color: #ffffff !important;
     border-color: var(--brand-gold) !important;
-    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1) !important;
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12) !important;
+}
+
+/* ── Page Headers ─────────────────────────────────── */
+.fi-header-heading {
+    font-weight: 800 !important;
+    color: var(--brand-navy) !important;
+}
+
+/* ── Tabs ─────────────────────────────────────────── */
+.fi-tabs-tab-active {
+    border-color: var(--brand-gold) !important;
+    color: var(--brand-navy) !important;
+}
+
+/* ── Modals ───────────────────────────────────────── */
+.fi-modal-content {
+    border-radius: 1rem !important;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15) !important;
+}
+
+/* ── Notifications ────────────────────────────────── */
+.fi-notification {
+    border-radius: 0.75rem !important;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08) !important;
+}
+
+/* ── Loading Bar ──────────────────────────────────── */
+.fi-topbar-progress-bar {
+    background: var(--brand-gold) !important;
 }
