@@ -23,20 +23,11 @@ WORKDIR /var/www/html
 # 5. Build arguments for environment variables
 # (This allows us to leverage Render's build-time env vars if needed, though we usually use runtime env)
 
-# 6. Configure Apache DocumentRoot
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
-RUN sed -i 's!/var/www/!/var/www/html/public/!g' /etc/apache2/apache2.conf
+# 6. Configure Apache
+COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # 6.1 Enable Apache mod_rewrite
 RUN a2enmod rewrite
-
-# 6.2 Explicitly allow Overrides
-RUN printf "<Directory /var/www/html/public>\n\
-    Options Indexes FollowSymLinks\n\
-    AllowOverride All\n\
-    Require all granted\n\
-    </Directory>\n" > /etc/apache2/conf-available/laravel.conf \
-    && a2enconf laravel
 
 # 8. Copy application code
 COPY . .
