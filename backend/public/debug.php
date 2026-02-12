@@ -1,34 +1,18 @@
 <?php
-header('Content-Type: text/plain');
+echo "=== GlobalLine Diagnostic ===\n";
+echo "Timestamp: " . date('Y-m-d H:i:s') . "\n";
+echo "PHP Version: " . phpversion() . "\n\n";
 
-echo "=== System Diagnostics ===\n";
-echo "Web Root: " . __DIR__ . "\n";
-echo "Document Root: " . $_SERVER['DOCUMENT_ROOT'] . "\n";
+echo "=== Request Info ===\n";
+echo "REQUEST_URI: " . ($_SERVER['REQUEST_URI'] ?? 'N/A') . "\n";
+echo "SCRIPT_NAME: " . ($_SERVER['SCRIPT_NAME'] ?? 'N/A') . "\n";
+echo "DOCUMENT_ROOT: " . ($_SERVER['DOCUMENT_ROOT'] ?? 'N/A') . "\n";
 
-$files = [
-    'index.php',
-    '../vendor/autoload.php',
-    '../bootstrap/app.php',
-    '../storage/logs/laravel.log'
-];
-
-echo "\n=== File Checks ===\n";
-foreach ($files as $file) {
-    if (file_exists(__DIR__ . '/' . $file)) {
-        echo "[OK] Found: $file\n";
-    } else {
-        echo "[ERROR] Missing: $file\n";
-    }
+echo "\n=== File Check ===\n";
+$critical = ['index.php', '.htaccess', '../vendor/autoload.php'];
+foreach ($critical as $f) {
+    echo "$f: " . (file_exists(__DIR__ . '/' . $f) ? "EXISTS" : "MISSING") . "\n";
 }
 
-echo "\n=== Apache Modules ===\n";
-if (function_exists('apache_get_modules')) {
-    $modules = apache_get_modules();
-    $relevant = array_filter($modules, fn($m) => in_array($m, ['mod_rewrite', 'mod_dir', 'mod_alias']));
-    print_r($relevant);
-} else {
-    echo "apache_get_modules() not available (likely PHP-FPM or distinct process).\n";
-}
-
-echo "\n=== PHP Info ===\n";
-echo "PHP Version: " . phpversion() . "\n";
+echo "\n=== Server Vars ===\n";
+print_r($_SERVER);
