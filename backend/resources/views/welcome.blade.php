@@ -5,90 +5,117 @@
 @section('content')
 
     <!-- [SECTION 1] The Global Terminal : Hero -->
-    <header class="relative min-h-screen flex items-center pt-24 overflow-hidden bg-brand-navy selection:bg-brand-gold selection:text-brand-navy">
+    <header class="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-brand-navy selection:bg-brand-gold selection:text-brand-navy">
         <!-- Intelligent Particles/Grid Background -->
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+            <!-- Electric Blue Accents -->
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-gold/10 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-brand-navy/95 to-[#050810]"></div>
         </div>
 
         <div class="container mx-auto px-6 relative z-10 py-20">
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <div class="lg:w-7/12" data-aos="fade-up">
-                    <div class="inline-flex items-center px-4 py-2 bg-brand-gold/10 border border-brand-gold/10 rounded-full mb-8">
+                    <div class="inline-flex items-center px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-8">
                         <span class="relative flex h-2 w-2 mr-3">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-gold"></span>
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                         </span>
-                        <p class="text-[10px] font-bold text-brand-gold uppercase tracking-[0.2em]">GlobalLine Frontier v5.0 Active</p>
+                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em]">GlobalLine Unified Protocol v5.2 Active</p>
                     </div>
 
-                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-[1.15] mb-8 tracking-tight">
-                        The Operating System <br>
-                        for <span class="text-brand-gold">Global Movement.</span>
+                    <h1 class="text-5xl md:text-7xl font-black text-white leading-[0.95] mb-8 tracking-tighter italic uppercase">
+                        Source. Settle. <br>
+                        <span class="text-brand-gold">Synchronize.</span>
                     </h1>
                     
                     <p class="text-lg md:text-xl text-white/50 font-medium mb-12 max-w-2xl leading-relaxed">
-                        Solve sourcing, settlement, and logistics in one terminal. Direct factory access from Guangzhou to Lagos, powered by the GlobalLine Trade Protocol.
+                        The ultimate terminal for high-velocity global trade. Direct factory pipelines from Guangzhou to Lagos, secured by the GlobalLine node network.
                     </p>
 
-                    <!-- Unified Search Terminal -->
-                    <div class="max-w-xl mb-12 relative group" data-aos="fade-up" data-aos-delay="200">
-                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-transparent rounded-[2.5rem] blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                        <form action="{{ route('marketplace.index') }}" method="GET" class="relative bg-brand-navy border border-white/10 rounded-[2rem] overflow-hidden focus-within:border-brand-gold/50 transition-all shadow-2xl">
+                    <!-- Unified Search Terminal (Enhanced) -->
+                    <div class="max-w-2xl mb-12 relative group" data-aos="fade-up" data-aos-delay="200">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-blue-500/30 to-brand-gold/30 rounded-[2.5rem] blur-xl opacity-20 group-hover:opacity-100 transition duration-1000"></div>
+                        <form action="{{ route('marketplace.index') }}" method="GET" class="relative bg-[#0A142F]/80 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden focus-within:border-blue-500/50 transition-all shadow-3xl">
                             <div class="flex items-center">
-                                <div class="pl-8 flex gap-4 opacity-30 group-focus-within:opacity-100 transition-opacity">
-                                    <span class="text-[10px] font-black text-brand-gold">1688</span>
-                                    <span class="text-[10px] font-black text-white">CNY</span>
-                                    <span class="text-[10px] font-black text-white">TRY</span>
+                                <div class="pl-8 hidden md:flex gap-4 border-r border-white/5 pr-6 py-4">
+                                    <div class="flex flex-col">
+                                        <span class="text-[8px] font-black text-white/40 uppercase tracking-widest">Market</span>
+                                        <span class="text-[10px] font-black text-brand-gold italic">1688.com</span>
+                                    </div>
                                 </div>
                                 <input type="text" name="query" 
-                                       placeholder="Paste manufacturing link or search intel..." 
-                                       class="w-full bg-transparent p-7 text-white focus:outline-none placeholder-white/20 font-medium text-sm">
-                                <button type="submit" class="bg-brand-gold text-brand-navy px-10 py-7 font-black uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-all italic border-none outline-none">
-                                    Search Nodes
+                                       placeholder="Paste manufacturing link or search global nodes..." 
+                                       class="w-full bg-transparent p-7 text-white focus:outline-none placeholder-white/20 font-bold text-sm tracking-tight text-center md:text-left">
+                                <button type="submit" class="bg-blue-600 text-white px-10 py-7 font-black uppercase tracking-[0.2em] text-[10px] hover:bg-brand-gold hover:text-brand-navy transition-all italic border-none outline-none hidden md:block">
+                                    Initiate Search
                                 </button>
                             </div>
                         </form>
                     </div>
 
-                    <!-- App Links -->
-                    <div class="flex flex-wrap gap-4">
-                        <a href="{{ route('register') }}" class="flex items-center bg-white text-brand-navy px-6 py-3 rounded-xl gap-3 hover:scale-105 transition-transform group shadow-xl">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.341c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1zm-4-10c-.551 0-1 .449-1 1s.449 1 1 1 1-.449 1-1-.449-1-1-1zM20 2H4a2 2 0 00-2 2v16a2 2 0 002 2h16a2 2 0 002-2V4a2 2 0 00-2-2zM4 20V4h16v16H4z"/></svg>
-                            <div class="text-left leading-none">
-                                <p class="text-[8px] uppercase tracking-tighter opacity-60">Deployment</p>
-                                <p class="text-sm font-bold">iOS Store</p>
-                            </div>
-                        </a>
-                        <a href="{{ route('register') }}" class="flex items-center bg-white/10 border border-white/10 text-white px-6 py-3 rounded-xl gap-3 hover:scale-105 transition-transform shadow-xl">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M3 21V3l18 9-18 9z"/></svg>
-                            <div class="text-left leading-none">
-                                <p class="text-[8px] uppercase tracking-tighter opacity-60">Deployment</p>
-                                <p class="text-sm font-bold">Play Store</p>
-                            </div>
-                        </a>
+                    <div class="flex flex-wrap items-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-soft">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Alibaba_Group_Logo.svg" class="h-6" alt="Alibaba">
+                        <img src="https://logowik.com/content/uploads/images/taobao5968.jpg" class="h-8" alt="Taobao">
+                        <img src="https://logowik.com/content/uploads/images/16886475.jpg" class="h-8" alt="1688">
                     </div>
                 </div>
 
                 <div class="lg:w-5/12 relative" data-aos="fade-left">
-                    <div class="relative z-10 bg-gradient-to-br from-white/10 to-transparent p-1 rounded-[3rem] border border-white/20 backdrop-blur-xl shadow-3xl">
-                        <img src="https://images.unsplash.com/photo-1566633399518-d61500e4b512?auto=format&fit=crop&w=800&q=80" 
-                             class="rounded-[2.8rem] w-full" alt="Global Supply Pipeline">
-                        <div class="absolute -bottom-10 -left-10 bg-brand-gold p-8 rounded-[2.5rem] shadow-2xl">
-                            <p class="text-brand-navy text-[10px] font-bold uppercase tracking-widest mb-1">Global Flow</p>
-                            <span class="text-4xl font-bold text-brand-navy tracking-tighter">Live Node</span>
+                    <div class="relative z-10 bg-gradient-to-br from-white/10 to-transparent p-1 rounded-[3rem] border border-white/20 backdrop-blur-xl shadow-4xl group">
+                        <img src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=800&q=80" 
+                             class="rounded-[2.8rem] w-full mix-blend-lighten opacity-80 group-hover:opacity-100 transition-soft" alt="Global Supply Hub">
+                        <div class="absolute -bottom-10 -left-10 bg-white/10 backdrop-blur-2xl p-8 rounded-[2.5rem] shadow-2xl border border-white/10">
+                            <p class="text-brand-gold text-[10px] font-black uppercase tracking-widest mb-1 italic">Node Activity</p>
+                            <span class="text-4xl font-black text-white tracking-tighter uppercase italic">99.8%</span>
+                            <p class="text-white/40 text-[8px] font-bold uppercase mt-1">Uptime Synchronized</p>
                         </div>
                     </div>
                     <!-- Decorative Orbit -->
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-white/5 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] border border-blue-500/10 rounded-full animate-[spin_30s_linear_infinite]"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border border-brand-gold/10 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- [SECTION 2] The Everything Movement : Multi-tier Stats -->
-    <section class="py-24 bg-[#050810] border-y border-white/5 overflow-hidden">
+    <!-- [SECTION 2] Global Sourcing Lanes : Logistics Ticker -->
+    <section class="py-12 bg-black border-y border-white/5 whitespace-nowrap overflow-hidden">
+        <div class="flex animate-[slide_40s_linear_infinite] gap-12 items-center">
+            @for($i = 0; $i < 5; $i++)
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black text-white/20 uppercase tracking-[0.4em]">Lane_042</span>
+                <span class="text-xs font-black text-white uppercase italic">Guangzhou &rarr; Lagos</span>
+                <span class="text-[10px] font-black text-brand-gold">Express Air: 3-5 Days</span>
+            </div>
+            <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black text-white/20 uppercase tracking-[0.4em]">Lane_118</span>
+                <span class="text-xs font-black text-white uppercase italic">Shanghai &rarr; Nairobi</span>
+                <span class="text-[10px] font-black text-brand-gold">Sea Freight: 22 Days</span>
+            </div>
+            <div class="w-1.5 h-1.5 rounded-full bg-white/10"></div>
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black text-white/20 uppercase tracking-[0.4em]">Lane_009</span>
+                <span class="text-xs font-black text-white uppercase italic">Istanbul &rarr; Accra</span>
+                <span class="text-[10px] font-black text-brand-gold">Economy Air: 7 Days</span>
+            </div>
+            <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+            @endfor
+        </div>
+    </section>
+
+    <style>
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+
+    <!-- [SECTION 3] The Everything Movement : Multi-tier Stats -->
+    <section class="py-24 bg-[#050810] selection:bg-blue-600">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
                 <div class="relative group" data-aos="fade-up" data-aos-delay="0">

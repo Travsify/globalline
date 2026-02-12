@@ -76,9 +76,9 @@
             <div class="hidden lg:flex items-center space-x-10 text-white/90 font-semibold tracking-wide text-sm">
                 <a href="{{ url('/') }}" class="hover:text-brand-gold transition-soft @if(Request::is('/')) text-brand-gold @endif">Home</a>
                 <a href="{{ route('marketplace.index') }}" class="hover:text-brand-gold transition-soft @if(Request::is('marketplace*')) text-brand-gold @endif">Marketplace</a>
-                <a href="{{ url('/services') }}" class="hover:text-brand-gold transition-soft @if(Request::is('services')) text-brand-gold @endif">Services</a>
-                <a href="{{ url('/how-it-works') }}" class="hover:text-brand-gold transition-soft @if(Request::is('how-it-works')) text-brand-gold @endif">How It Works</a>
-                <a href="{{ url('/about') }}" class="hover:text-brand-gold transition-soft @if(Request::is('about')) text-brand-gold @endif">About Us</a>
+                <a href="{{ url('/services') }}" class="hover:text-brand-gold transition-soft @if(Request::is('services')) text-brand-gold @endif">Solutions</a>
+                <a href="{{ route('pricing') }}" class="hover:text-brand-gold transition-soft @if(Request::is('pricing')) text-brand-gold @endif">Pricing</a>
+                <a href="{{ url('/about') }}" class="hover:text-brand-gold transition-soft @if(Request::is('about')) text-brand-gold @endif">About</a>
                 <a href="{{ url('/contact') }}" class="hover:text-brand-gold transition-soft @if(Request::is('contact')) text-brand-gold @endif">Contact</a>
             </div>
 
@@ -112,9 +112,9 @@
              x-transition:enter-end="opacity-100 translate-y-0"
              class="lg:hidden bg-brand-navy border-t border-white/5 py-4 px-6 space-y-4" x-cloak>
             <a href="{{ url('/') }}" class="block text-white font-bold py-2">Home</a>
-            <a href="{{ url('/services') }}" class="block text-white font-bold py-2">Services</a>
-            <a href="{{ url('/how-it-works') }}" class="block text-white font-bold py-2">How It Works</a>
-            <a href="{{ url('/about') }}" class="block text-white font-bold py-2">About Us</a>
+            <a href="{{ url('/services') }}" class="block text-white font-bold py-2">Solutions</a>
+            <a href="{{ route('pricing') }}" class="block text-white font-bold py-2">Pricing</a>
+            <a href="{{ url('/about') }}" class="block text-white font-bold py-2">About</a>
             <a href="{{ url('/contact') }}" class="block text-white font-bold py-2">Contact</a>
             
             @auth
@@ -160,8 +160,8 @@
                     <h4 class="text-brand-gold font-bold uppercase tracking-[0.2em] text-xs mb-8">Navigation</h4>
                     <ul class="space-y-4 text-sm text-white/60 font-medium">
                         <li><a href="{{ url('/') }}" class="hover:text-white transition-soft">Home Feed</a></li>
-                        <li><a href="{{ url('/services') }}" class="hover:text-white transition-soft">Operational Services</a></li>
-                        <li><a href="{{ url('/how-it-works') }}" class="hover:text-white transition-soft">Protocol Manual</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-white transition-soft">Solutions</a></li>
+                        <li><a href="{{ route('pricing') }}" class="hover:text-white transition-soft">Pricing</a></li>
                         <li><a href="{{ url('/about') }}" class="hover:text-white transition-soft">Identity</a></li>
                     </ul>
                 </div>
@@ -171,7 +171,7 @@
                     <ul class="space-y-4 text-sm text-white/60 font-medium">
                         <li><a href="{{ route('tracking') }}" class="hover:text-white transition-soft">Track Intel</a></li>
                         <li><a href="{{ url('/faq') }}" class="hover:text-white transition-soft">Intelligence Base (FAQ)</a></li>
-                        <li><a href="{{ route('register') }}" class="hover:text-white transition-soft">Terms of Engagement</a></li>
+                        <li><a href="{{ route('legal') }}" class="hover:text-white transition-soft">Legal & Compliance</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-white transition-soft">Direct Conduit</a></li>
                     </ul>
                 </div>

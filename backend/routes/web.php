@@ -23,6 +23,7 @@ Route::get('/marketplace', [GlobalMarketplaceController::class, 'index'])->name(
 Route::post('/marketplace/add', [GlobalMarketplaceController::class, 'addToCollective'])->name('marketplace.add');
 
 Route::get('/services', fn() => view('services'))->name('services');
+Route::get('/pricing', fn() => view('pricing'))->name('pricing');
 
 Route::get('/about', function () {
     return view('about');
@@ -43,6 +44,10 @@ Route::get('/faq', function () {
 Route::get('/tracking', function () {
     return view('tracking_public');
 })->name('tracking');
+
+Route::get('/legal', function () {
+    return view('legal');
+})->name('legal');
 
 // Auth Routes (Web)
 Route::middleware('guest')->group(function () {

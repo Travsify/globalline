@@ -49,12 +49,18 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'business_name' => 'nullable|string|max:255',
+            'business_type' => 'nullable|string|in:importer,manufacturer,logistics,retailer',
+            'phone' => 'nullable|string|max:20',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'business_name' => $request->business_name,
+            'business_type' => $request->business_type,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
