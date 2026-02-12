@@ -194,8 +194,8 @@
                 <p class="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em] mb-4 md:mb-0">&copy; 2026 Globalline Logistics. Professional Series.</p>
                 <div class="flex space-x-8 text-[10px] font-black uppercase tracking-widest text-white/40">
                     <span>CNY / USD / NGN</span>
-                    <span>1688 Verified</span>
-                    <span>Alibaba Partner</span>
+                    <span>Global Nodes Active</span>
+                    <span>Frontier Verified</span>
                 </div>
             </div>
         </div>
