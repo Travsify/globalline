@@ -18,13 +18,3 @@
     </span>
 </div>
 
-<style>
-    @keyframes spin-slow {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-    .animate-spin-slow {
-        animation: spin-slow 10s linear infinite;
-        transform-origin: center;
-    }
-</style>
