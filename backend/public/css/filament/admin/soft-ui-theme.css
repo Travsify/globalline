@@ -1,0 +1,85 @@
+/* GlobalLine Soft UI Admin Theme */
+
+:root {
+    --brand-navy: #002366;
+    --brand-gold: #C5A059;
+    --brand-gold-light: rgba(197, 160, 89, 0.1);
+    --soft-ui-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
+    --soft-ui-card-radius: 1rem;
+}
+
+/* Dashboard Global Background */
+.fi-main-ctn {
+    background-color: #f8f9fa !important;
+}
+
+/* Soft UI Cards */
+.fi-wi-stats-overview-stat-ctn, 
+.fi-section, 
+.fi-ta-ctn {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: var(--soft-ui-shadow) !important;
+    border-radius: var(--soft-ui-card-radius) !important;
+}
+
+/* Stat Icon Refinement */
+.fi-wi-stats-overview-stat-icon-ctn {
+    background: linear-gradient(310deg, var(--brand-navy), #004080) !important;
+    color: white !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.07) !important;
+}
+
+.fi-wi-stats-overview-stat-icon-ctn[data-color="warning"] {
+    background: linear-gradient(310deg, var(--brand-gold), #8e703f) !important;
+}
+
+.fi-wi-stats-overview-stat-icon-ctn[data-color="success"] {
+    background: linear-gradient(310deg, #17ad37, #98ec2d) !important;
+}
+
+.fi-wi-stats-overview-stat-icon-ctn[data-color="info"] {
+    background: linear-gradient(310deg, #2152ff, #21d4fd) !important;
+}
+
+/* Sidebar & Topbar */
+.fi-sidebar {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: var(--soft-ui-shadow) !important;
+}
+
+.fi-sidebar-item-active {
+    background: var(--brand-gold-light) !important;
+    border-radius: 0.5rem !important;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-label {
+    color: var(--brand-navy) !important;
+    font-weight: 700 !important;
+}
+
+.fi-topbar {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    border: none !important;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Buttons */
+.fi-btn-color-primary {
+    background: linear-gradient(310deg, var(--brand-navy), #004080) !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.025em !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.fi-btn-color-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08) !important;
+}

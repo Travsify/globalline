@@ -23,10 +23,9 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(\App\Filament\Pages\Auth\CustomLogin::class)
             ->brandName('GlobalLine Admin')
             ->brandLogo(fn () => view('filament.components.logo'))
             ->brandLogoHeight('3rem')
@@ -73,7 +72,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->renderHook(
                 'panels::head.end',
-                fn (): string => '<link rel="stylesheet" href="' . asset('css/filament/admin/theme.css') . '">'
+                fn (): string => '<link rel="stylesheet" href="' . asset('css/filament/admin/soft-ui-theme.css') . '">'
             );
     }
 }
