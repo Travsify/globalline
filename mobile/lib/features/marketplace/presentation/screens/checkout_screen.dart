@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile/features/marketplace/presentation/providers/cart_provider.dart';
 
 class CheckoutScreen extends ConsumerStatefulWidget {
@@ -12,12 +9,14 @@ class CheckoutScreen extends ConsumerStatefulWidget {
 
 class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   bool _isLoading = false;
+  String _loadingMessage = "Processing Payment...";
 
   @override
   Widget build(BuildContext context) {
     final cartItems = ref.watch(cartProvider);
     final total = ref.watch(cartTotalProvider);
-    final shippingFee = 15.0; // Mock shipping fee
+    final symbol = ref.watch(cartSymbolProvider);
+    final shippingFee = symbol == '₦' ? 22500.0 : (symbol == 'TL' ? 450.0 : 15.0);
     final grandTotal = total + shippingFee;
 
     return Scaffold(
@@ -72,7 +71,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                              Text("${item.quantity}x ${item.product.title}", style: const TextStyle(fontSize: 14, color: Colors.white70, fontFamily: 'Outfit')),
                              const Spacer(),
                              Text(
-                               "${item.product.currency} ${item.total.toStringAsFixed(2)}",
+                               "${item.product.symbol}${item.total.toStringAsFixed(2)}",
                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                              ),
                            ],
@@ -80,9 +79,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                        )),
                        Divider(color: Colors.white.withOpacity(0.1)),
                        const SizedBox(height: 8),
-                       _buildSummaryRow("Subtotal", "\$${total.toStringAsFixed(2)}"),
+                       _buildSummaryRow("Subtotal", "$symbol${total.toStringAsFixed(2)}"),
                        const SizedBox(height: 8),
-                       _buildSummaryRow("Estimated Shipping", "\$${shippingFee.toStringAsFixed(2)}"),
+                       _buildSummaryRow("Estimated Shipping", "$symbol${shippingFee.toStringAsFixed(2)}"),
                        const SizedBox(height: 12),
                        Divider(color: Colors.white.withOpacity(0.1)),
                        const SizedBox(height: 4),
@@ -90,9 +89,32 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                          children: [
                            const Text("Total", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white, fontFamily: 'Outfit')),
                            const Spacer(),
-                           Text("\$${grandTotal.toStringAsFixed(2)}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFFFFD700), fontFamily: 'Outfit')),
+                           Text("$symbol${grandTotal.toStringAsFixed(2)}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFFFFD700), fontFamily: 'Outfit')),
                          ],
                        ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Collective Sync Indicator
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFD700).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: const Color(0xFFFFD700).withOpacity(0.3)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.sync, color: Color(0xFFFFD700), size: 20),
+                      const SizedBox(width: 12),
+                      const Expanded(
+                        child: Text(
+                          "Collective Cart Synchronization Active",
+                          style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -143,7 +165,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                       child: const Icon(Icons.account_balance_wallet, color: Color(0xFFFFD700)),
                     ),
                     title: const Text("Wallet Balance", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                    subtitle: const Text("Available: \$1250.00", style: TextStyle(color: Colors.white70)),
+                    subtitle: Text("Available: $symbol 3,450.00", style: const TextStyle(color: Colors.white70)),
                     trailing: const Icon(Icons.check_circle, color: Color(0xFFFFD700)),
                   ),
                 ),
@@ -160,13 +182,20 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                       elevation: 5,
                     ),
                     child: _isLoading 
-                      ? const SizedBox(
-                          width: 24, 
-                          height: 24, 
-                          child: CircularProgressIndicator(color: Color(0xFF002366), strokeWidth: 3)
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              width: 20, 
+                              height: 20, 
+                              child: CircularProgressIndicator(color: Color(0xFF002366), strokeWidth: 2)
+                            ),
+                            const SizedBox(width: 12),
+                            Text(_loadingMessage, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          ],
                         )
                       : Text(
-                          "PAY \$${grandTotal.toStringAsFixed(2)}", 
+                          "PAY $symbol${grandTotal.toStringAsFixed(2)}", 
                           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 1),
                         ),
                   ),
@@ -205,9 +234,25 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   }
 
   void _placeOrder() async {
-    setState(() => _isLoading = true);
-    // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      _isLoading = true;
+      _loadingMessage = "Syncing Collective Cart...";
+    });
+    
+    // Simulate Collective Settle Sync
+    await Future.delayed(const Duration(seconds: 1));
+    
+    if (mounted) {
+      setState(() => _loadingMessage = "Authorizing Trade Protocol...");
+    }
+    
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (mounted) {
+      setState(() => _loadingMessage = "Processing Payment...");
+    }
+
+    await Future.delayed(const Duration(seconds: 1));
 
     if (mounted) {
       ref.read(cartProvider.notifier).clearCart();
@@ -219,7 +264,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
         builder: (ctx) => AlertDialog(
           backgroundColor: const Color(0xFF002366),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.white.withOpacity(0.1))),
-          title: const Text("Order Placed!", style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontFamily: 'Outfit'), textAlign: TextAlign.center),
+          title: const Text("Sourcing Complete!", style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontFamily: 'Outfit'), textAlign: TextAlign.center),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -229,10 +274,10 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   color: Colors.white.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.check_circle, color: Color(0xFFFFD700), size: 48),
+                child: const Icon(Icons.hub_outlined, color: Color(0xFFFFD700), size: 48),
               ),
               const SizedBox(height: 16),
-              const Text("Your sourcing order has been created successfully.", textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
+              const Text("Your order has been synchronized with the GlobalLine Collective Settle station.", textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
             ],
           ),
           actions: [

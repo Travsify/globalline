@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mobile/features/marketplace/presentation/providers/marketplace_provider.dart';
-import 'package:mobile/features/marketplace/data/models/product_model.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart'; // Ensure this dependency exists or use GridView
+import 'package:mobile/features/marketplace/presentation/providers/currency_provider.dart';
 
 class MarketplaceScreen extends ConsumerStatefulWidget {
   const MarketplaceScreen({super.key});
@@ -19,6 +14,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   @override
   Widget build(BuildContext context) {
     final productsAsync = ref.watch(productSearchProvider(_searchQuery));
+    final selectedCurrency = ref.watch(selectedCurrencyProvider);
+    final availableCurrencies = ref.watch(availableCurrenciesProvider);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF0F4F8),
@@ -26,7 +23,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         slivers: [
           SliverAppBar(
             pinned: true,
-            expandedHeight: 200,
+            expandedHeight: 220,
             backgroundColor: const Color(0xFF002366),
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
@@ -57,20 +54,57 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFFD700),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text(
-                              "WHOLESALE PRICES",
-                              style: TextStyle(
-                                color: Color(0xFF002366),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFFD700),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: const Text(
+                                  "WHOLESALE PRICES",
+                                  style: TextStyle(
+                                    color: Color(0xFF002366),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                  ),
+                                ),
                               ),
-                            ),
+                              // Currency Switcher
+                              Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                                ),
+                                child: Row(
+                                  children: availableCurrencies.map((curr) {
+                                    final isSelected = curr == selectedCurrency;
+                                    return GestureDetector(
+                                      onTap: () => ref.read(selectedCurrencyProvider.notifier).state = curr,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                        decoration: BoxDecoration(
+                                          color: isSelected ? const Color(0xFFFFD700) : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(8),
+                                        ),
+                                        child: Text(
+                                          curr,
+                                          style: TextStyle(
+                                            color: isSelected ? const Color(0xFF002366) : Colors.white60,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 8),
                           const Text(
@@ -82,7 +116,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                               fontFamily: 'Outfit',
                             ),
                           ),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 8),
                         ],
                       ),
                     ),
@@ -253,23 +287,28 @@ class _ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Wholesale",
-                              style: TextStyle(color: Colors.grey[500], fontSize: 10),
-                            ),
-                            Text(
-                              '\$${product.price.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Color(0xFF002366),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Verified Node Price",
+                                style: TextStyle(color: Colors.grey[500], fontSize: 9, fontStyle: FontStyle.italic),
                               ),
-                            ),
-                          ],
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  '${product.symbol}${product.displayPrice.toStringAsFixed(2)}',
+                                  style: const TextStyle(
+                                    fontFamily: 'Outfit',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Color(0xFF002366),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
                           width: 32,

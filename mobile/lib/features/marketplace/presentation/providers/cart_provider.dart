@@ -7,7 +7,8 @@ class CartItem {
 
   CartItem({required this.product, required this.quantity});
 
-  double get total => product.price * quantity;
+  double get total => product.displayPrice * quantity;
+  String get symbol => product.symbol;
 }
 
 class CartController extends Notifier<List<CartItem>> {
@@ -54,4 +55,9 @@ final cartProvider = NotifierProvider<CartController, List<CartItem>>(CartContro
 final cartTotalProvider = Provider<double>((ref) {
   final cart = ref.watch(cartProvider);
   return cart.fold(0, (sum, item) => sum + item.total);
+});
+
+final cartSymbolProvider = Provider<String>((ref) {
+  final cart = ref.watch(cartProvider);
+  return cart.isNotEmpty ? cart.first.symbol : '$';
 });

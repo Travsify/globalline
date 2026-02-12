@@ -103,7 +103,7 @@ class CartScreen extends ConsumerWidget {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          '${item.product.currency} ${item.product.price.toStringAsFixed(2)}',
+                                          '${item.product.symbol}${item.product.displayPrice.toStringAsFixed(2)}',
                                           style: const TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontFamily: 'Outfit'),
                                         ),
                                       ],
@@ -146,7 +146,7 @@ class CartScreen extends ConsumerWidget {
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
-                                        '${item.product.currency} ${item.total.toStringAsFixed(2)}',
+                                        '${item.product.symbol}${item.total.toStringAsFixed(2)}',
                                         style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white70, fontSize: 13),
                                       ),
                                     ],
@@ -181,10 +181,13 @@ class CartScreen extends ConsumerWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text("Total", style: TextStyle(color: Colors.white70, fontSize: 16, fontFamily: 'Outfit')),
-                                  Text(
-                                    '\$${total.toStringAsFixed(2)}',
-                                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFFFFD700), fontFamily: 'Outfit'),
-                                  ),
+                                  Consumer(builder: (context, ref, child) {
+                                    final symbol = ref.watch(cartSymbolProvider);
+                                    return Text(
+                                      '$symbol${total.toStringAsFixed(2)}',
+                                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFFFFD700), fontFamily: 'Outfit'),
+                                    );
+                                  }),
                                 ],
                               ),
                               const SizedBox(height: 24),
