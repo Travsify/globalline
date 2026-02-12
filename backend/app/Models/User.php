@@ -18,7 +18,7 @@ class User extends Authenticatable implements FilamentUser
 
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'role', 'wallet_balance', 'is_active',
-        'business_name', 'business_type',
+        'business_name', 'business_type', 'admin_role',
     ];
 
     protected $hidden = [
@@ -38,8 +38,28 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->role === 'admin';
+        return $this->role === 'admin' && $this->admin_role !== null;
     }
+
+    public function hasAdminRole(string $role): bool
+    {
+        return $this->admin_role === $role || $this->admin_role === 'super_admin';
+    }
+
+    public function hasAnyAdminRole(array $roles): bool
+    {
+        return in_array($this->admin_role, $roles) || $this->admin_role === 'super_admin';
+    }
+
+    public const ADMIN_ROLES = [
+        'super_admin' => 'Super Admin',
+        'compliance_analyst' => 'Compliance / KYB Analyst',
+        'payments_ops' => 'Payments Ops',
+        'logistics_ops' => 'Logistics Ops',
+        'support_agent' => 'Support Agent',
+        'finance' => 'Finance',
+        'marketing_growth' => 'Marketing / Growth',
+    ];
 
     public function shipments(): HasMany
     {

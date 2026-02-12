@@ -11,6 +11,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -46,6 +47,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->font('Inter')
             ->sidebarCollapsibleOnDesktop()
+            ->navigationGroups([
+                NavigationGroup::make('Dashboard')->icon('heroicon-o-home'),
+                NavigationGroup::make('Customers')->icon('heroicon-o-users'),
+                NavigationGroup::make('Compliance')->icon('heroicon-o-shield-check'),
+                NavigationGroup::make('Logistics')->icon('heroicon-o-truck'),
+                NavigationGroup::make('Finance')->icon('heroicon-o-banknotes'),
+                NavigationGroup::make('Support')->icon('heroicon-o-chat-bubble-left-right'),
+                NavigationGroup::make('Config & Platform')->icon('heroicon-o-cog-6-tooth'),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -53,8 +63,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
                 \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\OpsQueueWidget::class,
+                \App\Filament\Widgets\AlertsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
