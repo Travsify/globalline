@@ -1,0 +1,87 @@
+/* GlobalLine Admin Command Center Theme */
+
+:root {
+    --brand-navy: #002366;
+    --brand-gold: #c5a059;
+}
+
+/* Glassmorphism for Login Card */
+.fi-simple-main {
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+    border-radius: 2rem !important;
+}
+
+.fi-simple-main .fi-section-header {
+    margin-bottom: 2rem;
+}
+
+.fi-simple-main .fi-section-header-title {
+    color: var(--brand-gold) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.05em !important;
+}
+
+/* Input Styles */
+.fi-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 1rem !important;
+}
+
+.fi-input:focus {
+    border-color: var(--brand-gold) !important;
+    box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2) !important;
+}
+
+/* Button Styles */
+.fi-btn-color-primary {
+    background: var(--brand-gold) !important;
+    color: var(--brand-navy) !important;
+    font-weight: 800 !important;
+    border-radius: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.fi-btn-color-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.4);
+}
+
+/* Background for Simple Layout (Login) */
+.fi-simple-layout {
+    background: radial-gradient(
+        circle at top left,
+        #001a4d,
+        #000c26
+    ) !important;
+}
+
+/* Topbar & Sidebar Refinements */
+.fi-topbar {
+    background: rgba(0, 35, 102, 0.8) !important;
+    backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.fi-sidebar {
+    background: #000e3d !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.fi-sidebar-active {
+    background: linear-gradient(
+        to right,
+        rgba(197, 160, 89, 0.1),
+        transparent
+    ) !important;
+    border-right: 2px solid var(--brand-gold) !important;
+}
+
+.fi-sidebar-item-label {
+    font-weight: 600 !important;
+}

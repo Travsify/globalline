@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('GlobalLine Admin')
+            ->brandLogo(fn () => view('filament.components.logo'))
+            ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => [
                     '50' => '#f0f4f8',
@@ -41,7 +43,10 @@ class AdminPanelProvider extends PanelProvider
                     '800' => '#001347',
                     '900' => '#000e3d',
                 ],
+                'gray' => Color::Slate,
             ])
+            ->font('Inter')
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -65,6 +70,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->renderHook(
+                'panels::head.end',
+                fn (): string => '<link rel="stylesheet" href="' . asset('css/filament/admin/theme.css') . '">'
+            );
     }
 }
