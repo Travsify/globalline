@@ -1,171 +1,163 @@
 @extends('layouts.public')
 
-@section('title', 'GlobalLine | The Engine of African Enterprise')
+@section('title', 'GlobalLine | Direct Factory Access for African Enterprise')
 
 @section('content')
 
-    <!-- Hero Section: The Enterprise Gateway -->
-    <header class="relative min-h-screen flex items-center pt-24 overflow-hidden bg-brand-navy">
-        <!-- Background Imagery & Effects -->
+    <!-- [SECTION 1] The Global Gateway: White-label Hero -->
+    <header class="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-brand-navy font-sans">
+        <!-- Intelligent Depth Background -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2400&q=80" 
-                 class="w-full h-full object-cover opacity-20 scale-105" alt="Logistics Network">
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-navy via-brand-navy/80 to-brand-navy"></div>
+            <img src="https://images.unsplash.com/photo-154919438c-f4c635f199bc?auto=format&fit=crop&w=2400&q=80" 
+                 class="w-full h-full object-cover opacity-10 scale-105" alt="Global Trade Network">
+            <div class="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/95 to-[#050810]"></div>
         </div>
 
-        <!-- Animated Background Orbs -->
-        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-brand-gold/10 blur-[120px] rounded-full animate-pulse-slow"></div>
-        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-brand-gold/5 blur-[120px] rounded-full animate-pulse-slow-delay"></div>
-        
         <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-5xl">
-                <div class="inline-flex items-center px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8">
-                    <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3 animate-ping"></span>
-                    <p class="text-[10px] font-black text-white uppercase tracking-[0.3em] italic">Live Intelligence: Guangzhou Node Active</p>
+            <div class="max-w-4xl">
+                <!-- Deployment Pulse -->
+                <div class="inline-flex items-center px-4 py-1.5 bg-brand-gold/5 border border-brand-gold/10 rounded-full backdrop-blur-md mb-10">
+                    <span class="w-1.5 h-1.5 bg-brand-gold rounded-full mr-3 animate-pulse"></span>
+                    <p class="text-[9px] font-bold text-brand-gold/80 uppercase tracking-[0.3em]">GlobalLine Trade Protocol Active</p>
                 </div>
 
-                <h1 class="text-7xl md:text-9xl font-heading font-black text-white leading-none mb-8 tracking-tighter uppercase italic">
-                    The Engine of <br>
-                    <span class="gold-outline-text">African</span> <br>
-                    <span class="text-brand-gold">Enterprise</span>
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-8 tracking-tight">
+                    Direct Access to <br>
+                    <span class="text-brand-gold">Global Manufacturing</span>
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-white/50 font-medium mb-16 max-w-2xl leading-relaxed italic">
-                    Direct access to China's manufacturing giants. <br>
-                    <span class="text-white font-black uppercase tracking-widest text-sm">Sourcing · Logistics · Settlement</span>
+                <p class="text-lg md:text-xl text-white/50 font-medium mb-12 max-w-2xl leading-relaxed">
+                    The frontier for African businesses to source directly from global manufacturers. 
+                    <span class="text-white/80">Search. Settle. Move.</span> Our own terminal, your enterprise.
                 </p>
 
-                <!-- Glassmorphism 1688 Search Integration -->
-                <div class="max-w-4xl group">
-                    <form action="{{ route('marketplace.index') }}" method="GET" class="relative flex flex-col md:flex-row bg-white/5 backdrop-blur-2xl p-3 rounded-[2.5rem] border border-white/10 shadow-2xl transition-soft group-hover:border-brand-gold/40">
-                        <div class="flex-1 flex items-center px-8 py-4">
-                            <div class="bg-brand-gold/10 p-3 rounded-2xl mr-6">
-                                <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            </div>
+                <!-- White-label Search Terminal -->
+                <div class="max-w-3xl">
+                    <form action="{{ route('marketplace.index') }}" method="GET" class="relative flex flex-col md:flex-row bg-white/[0.03] backdrop-blur-xl p-2 rounded-2xl border border-white/10 shadow-3xl focus-within:border-brand-gold/40 transition-all duration-500">
+                        <div class="flex-1 flex items-center px-6 py-3">
                             <input type="text" name="query"
-                                   placeholder="Paste 1688.com or Alibaba URL to initiate sourcing..." 
-                                   class="w-full bg-transparent text-white font-bold placeholder-white/20 focus:outline-none text-lg">
+                                   placeholder="Search global manufacturers or paste factory product URL..." 
+                                   class="w-full bg-transparent text-white font-semibold placeholder-white/20 focus:outline-none text-base">
                         </div>
-                        <button type="submit" class="bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-16 py-6 rounded-[1.8rem] font-black uppercase tracking-[0.2em] text-xs transition-soft shadow-2xl active:scale-95 italic">
-                            Deploy Bot
+                        <button type="submit" class="bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-12 py-4 rounded-xl font-bold uppercase tracking-widest text-[11px] transition-all active:scale-95 shadow-lg shadow-brand-gold/10">
+                            Source Now
                         </button>
                     </form>
-                    <div class="mt-6 flex items-center space-x-6 px-4">
-                        <span class="text-[9px] font-black text-white/20 uppercase tracking-widest">Global Node Support:</span>
-                        <div class="flex space-x-4">
-                            <span class="text-[9px] font-bold text-white/40 hover:text-brand-gold cursor-pointer transition-colors uppercase italic tracking-tighter">1688.com</span>
-                            <span class="text-[9px] font-bold text-white/40 hover:text-brand-gold cursor-pointer transition-colors uppercase italic tracking-tighter">Alibaba.com</span>
-                            <span class="text-[9px] font-bold text-white/40 hover:text-brand-gold cursor-pointer transition-colors uppercase italic tracking-tighter">Taobao</span>
+                    <div class="mt-4 flex items-center space-x-4 px-2">
+                        <span class="text-[8px] font-bold text-white/30 uppercase tracking-[0.4em]">Integrated Supply Nodes:</span>
+                        <div class="flex space-x-3">
+                            <span class="text-[8px] font-black text-white/40 uppercase tracking-tighter">Guangzhou</span>
+                            <span class="text-[8px] font-black text-white/40 uppercase tracking-tighter">Istanbul</span>
+                            <span class="text-[8px] font-black text-white/40 uppercase tracking-tighter">Tel Aviv</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Floating Abstract Geometry -->
-        <div class="absolute right-0 bottom-0 w-1/3 h-full hidden xl:block pointer-events-none">
-            <div class="relative w-full h-full">
-                <div class="absolute top-1/2 left-0 w-[500px] h-[500px] border border-white/5 rounded-full rotate-45"></div>
-                <div class="absolute top-1/2 left-20 w-[400px] h-[400px] border border-brand-gold/10 rounded-full -rotate-12"></div>
             </div>
         </div>
     </header>
 
-    <!-- Trust Ledger: The Connected Network -->
-    <section class="py-20 bg-brand-navy border-y border-white/5">
+    <!-- [SECTION 2] The Intelligence Registry: Multi-tier Scope -->
+    <section class="py-24 bg-[#050810] border-y border-white/5">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-12 opacity-40 grayscale group hover:grayscale-0 transition-soft duration-700">
-                <span class="text-[10px] font-black text-white/40 uppercase tracking-[0.3em] italic mb-8 md:mb-0">Verified Logistics Nodes</span>
-                <div class="flex flex-wrap items-center justify-center gap-16 md:gap-24">
-                    <span class="text-2xl font-black text-white font-heading tracking-tighter italic uppercase underline decoration-brand-gold decoration-4 underline-offset-8">Cosco</span>
-                    <span class="text-2xl font-black text-white font-heading tracking-tighter italic uppercase">Maersk</span>
-                    <span class="text-2xl font-black text-white font-heading tracking-tighter italic uppercase underline decoration-brand-gold decoration-4 underline-offset-8">CMA CGM</span>
-                    <span class="text-2xl font-black text-white font-heading tracking-tighter italic uppercase">SF Express</span>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
+                <div class="group border-r border-white/5 last:border-0 pr-12">
+                    <p class="text-[9px] font-bold text-brand-gold/60 uppercase tracking-[0.3em] mb-3">Tons Moved</p>
+                    <span class="text-4xl font-bold text-white tracking-tighter group-hover:text-brand-gold transition-colors">4.8k+</span>
+                </div>
+                <div class="group border-r border-white/5 last:border-0 pr-12">
+                    <p class="text-[9px] font-bold text-white/30 uppercase tracking-[0.3em] mb-3">African Businesses</p>
+                    <span class="text-4xl font-bold text-white tracking-tighter group-hover:text-brand-gold transition-colors">12k+</span>
+                </div>
+                <div class="group border-r border-white/5 last:border-0 pr-12">
+                    <p class="text-[9px] font-bold text-white/30 uppercase tracking-[0.3em] mb-3">Supply Corridors</p>
+                    <span class="text-4xl font-bold text-white tracking-tighter group-hover:text-brand-gold transition-colors">Global</span>
+                </div>
+                <div class="group">
+                    <p class="text-[9px] font-bold text-white/30 uppercase tracking-[0.3em] mb-3">Settlement Node</p>
+                    <span class="text-4xl font-bold text-white tracking-tighter group-hover:text-brand-gold transition-colors">Instant</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Core Intelligence Pillars -->
-    <section class="py-40 bg-brand-navy relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-32">
-                <h2 class="text-4xl md:text-6xl font-heading font-black text-white mb-6 uppercase italic tracking-tighter">The Holy Trinity <br>of <span class="text-brand-gold">Sourcing</span></h2>
-                <div class="w-24 h-1 bg-brand-gold mx-auto"></div>
+    <!-- [SECTION 3] The Everything Movement: 5-Tier Logistics -->
+    <section class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-end justify-between mb-24 gap-8">
+                <div class="max-w-2xl">
+                    <span class="text-[10px] font-bold text-brand-gold uppercase tracking-[0.4em] mb-4 inline-block">The Logistics Domain</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-navy leading-tight tracking-tight">
+                        Every Movement. <br>Everywhere. Multi-tier.
+                    </h2>
+                </div>
+                <p class="text-slate-500 max-w-sm text-sm italic">
+                    From your neighborhood to the other side of the planet. GlobalLine handles the entire spectrum of logistics.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <!-- Sourcing Node -->
-                <div class="bg-white/5 border border-white/10 p-16 rounded-[4rem] group hover:bg-white/10 transition-soft relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-gold/20"></div>
-                    <div class="w-20 h-20 bg-brand-gold rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl group-hover:scale-110 transition-soft">
-                        <svg class="w-10 h-10 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Tier 1 & 2 -->
+                <div class="p-10 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="w-10 h-10 bg-brand-navy text-brand-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-heading font-black text-white mb-6 uppercase italic tracking-tighter">Direct Sourcing</h3>
-                    <p class="text-white/40 text-lg leading-relaxed mb-10 italic">We synchronize your orders directly with China's factory-tier pricing. No Middlemen.</p>
-                    <a href="/portal/marketplace" class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] italic border-b border-brand-gold/20 pb-2 hover:border-brand-gold">Tactical Entry &rarr;</a>
+                    <h4 class="text-lg font-bold text-brand-navy uppercase mb-3">Intra & Inter-City</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Swift, precision delivery within your city or between states. Local logistics powered by global technology.</p>
                 </div>
-
-                <!-- Consolidation Node -->
-                <div class="bg-brand-gold p-16 rounded-[4rem] group transition-soft relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 text-brand-navy"></div>
-                    <div class="w-20 h-20 bg-brand-navy rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl group-hover:scale-110 transition-soft">
-                        <svg class="w-10 h-10 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                <!-- Tier 3 & 4 -->
+                <div class="p-10 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all group">
+                    <div class="w-10 h-10 bg-brand-navy text-brand-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.065M15 20.33V18a2 2 0 012-2h3.065M12 2.13v20m0-20L10.5 4M12 2.13l1.5 1.87"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-heading font-black text-brand-navy mb-6 uppercase italic tracking-tighter">Master Merge</h3>
-                    <p class="text-brand-navy/60 text-lg font-bold leading-relaxed mb-10 italic">Combine multi-vendor orders into a single Master Box. Save 45% on volumetric freight.</p>
-                    <a href="/portal/consolidation" class="text-brand-navy text-xs font-black uppercase tracking-[0.3em] italic border-b border-brand-navy/20 pb-2 hover:border-brand-navy">Optimize Logistics &rarr;</a>
+                    <h4 class="text-lg font-bold text-brand-navy uppercase mb-3">Intra & Inter-Country</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Moving cargo across borders and nations. We simplify the complexity of cross-country transport.</p>
                 </div>
-
-                <!-- Settlement Node -->
-                <div class="bg-white/5 border border-white/10 p-16 rounded-[4rem] group hover:bg-white/10 transition-soft relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-gold/20"></div>
-                    <div class="w-20 h-20 bg-brand-gold rounded-[2rem] flex items-center justify-center mb-10 shadow-2xl group-hover:scale-110 transition-soft">
-                        <svg class="w-10 h-10 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                <!-- Tier 5 -->
+                <div class="p-10 rounded-3xl bg-brand-gold hover:shadow-xl transition-all group">
+                    <div class="w-10 h-10 bg-brand-navy text-brand-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9-3-9m-9 9a9 9 0 019-9"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-heading font-black text-white mb-6 uppercase italic tracking-tighter">Instant Settle</h3>
-                    <p class="text-white/40 text-lg leading-relaxed mb-10 italic">Multi-currency wallet (NGN/CNY/USD) with real-time settlement for supplier invoices.</p>
-                    <a href="/portal/wallet" class="text-brand-gold text-xs font-black uppercase tracking-[0.3em] italic border-b border-brand-gold/20 pb-2 hover:border-brand-gold">Deploy Capital &rarr;</a>
+                    <h4 class="text-lg font-bold text-brand-navy uppercase mb-3">Inter-Continental</h4>
+                    <p class="text-brand-navy/70 text-sm leading-relaxed">Direct freight lines from manufacturing hubs in Asia and Europe to the African continent.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Live Inventory Scroller -->
-    <section class="py-40 bg-slate-50 relative">
-        <div class="container mx-auto px-6 mb-20 flex justify-between items-end">
-            <div>
-                <span class="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em] italic">Live Intelligence</span>
-                <h2 class="text-5xl font-heading font-black text-brand-navy mt-4 uppercase italic tracking-tighter">Recently <span class="text-brand-gold">Sourced</span></h2>
+    <!-- [SECTION 4] The Sourcing Marketplace: White-labeled Catalouge -->
+    <section class="py-32 bg-slate-50 relative overflow-hidden">
+        <div class="container mx-auto px-6 mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div class="max-w-xl">
+                <span class="text-[10px] font-bold text-brand-gold uppercase tracking-[0.4em] mb-4 inline-block">Direct From Source</span>
+                <h2 class="text-4xl font-bold text-brand-navy leading-tight uppercase tracking-tighter">Verified Sourcing Terminal</h2>
             </div>
-            <a href="{{ route('portal.marketplace') }}" class="text-[10px] font-black text-brand-navy uppercase tracking-widest italic border-b-2 border-brand-gold pb-1">View Full Terminal &rarr;</a>
+            <a href="{{ route('portal.marketplace') }}" class="text-[11px] font-bold text-brand-navy uppercase tracking-widest border-b-2 border-brand-gold pb-1 hover:text-brand-gold transition-colors">Enter Terminal &rarr;</a>
         </div>
         
-        <div class="overflow-x-auto pb-20 no-scrollbar">
-            <div class="flex space-x-12 px-6">
+        <div class="overflow-x-auto pb-12 no-scrollbar">
+            <div class="flex space-x-8 px-6">
                 @php
                     $samples = [
-                        ['name' => 'Industrial CNC Node', 'price' => '¥4,200', 'img' => 'https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?auto=format&fit=crop&w=600&q=80'],
-                        ['name' => 'Solar Power Core', 'price' => '¥1,500', 'img' => 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&q=80'],
-                        ['name' => 'Premium Textile Mesh', 'price' => '¥120', 'img' => 'https://images.unsplash.com/photo-1558444452-92f7671f618a?auto=format&fit=crop&w=600&q=80'],
-                        ['name' => 'Logistics Tablet Pro', 'price' => '¥1,800', 'img' => 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80'],
-                        ['name' => 'Smart Cargo Sensor', 'price' => '¥300', 'img' => 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=600&q=80'],
+                        ['name' => 'Industrial Precision Node', 'price' => 'Factory Direct', 'img' => 'https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?auto=format&fit=crop&w=600&q=80'],
+                        ['name' => 'Solar Energy Core', 'price' => 'Wholesale Tier', 'img' => 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&q=80'],
+                        ['name' => 'Textile Manufacturing Mesh', 'price' => 'Bulk Unit', 'img' => 'https://images.unsplash.com/photo-1558444452-92f7671f618a?auto=format&fit=crop&w=600&q=80'],
+                        ['name' => 'Enterprise Logic Board', 'price' => 'Direct Import', 'img' => 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80'],
                     ];
                 @endphp
                 @foreach($samples as $item)
-                <div class="min-w-[400px] bg-white rounded-[3.5rem] shadow-xl overflow-hidden group hover:shadow-2xl transition-soft cursor-pointer" 
-                     onclick="window.location.href='{{ route('portal.marketplace') }}?item={{ urlencode($item['name']) }}';">
-                    <div class="h-64 relative overflow-hidden">
-                        <img src="{{ $item['img'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-soft duration-700" alt="{{ $item['name'] }}">
-                        <div class="absolute top-6 left-6 bg-brand-navy text-brand-gold px-6 py-2 rounded-full text-[10px] font-black uppercase italic tracking-widest shadow-lg">1688 Verified</div>
+                <div class="min-w-[320px] bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group hover:shadow-xl transition-all cursor-pointer" 
+                     onclick="window.location.href='{{ route('portal.marketplace') }}';">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="{{ $item['img'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 grayscale-[20%] group-hover:grayscale-0" alt="{{ $item['name'] }}">
+                        <div class="absolute top-4 left-4 bg-brand-navy/90 text-brand-gold px-4 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest">Global Sourced</div>
                     </div>
-                    <div class="p-10">
-                        <h4 class="text-2xl font-heading font-black text-brand-navy uppercase italic tracking-tighter mb-4">{{ $item['name'] }}</h4>
+                    <div class="p-8">
+                        <h4 class="text-base font-bold text-brand-navy mb-4">{{ $item['name'] }}</h4>
                         <div class="flex justify-between items-center">
-                            <span class="text-3xl font-heading font-black text-brand-gold italic tracking-tighter">{{ $item['price'] }}</span>
-                            <button class="bg-slate-50 p-4 rounded-2xl group-hover:bg-brand-gold transition-soft">
-                                <svg class="w-6 h-6 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
-                            </button>
+                            <span class="text-sm font-bold text-brand-gold uppercase tracking-tighter">{{ $item['price'] }}</span>
+                            <div class="bg-slate-50 p-2.5 rounded-lg group-hover:bg-brand-gold transition-colors">
+                                <svg class="w-4 h-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -174,62 +166,75 @@
         </div>
     </section>
 
-    <!-- The Sourcing Assistance Block: Enterprise Grade -->
+    <!-- [SECTION 5] Capital Bridge: African Payment Focus -->
     <section class="py-40 bg-brand-navy relative overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent"></div>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <div class="max-w-4xl mx-auto">
-                <span class="text-[10px] font-black text-brand-gold uppercase tracking-[0.4em] italic mb-8 inline-block">Bespoke Manufacturing Conduit</span>
-                <h2 class="text-6xl md:text-8xl font-heading font-black text-white mb-12 uppercase italic tracking-tighter leading-none">Can't Find It? <br>We'll <span class="gold-outline-text italic">Build</span> It.</h2>
-                <p class="text-xl md:text-2xl text-white/50 font-medium mb-16 leading-relaxed italic">Direct factory connections for custom production, OEM branding, and large-scale enterprise procurement.</p>
-                <a href="/portal/sourcing" class="inline-block bg-brand-gold hover:bg-brand-goldHover text-brand-navy px-16 py-6 rounded-[2rem] font-black uppercase tracking-[0.3em] text-sm transition-soft shadow-2xl active:scale-95 italic">
-                    Initiate Factory Inquiry
-                </a>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2">
+                    <span class="text-[10px] font-bold text-brand-gold uppercase tracking-[0.4em] mb-8 inline-block">The Settlement Layer</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-8">
+                        The Frontier for <br>African <span class="text-brand-gold">Capital Settlement</span>
+                    </h2>
+                    <p class="text-white/40 text-base leading-relaxed mb-12 max-w-xl">
+                        Designed for the African business. Pay your global suppliers in China, Turkey, or Israel directly using your local currency. We handle the currency bridge, you handle the growth.
+                    </p>
+                    <div class="grid grid-cols-2 gap-8 mb-12">
+                        <div>
+                            <p class="text-[10px] font-bold text-white/20 uppercase mb-2">Multicurrency</p>
+                            <p class="text-white font-bold">CNY · USD · NGN</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-white/20 uppercase mb-2">Compliance</p>
+                            <p class="text-white font-bold">Secure Gateway</p>
+                        </div>
+                    </div>
+                    <a href="{{ route('register') }}" class="inline-block bg-brand-gold text-brand-navy px-12 py-5 rounded-xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-goldHover transition-colors">
+                        Start Settling
+                    </a>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-brand-gold/10 blur-[100px] rounded-full"></div>
+                        <div class="relative bg-white/[0.03] p-12 rounded-[3rem] border border-white/10 backdrop-blur-sm">
+                            <div class="space-y-6">
+                                <div class="flex justify-between items-center text-white/30 text-[10px] font-bold uppercase pb-4 border-b border-white/5">
+                                    <span>Real-time Invoice Settle</span>
+                                    <span>Sync: Guaranteed</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center font-bold text-brand-navy">NGN</div>
+                                    <div class="flex-1 h-px bg-white/10"></div>
+                                    <div class="w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center font-bold text-white">CNY</div>
+                                </div>
+                                <p class="text-brand-gold font-bold text-center text-sm">Automated Manufacturer Credit</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Abstract Grid lines -->
-        <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent"></div>
     </section>
 
-    <!-- Intelligence Grid: Real-time Stats -->
-    <section class="py-32 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-                <div class="space-y-4">
-                    <span class="text-5xl md:text-7xl font-heading font-black text-brand-navy italic tracking-tighter">12k+</span>
-                    <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] italic">Delivered Loads</p>
-                </div>
-                <div class="space-y-4">
-                    <span class="text-5xl md:text-7xl font-heading font-black text-brand-navy italic tracking-tighter">120+</span>
-                    <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] italic">Verified Ports</p>
-                </div>
-                <div class="space-y-4">
-                    <span class="text-5xl md:text-7xl font-heading font-black text-brand-navy italic tracking-tighter">8.4k</span>
-                    <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] italic">Active Merchants</p>
-                </div>
-                <div class="space-y-4">
-                    <span class="text-5xl md:text-7xl font-heading font-black text-brand-navy italic tracking-tighter">4.9/5</span>
-                    <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] italic">Protocol Rating</p>
+    <!-- [SECTION 6] Final Gateway -->
+    <section class="py-40 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-6xl font-bold text-brand-navy tracking-tight leading-none mb-10">
+                    Your Enterprise, <br>Directly Connected.
+                </h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <a href="{{ route('register') }}" class="w-full md:w-auto bg-brand-navy text-white px-14 py-6 rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:shadow-2xl hover:shadow-brand-navy/30 transition-all">
+                        Create Account
+                    </a>
+                    <a href="{{ route('login') }}" class="w-full md:w-auto bg-white text-brand-navy border-2 border-brand-navy px-14 py-6 rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-slate-50 transition-all">
+                        Enter Terminal
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <style>
-        .gold-outline-text {
-            -webkit-text-stroke: 2px #C5A059;
-            color: transparent;
-        }
-        .animate-pulse-slow { animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        .animate-pulse-slow-delay { animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; animation-delay: 2s; }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(1.1); }
-        }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
