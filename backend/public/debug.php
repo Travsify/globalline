@@ -1,18 +1,19 @@
 <?php
-echo "=== GlobalLine Diagnostic ===\n";
-echo "Timestamp: " . date('Y-m-d H:i:s') . "\n";
-echo "PHP Version: " . phpversion() . "\n\n";
+echo "=== GlobalLine Diagnostic (v2) ===\n";
+echo "Date: " . date('Y-m-d H:i:s') . "\n";
 
-echo "=== Request Info ===\n";
-echo "REQUEST_URI: " . ($_SERVER['REQUEST_URI'] ?? 'N/A') . "\n";
-echo "SCRIPT_NAME: " . ($_SERVER['SCRIPT_NAME'] ?? 'N/A') . "\n";
-echo "DOCUMENT_ROOT: " . ($_SERVER['DOCUMENT_ROOT'] ?? 'N/A') . "\n";
-
-echo "\n=== File Check ===\n";
-$critical = ['index.php', '.htaccess', '../vendor/autoload.php'];
-foreach ($critical as $f) {
-    echo "$f: " . (file_exists(__DIR__ . '/' . $f) ? "EXISTS" : "MISSING") . "\n";
+echo "\n=== Loaded Apache Modules ===\n";
+if (function_exists('apache_get_modules')) {
+    $mods = apache_get_modules();
+    sort($mods);
+    foreach ($mods as $m) {
+        echo "- $m\n";
+    }
+} else {
+    echo "apache_get_modules() not available.\n";
 }
 
-echo "\n=== Server Vars ===\n";
-print_r($_SERVER);
+echo "\n=== Request Details ===\n";
+echo "URI: " . $_SERVER['REQUEST_URI'] . "\n";
+echo "Script: " . $_SERVER['SCRIPT_NAME'] . "\n";
+echo "DocRoot: " . $_SERVER['DOCUMENT_ROOT'] . "\n";
