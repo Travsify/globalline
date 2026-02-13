@@ -3,7 +3,9 @@
 @section('title', 'Marketplace | GlobalLine Collective')
 
 @section('content')
-<main class="bg-navy-dark min-h-screen pt-32 pb-32 overflow-hidden" x-data="marketplaceController()">
+<main class="bg-navy-dark min-h-screen pt-32 pb-32 overflow-hidden" 
+      x-data="marketplaceController($el)"
+      data-initial-cart="{{ json_encode(array_values(Session::get('collective_cart', []))) }}">
     
     <!-- Hero / Discovery Section -->
     <div class="container mx-auto px-6 relative z-10 mb-20">
@@ -241,10 +243,10 @@
 </main>
 
 <script>
-function marketplaceController() {
+function marketplaceController(el) {
     return {
         cartOpen: false,
-        cart: @js(array_values(Session::get('collective_cart', []))),
+        cart: JSON.parse(el.dataset.initialCart || '[]'),
         totalCost: 0,
         
         init() {
@@ -257,12 +259,13 @@ function marketplaceController() {
         },
 
         calculateTotal() {
-            this.totalCost = this.cart.reduce((sum, item) => sum + (item.display_price * item.qty), 0);
+            this.totalCost = this.cart.reduce((sum, item) => sum + (parseFloat(item.display_price) * item.qty), 0);
         },
 
         async addToCollective(product) {
             try {
-                const response = await fetch('{{ route('marketplace.add') }}', {
+                const addRoute = "{{ route('marketplace.add') }}";
+                const response = await fetch(addRoute, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

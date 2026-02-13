@@ -228,19 +228,10 @@
                 <div>
                     <h4 class="text-white font-bold mb-6 font-heading">Company</h4>
                     <ul class="space-y-4 text-sm text-white/60">
-                        <li><a href="{{ url('/about') }}" class="hover:text-amber-brand transition-colors">The Manifesto</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-amber-brand transition-colors">The Manifesto</a></li>
                         <li><a href="{{ route('pricing') }}" class="hover:text-amber-brand transition-colors">Pricing Tiers</a></li>
-                        <li><a href="{{ url('/contact') }}" class="hover:text-amber-brand transition-colors">Global Support</a></li>
+                        <li><a href="{{ route('contact') }}" class="hover:text-amber-brand transition-colors">Global Support</a></li>
                         <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Legal & Compliance</a></li>
-                    </ul>
-                </div>
-            </div>
-                <div>
-                    <h4 class="text-white font-bold mb-6 font-heading">Legal</h4>
-                    <ul class="space-y-4 text-sm text-white/60">
-                        <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Privacy Policy</a></li>
-                        <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Terms of Service</a></li>
-                        <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Compliance</a></li>
                     </ul>
                 </div>
             </div>
