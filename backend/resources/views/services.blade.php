@@ -1,188 +1,158 @@
 @extends('layouts.public')
 
-@section('title', 'Our Services | GlobalLine Logistics')
+@section('title', 'Our Solutions | GlobalLine Logistics')
 
 @section('content')
 
-    <!-- Hero Header -->
-    <header class="pt-48 pb-24 bg-brand-navy relative overflow-hidden">
+    <!-- HERO SECTION -->
+     <section class="relative pt-32 pb-20 bg-navy-dark overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <div class="absolute top-0 right-0 w-1/2 h-full bg-brand-gold/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+             <div class="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-gradient-to-r from-blue-600/10 to-amber-brand/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
         </div>
-        
         <div class="container mx-auto px-6 relative z-10 text-center">
-            <span class="inline-block px-4 py-1 bg-brand-gold/10 text-brand-gold rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6 italic">Enterprise Core</span>
-            <h1 class="text-6xl md:text-8xl font-heading font-black text-white mb-8 tracking-tighter uppercase italic">
-                Our <span class="gold-outline-text underline decoration-brand-gold/20">Solutions</span>
+            <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-xs mb-6 block" data-aos="fade-up">Logistics Ecosystem</span>
+            <h1 class="text-5xl md:text-7xl font-bold font-heading text-white mb-8 tracking-tighter" data-aos="fade-up" data-aos-delay="100">
+                End-to-End <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50">Supply Chain Solutions.</span>
             </h1>
-            <p class="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
-                Integrated logistics, procurement, and financial infrastructure for the modern global trader.
-            </p>
-        </div>
-    </header>
-
-    <!-- Detailed Services Breakdown -->
-    <section class="py-32 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="space-y-40">
-                <!-- 01: Importing (Sourcing) -->
-                <div class="flex flex-col lg:flex-row items-center gap-24">
-                    <div class="w-full lg:w-1/2 order-2 lg:order-1">
-                        <div class="inline-flex items-center px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-8">
-                            <p class="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] italic">Track_01: Procurement</p>
-                        </div>
-                        <h2 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tighter uppercase italic">Importing <br><span class="text-brand-gold italic">Made Simple.</span></h2>
-                        <p class="text-lg text-slate-500 font-medium leading-relaxed mb-10">
-                            Stop navigating complex Chinese marketplaces alone. Our "Buy-for-me" protocol allows you to source direct from 1688, Taobao, and Alibaba with local quality control and verified factory audits.
-                        </p>
-                        <ul class="space-y-4 mb-12">
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Unified Sourcing Terminal (1688/Taobao)
-                            </li>
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Mandatory Quality Control & QC Photos
-                            </li>
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Multi-vendor Consolidation (MasterMerge)
-                            </li>
-                        </ul>
-                        <a href="{{ route('marketplace.index') }}" class="inline-block bg-brand-navy text-white px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-gold hover:text-brand-navy transition-all shadow-xl">
-                            Launch Sourcing Engine
-                        </a>
-                    </div>
-                    <div class="w-full lg:w-1/2 order-1 lg:order-2">
-                         <div class="relative group">
-                            <div class="absolute -inset-4 bg-blue-500/5 rounded-[4rem] group-hover:scale-105 transition-all duration-700"></div>
-                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=80" 
-                                 class="relative z-10 w-full rounded-[3.5rem] shadow-3xl grayscale hover:grayscale-0 transition-all duration-1000" alt="Importing">
-                            <div class="absolute top-10 right-10 z-20 bg-brand-gold text-brand-navy p-4 rounded-2xl font-black italic text-xs uppercase tracking-widest shadow-2xl animate-bounce">
-                                4,800+ Factories
-                            </div>
-                         </div>
-                    </div>
-                </div>
-
-                <!-- 02: Exporting (Shipping) -->
-                <div class="flex flex-col lg:flex-row items-center gap-24">
-                    <div class="w-full lg:w-1/2">
-                         <div class="relative group">
-                            <div class="absolute -inset-4 bg-brand-gold/5 rounded-[4rem] group-hover:scale-105 transition-all duration-700"></div>
-                            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80" 
-                                 class="relative z-10 w-full rounded-[3.5rem] shadow-3xl grayscale hover:grayscale-0 transition-all duration-1000" alt="Exporting">
-                            <div class="absolute -bottom-10 -left-10 z-20 bg-brand-navy text-white p-8 rounded-[2.5rem] shadow-3xl border border-white/10 italic">
-                                <p class="text-[10px] uppercase font-black tracking-widest text-brand-gold mb-2">Transit Intel</p>
-                                <p class="text-2xl font-black tracking-tighter">3-5 Day Express</p>
-                            </div>
-                         </div>
-                    </div>
-                    <div class="w-full lg:w-1/2">
-                        <div class="inline-flex items-center px-4 py-2 bg-brand-gold/10 border border-brand-gold/20 rounded-full mb-8">
-                            <p class="text-[10px] font-black text-brand-gold uppercase tracking-[0.2em] italic">Track_02: Logistics</p>
-                        </div>
-                        <h2 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tighter uppercase italic">Exporting <br><span class="text-blue-500 italic">Globally.</span></h2>
-                        <p class="text-lg text-slate-500 font-medium leading-relaxed mb-10">
-                            Fast, reliable cargo movement from GlobalLine hubs to your doorstep. We handle the documentation, clearing, and last-mile delivery across all major trade corridors.
-                        </p>
-                        <ul class="space-y-4 mb-12">
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-brand-gold rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Air & Sea Freight Custom Solutions
-                            </li>
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-brand-gold rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Real-time Granular Asset Tracking
-                            </li>
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-brand-gold rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Nationwide Distribution Centers
-                            </li>
-                        </ul>
-                        <a href="{{ route('tracking') }}" class="inline-block border-2 border-brand-navy text-brand-navy px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-navy hover:text-white transition-all italic">
-                            Track Your Freight
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 03: Supplier Payments -->
-                <div class="flex flex-col lg:flex-row items-center gap-24">
-                    <div class="w-full lg:w-1/2 order-2 lg:order-1">
-                        <div class="inline-flex items-center px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-8">
-                            <p class="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] italic">Track_03: Financials</p>
-                        </div>
-                        <h2 class="text-5xl md:text-6xl font-black text-brand-navy mb-8 tracking-tighter uppercase italic">Supplier <br><span class="text-emerald-500 italic">Settlements.</span></h2>
-                        <p class="text-lg text-slate-500 font-medium leading-relaxed mb-10">
-                            Bridging the currency gap. Pay factory invoices in USD, CNY, or TRY instantly using your local currency. Secure B2B wire transfers protected by the GlobalLine Ledger.
-                        </p>
-                        <ul class="space-y-4 mb-12">
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Multi-currency Enterprise Wallets
-                            </li>
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Automated 1688 Checkout (Naira to Yuan)
-                            </li>
-                            <li class="flex items-center text-sm font-bold text-brand-navy uppercase tracking-widest italic group">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-4 group-hover:scale-150 transition-soft"></span>
-                                Zero-Middleman FX Rates
-                            </li>
-                        </ul>
-                        <a href="{{ route('portal.wallet') }}" class="inline-block bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-navy transition-all shadow-xl shadow-emerald-500/20">
-                            Access Ledger System
-                        </a>
-                    </div>
-                    <div class="w-full lg:w-1/2 order-1 lg:order-2">
-                         <div class="relative group">
-                            <div class="absolute -inset-4 bg-emerald-500/5 rounded-[4rem] group-hover:scale-105 transition-all duration-700"></div>
-                            <div class="relative z-10 w-full rounded-[3.5rem] bg-brand-navy p-12 shadow-4xl text-center overflow-hidden border border-white/5">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-brand-gold to-emerald-500"></div>
-                                <h4 class="text-white/20 font-black uppercase tracking-[0.4em] text-[10px] mb-8 italic">Financial Node Protocol</h4>
-                                <div class="flex justify-center space-x-6 mb-12">
-                                    <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center text-white">
-                                        <span class="text-[8px] font-black uppercase tracking-widest text-white/40 mb-1">Local</span>
-                                        <span class="font-black text-xs">NGN</span>
-                                    </div>
-                                    <div class="w-20 h-20 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center">
-                                         <svg class="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                                    </div>
-                                    <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center justify-center text-white">
-                                        <span class="text-[8px] font-black uppercase tracking-widest text-white/40 mb-1">Global</span>
-                                        <span class="font-black text-xs">CNY</span>
-                                    </div>
-                                </div>
-                                <p class="text-emerald-500 font-black text-[10px] uppercase tracking-widest italic animate-pulse">Settlement Stream Active</p>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Global Network Section -->
-    <section class="py-32 bg-brand-slate overflow-hidden relative">
-        <div class="container mx-auto px-6 text-center">
-            <h3 class="text-4xl md:text-5xl font-heading font-black text-brand-navy mb-16 tracking-tight uppercase italic">Our Global <span class="gold-outline-text text-brand-navy italic">Hubs</span></h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-                <div class="p-10 bg-white rounded-3xl shadow-xl transition-soft hover:shadow-2xl">
-                    <span class="block text-brand-gold font-black text-xs uppercase tracking-widest mb-4 italic">China Hub</span>
-                    <h5 class="text-2xl font-black font-heading text-brand-navy mb-2">Guangzhou</h5>
-                    <p class="text-slate-400 text-sm font-medium">Baiyun District Sourcing Center</p>
+    <!-- SERVICES GRID -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            
+            <!-- Service 1: Air Freight -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-32 group">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1559297434-fae8a1916a79?q=80&w=2070&auto=format&fit=crop" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105" alt="Air Freight">
+                        <div class="absolute bottom-10 left-10 p-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-amber-brand text-navy-dark rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-navy-dark font-bold text-sm uppercase tracking-wide">Express Air</p>
+                                    <p class="text-xs text-slate-500">3-5 Days Delivery</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-10 bg-white rounded-3xl shadow-xl transition-soft hover:shadow-2xl border-2 border-brand-gold/20">
-                    <span class="block text-brand-gold font-black text-xs uppercase tracking-widest mb-4 italic">Africa Hub</span>
-                    <h5 class="text-2xl font-black font-heading text-brand-navy mb-2">Lagos</h5>
-                    <p class="text-slate-400 text-sm font-medium">Ikeja Logistics & Clearing HQ</p>
-                </div>
-                <div class="p-10 bg-white rounded-3xl shadow-xl transition-soft hover:shadow-2xl">
-                    <span class="block text-brand-gold font-black text-xs uppercase tracking-widest mb-4 italic">Finance Hub</span>
-                    <h5 class="text-2xl font-black font-heading text-brand-navy mb-2">New York</h5>
-                    <p class="text-slate-400 text-sm font-medium">Wall St. Payments Compliance</p>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold text-navy-dark mb-6">Expert Air Freight</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        When speed is critical, our air freight network delivers. We leverage partnerships with major airlines to secure cargo space even during peak seasons.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Door-to-Door Delivery
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Customs Clearance Handling
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Cargo Insurance Included
+                        </li>
+                    </ul>
+                    <a href="{{ route('register') }}" class="inline-flex items-center bg-navy-dark text-white px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-amber-brand hover:text-navy-dark transition-all">
+                        Start Shipping
+                    </a>
                 </div>
             </div>
+
+            <!-- Service 2: Ocean Freight -->
+            <div class="flex flex-col lg:flex-row-reverse items-center gap-16 mb-32 group">
+                <div class="lg:w-1/2" data-aos="fade-left">
+                     <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1494412574643-35d3d1706f28?q=80&w=1974&auto=format&fit=crop" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105" alt="Ocean Freight">
+                        <div class="absolute bottom-10 right-10 p-4 bg-navy-dark/90 backdrop-blur-md rounded-2xl shadow-lg border border-white/10">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-white/10 text-amber-brand rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold text-sm uppercase tracking-wide">Ocean Cargo</p>
+                                    <p class="text-xs text-white/50">FCL & LCL Options</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <h2 class="text-4xl font-bold text-navy-dark mb-6">Ocean Transport</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Cost-effective solutions for large volume shipments. Whether you need a full container (FCL) or less than a container (LCL), we optimize consolidation to save you money.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Consolidation Services
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Port-to-Port & Door-to-Door
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Heavy Equipment Handling
+                        </li>
+                    </ul>
+                    <a href="{{ route('register') }}" class="inline-flex items-center bg-navy-dark text-white px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-amber-brand hover:text-navy-dark transition-all">
+                        Get a Quote
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 3: Sourcing -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 group">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105" alt="Sourcing">
+                        <div class="absolute inset-0 bg-navy/20 mix-blend-multiply"></div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold text-navy-dark mb-6">Global Sourcing</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Don't just ship it, buy it through us. We enable you to procure goods directly from factories in China, Vietnam, and Turkey without barriers.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Payment Intermediary (RMB/USD)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Quality Inspection
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-medium text-navy-dark">
+                            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Supplier Verification
+                        </li>
+                    </ul>
+                    <a href="{{ route('marketplace.index') }}" class="inline-flex items-center bg-amber-brand text-navy-dark px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-amber-light transition-all">
+                        Browse Market
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 bg-navy-dark relative overflow-hidden">
+         <div class="absolute inset-0 z-0">
+             <div class="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] bg-amber-brand/5 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl font-bold text-white mb-8">Ready to move your cargo?</h2>
+            <a href="{{ route('register') }}" class="inline-flex items-center bg-white text-navy-dark px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-amber-brand transition-all shadow-xl hover:shadow-amber-brand/20 hover:-translate-y-1">
+                Create Free Account
+            </a>
         </div>
     </section>
 

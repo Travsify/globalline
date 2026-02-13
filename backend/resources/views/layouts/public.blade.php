@@ -137,32 +137,33 @@
                 </div>
 
                 <!-- Links -->
+                <!-- Links -->
                 <div>
                     <h4 class="text-white font-bold mb-6 font-heading">Solutions</h4>
                     <ul class="space-y-4 text-sm text-white/60">
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Air Freight</a></li>
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Ocean Cargo</a></li>
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Customs Brokerage</a></li>
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Warehousing</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Air Freight</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Ocean Cargo</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Customs Brokerage</a></li>
+                        <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Warehousing</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="text-white font-bold mb-6 font-heading">Company</h4>
                     <ul class="space-y-4 text-sm text-white/60">
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">About Us</a></li>
+                        <li><a href="{{ url('/about') }}" class="hover:text-amber-brand transition-colors">About Us</a></li>
                         <li><a href="#" class="hover:text-amber-brand transition-colors">Careers</a></li>
                         <li><a href="#" class="hover:text-amber-brand transition-colors">Partner Program</a></li>
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Contact</a></li>
+                        <li><a href="{{ url('/contact') }}" class="hover:text-amber-brand transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="text-white font-bold mb-6 font-heading">Legal</h4>
                     <ul class="space-y-4 text-sm text-white/60">
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-amber-brand transition-colors">Compliance</a></li>
+                        <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Privacy Policy</a></li>
+                        <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Terms of Service</a></li>
+                        <li><a href="{{ route('legal') }}" class="hover:text-amber-brand transition-colors">Compliance</a></li>
                     </ul>
                 </div>
             </div>
