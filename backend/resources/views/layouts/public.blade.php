@@ -17,6 +17,7 @@
     
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @stack('styles')
 </head>
 <body class="bg-background text-foreground antialiased font-sans selection:bg-amber-brand selection:text-navy" x-data="{ mobileMenu: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
 
@@ -258,5 +259,6 @@
             easing: 'ease-out-cubic'
         });
     </script>
+    @stack('scripts')
 </body>
 </html>
