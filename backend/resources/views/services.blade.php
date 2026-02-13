@@ -99,7 +99,7 @@
                                  </div>
                                  <div class="aspect-square bg-white/5 rounded-xl border border-white/5 flex flex-col items-center justify-center">
                                      <div class="text-blue-400 font-bold text-lg italic">03</div>
-                                     <p class="text-[8px] text-white/30 uppercase tracking-tighter">Shortlisted</p>
+                                     <p class="text-white/30 platform-label uppercase">Shortlisted</p>
                                  </div>
                              </div>
                         </div>
@@ -145,14 +145,14 @@
                              <div class="space-y-6">
                                  <div class="flex justify-between items-center p-4 bg-white/5 rounded-2xl border border-white/5">
                                      <div class="flex items-center gap-4">
-                                         <div class="w-10 h-10 bg-amber-brand rounded-lg flex items-center justify-center text-navy-dark font-bold text-xs">CN</div>
+                                         <div class="w-10 h-10 bg-amber-brand rounded-lg flex items-center justify-center text-navy-dark font-bold platform-label">CN</div>
                                          <span class="text-sm font-bold tracking-tight">Factory Settlement (Guangzhou)</span>
                                      </div>
                                      <span class="text-emerald-400 font-mono text-sm leading-none">- ¥ 450,000.00</span>
                                  </div>
                                  <div class="flex justify-between items-center p-4 bg-white/5 rounded-2xl border border-white/5 opacity-50">
                                      <div class="flex items-center gap-4">
-                                         <div class="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center text-navy-dark font-bold text-xs">US</div>
+                                         <div class="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center text-navy-dark font-bold platform-label">US</div>
                                          <span class="text-sm font-bold tracking-tight">Logistics Hub (Tax/Duty)</span>
                                      </div>
                                      <span class="text-amber-brand font-mono text-sm leading-none">- $ 1,240.00</span>
@@ -169,9 +169,9 @@
     <section class="py-32 bg-slate-50 relative border-y border-slate-200">
         <div class="container mx-auto px-6">
              <div class="text-center mb-20">
-                 <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">Module :: 03</span>
+                 <span class="text-amber-brand mb-6 block platform-label uppercase">Module :: 03</span>
                  <h2 class="text-4xl md:text-5xl font-bold font-heading text-navy-dark mb-6">Smart Consolidation. <br>Space Optimization.</h2>
-                 <p class="text-slate-500 max-w-2xl mx-auto text-lg">
+                 <p class="text-slate-500 max-w-2xl mx-auto platform-body">
                     Stop paying for empty space. Our spatial algorithms repackage goods from multiple suppliers into a single, highly dense unit, reducing volumetric weight and shipping costs by up to 45%.
                  </p>
              </div>
@@ -183,7 +183,7 @@
                      </div>
                      <h3 class="text-2xl font-bold mb-4">Fragmented Mode</h3>
                      <p class="text-slate-500 text-sm leading-relaxed mb-6">Traditional shipping where each supplier sends a box separately, incurring 10-15 base fees and wasted space.</p>
-                     <p class="text-[10px] font-black uppercase text-red-500 tracking-widest">Efficiency: 35%</p>
+                     <p class="text-red-500 platform-label uppercase">Efficiency: 35%</p>
                  </div>
                  
                  <div class="bg-navy-dark p-10 rounded-[3rem] shadow-2xl group flex flex-col justify-center relative overflow-hidden" data-aos="scale-up" data-aos-delay="100">
@@ -201,7 +201,7 @@
                      </div>
                      <h3 class="text-2xl font-bold mb-4">The Savings</h3>
                      <p class="text-slate-500 text-sm leading-relaxed mb-6">Clients typically see a reduction of 40% on their total landed cost just by switching to our consolidation engine.</p>
-                     <p class="text-[10px] font-black uppercase text-emerald-500 tracking-widest">Avg Saving: $1,400 / m3</p>
+                     <p class="text-emerald-500 platform-label uppercase">Avg Saving: $1,400 / m3</p>
                  </div>
              </div>
         </div>

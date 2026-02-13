@@ -15,18 +15,18 @@
         </div>
 
         <div class="container mx-auto px-6 relative z-20 text-center">
-            <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block" data-aos="fade-up">Physical Infrastructure</span>
+            <span class="text-amber-brand mb-6 block platform-label" data-aos="fade-up">Physical Infrastructure</span>
             <h1 class="text-6xl md:text-9xl font-bold font-heading text-white mb-8 tracking-tighter" data-aos="fade-up">
                 Trade Without <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-brand via-white to-white/40 italic">Borders.</span>
             </h1>
-            <p class="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+            <p class="max-w-2xl mx-auto leading-relaxed platform-body text-white/50" data-aos="fade-up" data-aos-delay="100">
                 A dense mesh of proprietary nodes, strategic hubs, and digital arteries spanning 220 countries and territories.
             </p>
         </div>
 
         <!-- Float Mapping Nodes -->
         <div class="absolute bottom-10 left-10 p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl hidden lg:block" data-aos="fade-right">
-             <div class="flex items-center gap-4 text-white/40 text-[10px] font-bold uppercase tracking-widest">
+             <div class="flex items-center gap-4 text-white/40 platform-label">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                   Active Connections :: 4,892
              </div>
@@ -48,9 +48,9 @@
                       <img src="{{ $node['img'] }}" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700">
                       <div class="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/40 to-transparent"></div>
                       <div class="absolute bottom-0 left-0 p-10 w-full">
-                           <p class="text-[10px] font-bold text-amber-brand uppercase tracking-widest mb-2">{{ $node['country'] }}</p>
+                           <p class="text-amber-brand mb-2 platform-label">{{ $node['country'] }}</p>
                            <h3 class="text-3xl font-bold text-white mb-4">{{ $node['city'] }}</h3>
-                           <p class="text-xs text-white/40 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity">{{ $node['type'] }}</p>
+                           <p class="text-white/40 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity platform-body">{{ $node['type'] }}</p>
                       </div>
                  </div>
                  @endforeach
@@ -64,15 +64,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
                  <div data-aos="zoom-in">
                       <div class="text-5xl font-bold font-heading text-white mb-4">220+</div>
-                      <p class="text-xs font-black uppercase text-white/20 tracking-[0.3em]">Countries Reached</p>
+                      <p class="text-white/20 platform-label">Countries Reached</p>
                  </div>
                  <div data-aos="zoom-in" data-aos-delay="100">
                       <div class="text-5xl font-bold font-heading text-emerald-400 mb-4">48h</div>
-                      <p class="text-xs font-black uppercase text-white/20 tracking-[0.3em]">Avg Node-to-Node Transfer</p>
+                      <p class="text-white/20 platform-label">Avg Node-to-Node Transfer</p>
                  </div>
                  <div data-aos="zoom-in" data-aos-delay="200">
                       <div class="text-5xl font-bold font-heading text-amber-brand mb-4">Master</div>
-                      <p class="text-xs font-black uppercase text-white/20 tracking-[0.3em]">Global Logistics License</p>
+                      <p class="text-white/20 platform-label">Global Logistics License</p>
                  </div>
             </div>
         </div>
@@ -83,9 +83,9 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
-                    <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Intelligent Logistics</span>
+                    <span class="text-amber-brand mb-6 block platform-label">Intelligent Logistics</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-navy-dark mb-8 tracking-tighter">Dynamic Pathing <br>Optimization.</h2>
-                    <p class="text-slate-600 text-lg mb-10 leading-relaxed">
+                    <p class="text-slate-600 mb-10 leading-relaxed platform-body">
                         Our routing engine doesn't just look for the cheapest route—it constantly updates based on port congestion, flight availability, and customs speed to find the absolute fastest path for your cargo.
                     </p>
                     <div class="space-y-4">

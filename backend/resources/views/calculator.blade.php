@@ -20,7 +20,7 @@
             <h1 class="text-6xl md:text-8xl font-bold font-heading text-white mb-8 tracking-tighter" data-aos="fade-up">
                 Zero <span class="text-amber-brand italic">Guesstimates.</span>
             </h1>
-            <p class="text-white/50 text-xl max-w-2xl mx-auto leading-relaxed mb-12" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-white/50 max-w-2xl mx-auto leading-relaxed mb-12 platform-body" data-aos="fade-up" data-aos-delay="100">
                 Landed cost complexity is now a solved problem. Use our spatial engine to project exact shipping, duty, and handling fees.
             </p>
         </div>
@@ -38,10 +38,10 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
                     <div class="space-y-12">
                         <div>
-                            <label class="block text-white/40 text-[10px] font-bold uppercase tracking-[0.3em] mb-6">Cargo Geography</label>
+                            <label class="block text-white/40 mb-6 platform-label">Cargo Geography</label>
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="space-y-2">
-                                    <span class="text-[10px] text-white/20 uppercase font-black">Origin Node</span>
+                                    <span class="text-white/20 platform-label uppercase">Origin Node</span>
                                     <select x-model="source" class="w-full bg-navy-dark border border-white/10 rounded-2xl p-4 text-white focus:border-amber-brand focus:ring-0 transition-all">
                                         <option value="GZ">Guangzhou (CN)</option>
                                         <option value="DXB">Dubai (UAE)</option>
@@ -50,7 +50,7 @@
                                     </select>
                                 </div>
                                 <div class="space-y-2">
-                                    <span class="text-[10px] text-white/20 uppercase font-black">Destination Node</span>
+                                    <span class="text-white/20 platform-label uppercase">Destination Node</span>
                                     <select x-model="destination" class="w-full bg-navy-dark border border-white/10 rounded-2xl p-4 text-white focus:border-amber-brand focus:ring-0 transition-all">
                                         <option value="LOS">Lagos (NG)</option>
                                         <option value="ACC">Accra (GH)</option>
@@ -64,14 +64,14 @@
                         <div class="space-y-8">
                              <div>
                                 <div class="flex justify-between items-center mb-4">
-                                     <label class="text-white/40 text-[10px] font-bold uppercase tracking-[0.3em]">Estimated Weight (KG)</label>
+                                     <label class="text-white/40 platform-label">Estimated Weight (KG)</label>
                                      <span class="text-amber-brand font-mono font-bold" x-text="weight"></span>
                                 </div>
                                 <input type="range" min="1" max="1000" x-model="weight" class="w-full accent-amber-brand bg-white/10 h-1 rounded-full appearance-none cursor-pointer">
                              </div>
                              <div>
                                 <div class="flex justify-between items-center mb-4">
-                                     <label class="text-white/40 text-[10px] font-bold uppercase tracking-[0.3em]">Volumetric Volume (CBM)</label>
+                                     <label class="text-white/40 platform-label">Volumetric Volume (CBM)</label>
                                      <span class="text-amber-brand font-mono font-bold" x-text="volume"></span>
                                 </div>
                                 <input type="range" min="0.1" max="10" step="0.1" x-model="volume" class="w-full accent-blue-500 bg-white/10 h-1 rounded-full appearance-none cursor-pointer">
@@ -81,7 +81,7 @@
 
                     <div class="bg-navy-dark/50 p-12 rounded-[3.5rem] border border-white/10 flex flex-col justify-between">
                          <div>
-                             <h3 class="text-white/30 text-xs font-bold uppercase tracking-widest mb-10">Live Quotation Pipeline</h3>
+                             <h3 class="text-white/30 mb-10 platform-label uppercase">Live Quotation Pipeline</h3>
                              <div class="space-y-6 mb-12">
                                  <div class="flex justify-between text-white/50 text-sm">
                                      <span>Freight (Air Express)</span>
@@ -98,9 +98,9 @@
                              </div>
                          </div>
                          <div class="pt-10 border-t border-white/10">
-                             <p class="text-[10px] font-black uppercase text-amber-brand tracking-widest mb-2">Total Landed Estimate</p>
+                             <p class="text-amber-brand mb-2 platform-label uppercase">Total Landed Estimate</p>
                              <div class="text-6xl font-bold text-white font-heading tracking-tighter">$ <span x-text="calculate()"></span></div>
-                             <p class="text-[10px] text-white/20 mt-4 italic">*Estimates include door-to-door clearing for most standard nodes.</p>
+                             <p class="text-white/20 mt-4 italic platform-body">*Estimates include door-to-door clearing for most standard nodes.</p>
                          </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
                     <h2 class="text-4xl font-bold text-white mb-8">Understanding <br><span class="text-amber-brand">Volumetric Weight.</span></h2>
-                    <p class="text-white/40 text-lg leading-relaxed mb-8">
+                    <p class="text-white/40 leading-relaxed mb-8 platform-body">
                         Most legacy shippers hide their formulas. We don't. Our calculator uses a 1:6000 ratio for air and 1:3000 for express, ensuring you never pay for "ghost volume."
                     </p>
                     <div class="p-8 bg-white/5 border border-white/10 rounded-3xl font-mono text-emerald-400 text-sm">
@@ -125,9 +125,9 @@
                     <div class="relative group">
                          <div class="absolute inset-0 bg-blue-600/20 blur-[100px]"></div>
                          <div class="relative bg-navy-dark p-12 rounded-[4rem] border border-white/10">
-                              <div class="text-[10px] font-bold text-white/20 uppercase tracking-[0.3em] mb-8">Algorithm Spotlight :: SPATIAL_EFFICIENCY_V2</div>
+                              <div class="text-white/20 mb-8 platform-label uppercase">Algorithm Spotlight :: SPATIAL_EFFICIENCY_V2</div>
                               <h4 class="text-white text-2xl font-bold mb-4 italic">Repackaging Protocol.</h4>
-                              <p class="text-white/40 text-xs leading-relaxed">Our warehouse robots automatically calculate if repacking your items into a smaller footprint can trigger a lower volumetric tier.</p>
+                              <p class="text-white/40 leading-relaxed platform-body">Our warehouse robots automatically calculate if repacking your items into a smaller footprint can trigger a lower volumetric tier.</p>
                          </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
     <section class="py-40 bg-white relative overflow-hidden text-center">
          <div class="container mx-auto px-6 relative z-10">
              <h2 class="text-4xl md:text-7xl font-bold font-heading text-navy-dark mb-8 tracking-tighter">Ready to initiate?</h2>
-             <a href="{{ route('register') }}" class="px-12 py-6 bg-navy-dark text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-amber-brand hover:text-navy-dark transition-all shadow-3xl">
+             <a href="{{ route('register') }}" class="px-12 py-6 bg-navy-dark text-white rounded-full transition-all shadow-3xl platform-label hover:bg-amber-brand hover:text-navy-dark">
                  Secure This Rate &rarr;
              </a>
          </div>

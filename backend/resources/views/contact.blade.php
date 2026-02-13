@@ -10,7 +10,7 @@
              <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-brand/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>
         </div>
         <div class="container mx-auto px-6 relative z-10 text-center">
-            <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-xs mb-6 block" data-aos="fade-up">Get Connections</span>
+            <span class="text-amber-brand mb-6 block platform-label" data-aos="fade-up">Get Connections</span>
             <h1 class="text-5xl md:text-7xl font-bold font-heading text-white mb-8 tracking-tighter" data-aos="fade-up" data-aos-delay="100">
                 Contact <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-brand to-amber-light">GlobalLine.</span>
             </h1>
@@ -25,7 +25,7 @@
                 <!-- Info Column -->
                 <div data-aos="fade-right">
                     <h2 class="text-3xl font-bold text-navy-dark mb-8">We'd love to hear from you.</h2>
-                    <p class="text-slate-600 mb-10 leading-relaxed">
+                    <p class="text-slate-600 mb-10 leading-relaxed platform-body">
                         Whether you have a specific shipment query, need a custom quote, or just want to know more about our services, our team is ready to assist.
                     </p>
                     
@@ -36,7 +36,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-navy-dark text-lg mb-1">Headquarters</h4>
-                                <p class="text-slate-500 text-sm">Level 24, Global Trade Tower, Lagos, Nigeria</p>
+                                <p class="text-slate-500 platform-body">Level 24, Global Trade Tower, Lagos, Nigeria</p>
                             </div>
                         </div>
 
@@ -46,8 +46,8 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-navy-dark text-lg mb-1">Email Us</h4>
-                                <a href="mailto:support@globalline.io" class="text-amber-brand font-bold">support@globalline.io</a>
-                                <p class="text-slate-500 text-xs mt-1">Response time: &lt; 2 hours</p>
+                                <a href="mailto:support@globalline.io" class="text-amber-brand font-bold platform-body block">support@globalline.io</a>
+                                <p class="text-slate-500 mt-1 platform-label">Response time: &lt; 2 hours</p>
                             </div>
                         </div>
                     </div>
@@ -58,26 +58,26 @@
                     <form action="#" class="space-y-6">
                         <div class="grid grid-cols-2 gap-6">
                             <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-navy-dark">First Name</label>
+                                <label class="text-navy-dark platform-label">First Name</label>
                                 <input type="text" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-brand focus:ring-1 focus:ring-amber-brand transition-all">
                             </div>
                             <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-navy-dark">Last Name</label>
+                                <label class="text-navy-dark platform-label">Last Name</label>
                                 <input type="text" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-brand focus:ring-1 focus:ring-amber-brand transition-all">
                             </div>
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-navy-dark">Email Address</label>
+                            <label class="text-navy-dark platform-label">Email Address</label>
                             <input type="email" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-brand focus:ring-1 focus:ring-amber-brand transition-all">
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-navy-dark">Message</label>
+                            <label class="text-navy-dark platform-label">Message</label>
                             <textarea rows="4" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-brand focus:ring-1 focus:ring-amber-brand transition-all"></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-navy-dark text-white font-bold uppercase tracking-widest text-xs py-4 rounded-xl hover:bg-amber-brand hover:text-navy-dark transition-all shadow-lg hover:shadow-amber-brand/20">
+                        <button type="submit" class="w-full bg-navy-dark text-white py-4 rounded-xl hover:bg-amber-brand hover:text-navy-dark transition-all shadow-lg hover:shadow-amber-brand/20 platform-label">
                             Send Message
                         </button>
                     </form>

@@ -16,12 +16,12 @@
 
         <div class="container mx-auto px-6 relative z-20 text-center">
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8" data-aos="fade-up">
-                <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest">GlobalLine API :: v2.8 Standard</span>
+                <span class="text-blue-400 platform-label">GlobalLine API :: v2.8 Standard</span>
             </div>
             <h1 class="text-6xl md:text-8xl font-bold font-heading text-white mb-8 tracking-tighter" data-aos="fade-up">
                 Build the <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-white/40 italic">Rails.</span>
             </h1>
-            <p class="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-white/50 max-w-2xl mx-auto leading-relaxed platform-body" data-aos="fade-up" data-aos-delay="100">
                 Embed global sourcing, instant trade finance, and logistics tracking directly into your own applications with our robust REST API.
             </p>
         </div>
@@ -40,7 +40,7 @@
                          <div class="w-2.5 h-2.5 rounded-full bg-amber-brand"></div>
                          <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
                      </div>
-                     <div class="text-[10px] font-mono text-white/20 uppercase tracking-widest">POST /v2/shipments/create</div>
+                     <div class="text-white/20 font-mono platform-label uppercase">POST /v2/shipments/create</div>
                  </div>
                  
                  <div class="font-mono text-[13px] md:text-[15px] leading-relaxed">
@@ -66,19 +66,19 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
-                    <span class="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">System Events</span>
+                    <span class="text-blue-400 mb-6 block font-mono platform-label">System Events</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-8">Live Webhooks. <br>Zero Latency.</h2>
-                    <p class="text-white/50 text-lg mb-10 leading-relaxed">
+                    <p class="text-white/50 mb-10 leading-relaxed platform-body">
                         Don't poll our API. Listen for events. Get instantly notified when cargo arrives at a hub, customs is cleared, or a supplier payment is settled.
                     </p>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                             <code class="text-emerald-400 text-[10px] block mb-2">cargo.node_arrival</code>
-                             <p class="text-white/30 text-[9px] uppercase tracking-tighter">Triggered on scan</p>
+                             <code class="text-emerald-400 block mb-2 platform-label">cargo.node_arrival</code>
+                             <p class="text-white/30 platform-label uppercase">Triggered on scan</p>
                         </div>
                         <div class="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                             <code class="text-blue-400 text-[10px] block mb-2">payment.settled</code>
-                             <p class="text-white/30 text-[9px] uppercase tracking-tighter">Instant RMB/USD link</p>
+                             <code class="text-blue-400 block mb-2 platform-label">payment.settled</code>
+                             <p class="text-white/30 platform-label uppercase">Instant RMB/USD link</p>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                           <div class="absolute inset-0 bg-blue-600/5 blur-3xl"></div>
                           <div class="text-6xl font-black text-white/5 font-heading mb-6 tracking-tighter uppercase italic">Real-Time</div>
                           <h4 class="text-white text-2xl font-bold italic tracking-tighter mb-4">Event Streaming.</h4>
-                          <p class="text-white/30 text-xs">Propagate logistics state across your entire enterprise architecture in &lt;100ms.</p>
+                          <p class="text-white/30 platform-body">Propagate logistics state across your entire enterprise architecture in &lt;100ms.</p>
                      </div>
                 </div>
             </div>
@@ -101,19 +101,19 @@
              <div class="flex flex-wrap justify-center gap-12 lg:gap-24 opacity-60">
                   <div class="flex flex-col items-center gap-4">
                        <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center font-bold text-2xl">JS</div>
-                       <span class="text-[10px] font-black uppercase tracking-widest">Node.js</span>
+                       <span class="platform-label uppercase">Node.js</span>
                   </div>
                   <div class="flex flex-col items-center gap-4">
                        <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center font-bold text-2xl">Py</div>
-                       <span class="text-[10px] font-black uppercase tracking-widest">Python</span>
+                       <span class="platform-label uppercase">Python</span>
                   </div>
                   <div class="flex flex-col items-center gap-4">
                        <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center font-bold text-2xl">Go</div>
-                       <span class="text-[10px] font-black uppercase tracking-widest">GoLang</span>
+                       <span class="platform-label uppercase">GoLang</span>
                   </div>
                   <div class="flex flex-col items-center gap-4">
                        <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center font-bold text-2xl">PHP</div>
-                       <span class="text-[10px] font-black uppercase tracking-widest">Laravel</span>
+                       <span class="platform-label uppercase">Laravel</span>
                   </div>
              </div>
         </div>
@@ -125,21 +125,21 @@
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2">
                     <h2 class="text-4xl md:text-5xl font-bold font-heading mb-8">Hardened Security.</h2>
-                    <p class="text-white/40 text-lg leading-relaxed mb-10">
+                    <p class="text-white/40 leading-relaxed mb-10 platform-body">
                         Our API follows PCI-DSS and SOC2 standards for financial and trade security. We support OAuth 2.0, mutual TLS, and granular key permissions to protect your global operations.
                     </p>
                     <ul class="space-y-4">
                         <li class="flex items-center gap-4">
                              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                             <span class="text-sm font-bold uppercase tracking-widest opacity-60">Rotating Access Keys</span>
+                             <span class="font-bold uppercase opacity-60 platform-label">Rotating Access Keys</span>
                         </li>
                         <li class="flex items-center gap-4">
                              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                             <span class="text-sm font-bold uppercase tracking-widest opacity-60">Endpoint Signing (HMAC)</span>
+                             <span class="font-bold uppercase opacity-60 platform-label">Endpoint Signing (HMAC)</span>
                         </li>
                         <li class="flex items-center gap-4">
                              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                             <span class="text-sm font-bold uppercase tracking-widest opacity-60">IP Whitelisting Architecture</span>
+                             <span class="font-bold uppercase opacity-60 platform-label">IP Whitelisting Architecture</span>
                         </li>
                     </ul>
                 </div>
@@ -149,7 +149,7 @@
                              <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                           </div>
                           <h4 class="text-2xl font-bold italic mb-4">SOC2 Ready Infrastructure.</h4>
-                          <p class="text-white/30 text-xs">A technical foundation built on the trust requirements of Fortune 500 enterprises.</p>
+                          <p class="text-white/30 platform-body">A technical foundation built on the trust requirements of Fortune 500 enterprises.</p>
                      </div>
                 </div>
             </div>

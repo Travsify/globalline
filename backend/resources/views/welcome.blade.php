@@ -26,10 +26,10 @@
                                 One unified operating system for global trade nodes, high-velocity shipping, and seamless customs.
                             </p>
                             <div class="flex flex-wrap gap-6">
-                                <a href="{{ route('register') }}" class="px-10 py-5 bg-amber-brand hover:bg-white text-navy-dark rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-btn active:scale-95">
+                                <a href="{{ route('register') }}" class="px-10 py-5 bg-amber-brand hover:bg-white text-navy-dark rounded-2xl transition-all shadow-btn active:scale-95 platform-label">
                                     Initialize Shipments
                                 </a>
-                                <a href="{{ route('services') }}" class="px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all backdrop-blur-md">
+                                <a href="{{ route('services') }}" class="px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-2xl transition-all backdrop-blur-md platform-label">
                                     Explore Nodes
                                 </a>
                             </div>
@@ -53,7 +53,7 @@
                                 Bypass the noise. Connect directly to verified manufacturing clusters in CN, TR, and UAE with local node support.
                             </p>
                             <div class="flex flex-wrap gap-6">
-                                <a href="{{ route('marketplace.index') }}" class="px-10 py-5 bg-blue-600 hover:bg-blue-400 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-btn active:scale-95">
+                                <a href="{{ route('marketplace.index') }}" class="px-10 py-5 bg-blue-600 hover:bg-blue-400 text-white rounded-2xl transition-all shadow-btn active:scale-95 platform-label">
                                     Browse Marketplace
                                 </a>
                             </div>
@@ -77,7 +77,7 @@
                                 Pay suppliers instantly in RMB or USD. High-frequency trade financing built into your workflow.
                             </p>
                             <div class="flex flex-wrap gap-6">
-                                <a href="{{ route('pricing') }}" class="px-10 py-5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-btn active:scale-95">
+                                <a href="{{ route('pricing') }}" class="px-10 py-5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl transition-all shadow-btn active:scale-95 platform-label">
                                     View Financing Plans
                                 </a>
                             </div>
@@ -161,11 +161,11 @@
                     <div class="grid grid-cols-2 gap-10">
                         <div class="p-8 bg-white/5 border border-white/10 rounded-3xl">
                             <p class="text-4xl font-black text-white mb-2 tracking-tighter italic">220+</p>
-                            <p class="text-white/30 uppercase tracking-[0.4em] platform-label">Active Hubs</p>
+                            <p class="text-white/30 uppercase platform-label">Active Hubs</p>
                         </div>
                         <div class="p-8 bg-white/5 border border-white/10 rounded-3xl">
                             <p class="text-4xl font-black text-white mb-2 tracking-tighter italic">40%</p>
-                            <p class="text-white/30 uppercase tracking-[0.4em] platform-label">Lower Latency</p>
+                            <p class="text-white/30 uppercase platform-label">Lower Latency</p>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                                  </div>
                              </div>
                              <div class="text-6xl font-black text-white mb-4 tracking-tighter">¥ 45,000.00</div>
-                             <div class="text-xl text-white/40 italic mb-12">≈ $6,234.50 USD</div>
+                             <div class="text-xl text-white/40 italic mb-12 platform-body">≈ $6,234.50 USD</div>
                              
                              <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
                                  <div class="h-full w-full bg-emerald-500 animate-shimmer"></div>
@@ -293,7 +293,7 @@
                 <!-- Box 4 -->
                 <div class="md:col-span-2 bg-gradient-to-r from-navy-dark to-navy rounded-[3.5rem] p-16 shadow-2xl text-white flex items-center justify-between group cursor-pointer hover:shadow-4xl transition-all" data-aos="fade-up" data-aos-delay="300">
                     <div class="max-w-md">
-                        <h3 class="text-4xl font-bold tracking-tighter mb-6 leading-tight">Private Label <br><span class="italic text-white/40 tracking-widest text-2xl platform-label">OEM/ODM Sync</span></h3>
+                        <h3 class="text-4xl font-bold tracking-tighter mb-6 leading-tight">Private Label <br><span class="italic text-white/40 tracking-widest platform-label">OEM/ODM Sync</span></h3>
                         <p class="text-white/40 italic leading-relaxed platform-body">Deploy custom-engineered assets. We manage the full stack from prototype engineering to mass-port delivery.</p>
                     </div>
                      <div class="w-20 h-20 rounded-full border-2 border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-navy-dark transition-all duration-500 group-hover:scale-110">
@@ -321,17 +321,17 @@
                         <!-- Hub 1 -->
                         <div class="bg-slate-50 rounded-[2.5rem] p-10 text-center hover:bg-navy-dark hover:text-white transition-all duration-500 border border-slate-100 group shadow-lg hover:shadow-4xl">
                             <h4 class="text-4xl font-black text-navy-dark mb-2 group-hover:text-amber-brand tracking-tighter italic">CN</h4>
-                            <p class="text-[10px] uppercase text-slate-400 font-black tracking-[0.2em] group-hover:text-white/20">Guangzhou</p>
+                            <p class="uppercase text-slate-400 group-hover:text-white/20 platform-label">Guangzhou</p>
                         </div>
                         <!-- Hub 2 -->
                         <div class="bg-slate-50 rounded-[2.5rem] p-10 text-center hover:bg-navy-dark hover:text-white transition-all duration-500 border border-slate-100 group shadow-lg hover:shadow-4xl">
                             <h4 class="text-4xl font-black text-navy-dark mb-2 group-hover:text-amber-brand tracking-tighter italic">AE</h4>
-                            <p class="text-[10px] uppercase text-slate-400 font-black tracking-[0.2em] group-hover:text-white/20">Dubai</p>
+                            <p class="uppercase text-slate-400 group-hover:text-white/20 platform-label">Dubai</p>
                         </div>
                         <!-- Hub 3 -->
                         <div class="bg-slate-50 rounded-[2.5rem] p-10 text-center hover:bg-navy-dark hover:text-white transition-all duration-500 border border-slate-100 group shadow-lg hover:shadow-4xl">
                             <h4 class="text-4xl font-black text-navy-dark mb-2 group-hover:text-amber-brand tracking-tighter italic">US</h4>
-                            <p class="text-[10px] uppercase text-slate-400 font-black tracking-[0.2em] group-hover:text-white/20">New York</p>
+                            <p class="uppercase text-slate-400 group-hover:text-white/20 platform-label">New York</p>
                         </div>
                         <!-- Hub 4 -->
                         <div class="bg-slate-50 rounded-[2.5rem] p-10 text-center hover:bg-navy-dark hover:text-white transition-all duration-500 border border-slate-100 group shadow-lg hover:shadow-4xl">

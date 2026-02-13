@@ -22,7 +22,7 @@
             <div class="max-w-5xl" data-aos="fade-up">
                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8">
                     <span class="w-2 h-2 rounded-full bg-amber-brand animate-ping"></span>
-                    <span class="text-[10px] font-bold text-white/80 uppercase tracking-widest">GlobalLine Network :: Established 2018</span>
+                    <span class="text-white/80 platform-label">GlobalLine Network :: Established 2018</span>
                 </div>
 
                 <h1 class="text-6xl md:text-9xl font-bold font-heading text-white leading-[0.85] mb-8 tracking-tighter">
@@ -30,7 +30,7 @@
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-brand via-white to-white/40 italic">Global Trade.</span>
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-white/50 font-medium mb-12 max-w-3xl leading-relaxed">
+                <p class="mb-12 max-w-3xl leading-relaxed platform-body text-white/50">
                     Logistics is the heartbeat of civilization. We are building the operating system that makes it beat faster, smarter, and without friction.
                 </p>
 
@@ -49,7 +49,7 @@
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-8">The Legacy Gap.</h2>
-                    <p class="text-white/50 text-lg mb-10 leading-relaxed">
+                    <p class="text-white/50 mb-10 leading-relaxed platform-body">
                         Traditional trade is trapped in a pre-digital era—bogged down by manual paperwork, shadow-pricing, and fragmented agents.
                     </p>
                     
@@ -60,7 +60,7 @@
                             </div>
                             <div>
                                 <h4 class="text-white font-bold mb-1">Legacy Logistics</h4>
-                                <p class="text-xs text-white/40">Manual entries, 3-week delays, hidden markups, and fax machines.</p>
+                                <p class="text-white/40 platform-body">Manual entries, 3-week delays, hidden markups, and fax machines.</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-6 p-6 bg-amber-brand/10 border border-amber-brand/20 rounded-3xl animate-float">
@@ -69,7 +69,7 @@
                             </div>
                             <div>
                                 <h4 class="text-amber-brand font-bold mb-1">GlobalLine OS</h4>
-                                <p class="text-xs text-amber-brand/60">API-first automation, instant global payments, and total transparency.</p>
+                                <p class="text-amber-brand/60 platform-body">API-first automation, instant global payments, and total transparency.</p>
                             </div>
                         </div>
                     </div>
@@ -78,19 +78,19 @@
                 <div class="lg:w-1/2" data-aos="fade-left">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="aspect-square bg-white/5 border border-white/10 rounded-[2.5rem] p-8 flex flex-col justify-between">
-                            <span class="text-[10px] font-bold text-white/20 uppercase tracking-widest">Speed</span>
+                            <span class="text-white/20 platform-label">Speed</span>
                             <div class="text-3xl font-bold text-white italic">+400%</div>
                         </div>
                         <div class="aspect-square bg-white/5 border border-white/10 rounded-[2.5rem] p-8 flex flex-col justify-between">
-                            <span class="text-[10px] font-bold text-white/20 uppercase tracking-widest">Transparency</span>
+                            <span class="text-white/20 platform-label">Transparency</span>
                             <div class="text-3xl font-bold text-emerald-500 italic">Total</div>
                         </div>
                         <div class="aspect-square bg-white/5 border border-white/10 rounded-[2.5rem] p-8 flex flex-col justify-between">
-                            <span class="text-[10px] font-bold text-white/20 uppercase tracking-widest">Cost Redux</span>
+                            <span class="text-white/20 platform-label">Cost Redux</span>
                             <div class="text-3xl font-bold text-amber-brand italic">-30%</div>
                         </div>
                         <div class="aspect-square bg-white/5 border border-white/10 rounded-[2.5rem] p-8 flex flex-col justify-between">
-                            <span class="text-[10px] font-bold text-white/20 uppercase tracking-widest">Human Error</span>
+                            <span class="text-white/20 platform-label">Human Error</span>
                             <div class="text-3xl font-bold text-red-500 italic">0.02%</div>
                         </div>
                     </div>
@@ -104,15 +104,15 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row-reverse items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-left">
-                    <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Physical Infrastructure</span>
+                    <span class="text-amber-brand mb-6 block platform-label">Physical Infrastructure</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-navy-dark mb-8">Hardware Logistics. <br>Software Speed.</h2>
-                    <p class="text-slate-600 text-lg mb-10 leading-relaxed">
+                    <p class="text-slate-600 mb-10 leading-relaxed platform-body">
                         We aren't just a technical layer. We operate a massive physical network of owned warehouses, audited factory nodes, and local customs agents across 220 countries.
                     </p>
                     <div class="flex gap-4">
-                        <div class="px-6 py-3 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-widest">Guangzhou Hub</div>
-                        <div class="px-6 py-3 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-widest">Lagos Port</div>
-                        <div class="px-6 py-3 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-widest">Dubai Gateway</div>
+                        <div class="px-6 py-3 bg-slate-100 rounded-xl platform-label">Guangzhou Hub</div>
+                        <div class="px-6 py-3 bg-slate-100 rounded-xl platform-label">Lagos Port</div>
+                        <div class="px-6 py-3 bg-slate-100 rounded-xl platform-label">Dubai Gateway</div>
                     </div>
                 </div>
                 <div class="lg:w-1/2" data-aos="fade-right">
@@ -146,21 +146,21 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                          </div>
                          <h4 class="text-lg font-bold mb-2">API-First</h4>
-                         <p class="text-xs text-white/40 leading-relaxed">Every logistics event is an endpoint. Real-time integration for your ERP.</p>
+                         <p class="text-white/40 leading-relaxed platform-body">Every logistics event is an endpoint. Real-time integration for your ERP.</p>
                      </div>
                      <div class="p-8 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 transition-all">
                          <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-6">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                          </div>
                          <h4 class="text-lg font-bold mb-2">Security-Native</h4>
-                         <p class="text-xs text-white/40 leading-relaxed">Enterprise-grade encryption for all trade data and financial settlements.</p>
+                         <p class="text-white/40 leading-relaxed platform-body">Enterprise-grade encryption for all trade data and financial settlements.</p>
                      </div>
                      <div class="p-8 bg-white/5 border border-white/10 rounded-3xl hover:bg-white/10 transition-all">
                          <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white mb-6">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m2-1l-2-1m2 1l2 1m-2-1l2-1m-4 10l4-1m-4 1l-1-2m1 2l1 2m3-1l1 2M9 21l-4-1m4 1l1-2M5 20l-1-2m1 2l1 2m-1-4l1-2m2 5l-2-1m2 1l1-2m-3 1l-1-2m14-9l4-1m-4 1l1-2m-1 2l-1-2m4 1l-1 2M9 3l4 1m-4-1l-1 2M9 3l1 2m3-1l1 2m-1-2l1-2"></path></svg>
                          </div>
                          <h4 class="text-lg font-bold mb-2">Self-Optimizing</h4>
-                         <p class="text-xs text-white/40 leading-relaxed">AI that learns from millions of data points to find the best routes instantly.</p>
+                         <p class="text-white/40 leading-relaxed platform-body">AI that learns from millions of data points to find the best routes instantly.</p>
                      </div>
                  </div>
             </div>
@@ -170,19 +170,19 @@
     <!-- 5. PROOF OF SCALE (The Numbers) -->
     <section class="py-32 bg-slate-50 relative border-y border-slate-200">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-navy-dark mb-16 uppercase tracking-widest">Global Traction.</h2>
+            <h2 class="text-3xl font-bold text-navy-dark mb-16 platform-label">Global Traction.</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div data-aos="zoom-in">
                     <p class="text-6xl font-bold font-heading text-navy-dark mb-4">$1.4B+</p>
-                    <p class="text-xs font-black uppercase text-slate-400 tracking-[0.3em]">Managed Trade Value</p>
+                    <p class="text-slate-400 platform-label uppercase">Managed Trade Value</p>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="100">
                     <p class="text-6xl font-bold font-heading text-navy-dark mb-4">15k+</p>
-                    <p class="text-xs font-black uppercase text-slate-400 tracking-[0.3em]">Global Enterprise Clients</p>
+                    <p class="text-slate-400 platform-label uppercase">Global Enterprise Clients</p>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="200">
                     <p class="text-6xl font-bold font-heading text-navy-dark mb-4">99.9%</p>
-                    <p class="text-xs font-black uppercase text-slate-400 tracking-[0.3em]">Clearance Success Rate</p>
+                    <p class="text-slate-400 platform-label uppercase">Clearance Success Rate</p>
                 </div>
             </div>
         </div>
@@ -195,9 +195,9 @@
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <h2 class="text-4xl md:text-7xl font-bold font-heading text-white mb-8 tracking-tighter" data-aos="fade-up">The future is global. <br>Build it with us.</h2>
-            <p class="text-xl text-white/40 mb-12 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">Don't settle for legacy logistics. Switch to the OS for global trade.</p>
+            <p class="text-white/40 mb-12 max-w-xl mx-auto platform-body" data-aos="fade-up" data-aos-delay="100">Don't settle for legacy logistics. Switch to the OS for global trade.</p>
             <div class="flex justify-center flex-wrap gap-6" data-aos="fade-up" data-aos-delay="200">
-                <a href="{{ route('register') }}" class="px-12 py-6 bg-amber-brand text-navy-dark rounded-[2.5rem] font-bold uppercase tracking-widest text-xs hover:bg-amber-light transition-all shadow-3xl hover:shadow-amber-brand/40">
+                <a href="{{ route('register') }}" class="px-12 py-6 bg-amber-brand text-navy-dark rounded-[2.5rem] transition-all hover:bg-amber-light shadow-3xl hover:shadow-amber-brand/40 platform-label">
                     Initialize Setup &rarr;
                 </a>
             </div>
