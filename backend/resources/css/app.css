@@ -6,6 +6,85 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Colors */
+    --color-background: hsl(222 47% 8%);
+    --color-foreground: hsl(210 40% 98%);
+    
+    --color-primary: hsl(32 95% 52%);
+    --color-primary-foreground: hsl(222 47% 11%);
+    
+    --color-secondary: hsl(222 30% 18%);
+    --color-secondary-foreground: hsl(210 40% 98%);
+    
+    --color-accent: hsl(32 95% 52%);
+    --color-accent-foreground: hsl(222 47% 11%);
+    
+    --color-muted: hsl(222 30% 15%);
+    --color-muted-foreground: hsl(215 20% 65%);
+    
+    --color-card: hsl(222 47% 11%);
+    --color-card-foreground: hsl(210 40% 98%);
+    
+    --color-border: hsl(222 30% 20%);
+    --color-input: hsl(222 30% 20%);
+    
+    /* Custom Brand Colors */
+    --color-navy: hsl(222 47% 15%);
+    --color-navy-light: hsl(222 35% 22%);
+    --color-navy-dark: hsl(222 50% 10%);
+    
+    --color-amber-brand: hsl(32 95% 52%);
+    --color-amber-light: hsl(38 100% 60%);
+    --color-amber-dark: hsl(28 90% 45%);
+
+    /* Fonts */
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+
+    /* Animations */
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-pulse-slow: pulse 3s ease-in-out infinite;
+    --animate-slide: slide 40s linear infinite;
+    --animate-scan: scan 3s linear infinite;
+    --animate-spin-slow: spin 30s linear infinite;
+    --animate-spin-reverse: spin 20s linear infinite reverse;
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    @keyframes scan {
+        0% { top: 0; }
+        100% { top: 100%; }
+    }
+}
+
+/* Base Styles */
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading;
+    }
+}
+
+/* Utilities */
+@layer utilities {
+    .text-gradient {
+        @apply bg-gradient-to-r from-amber-brand to-amber-light bg-clip-text text-transparent;
+    }
+    .glass-card {
+        @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    }
+    .hero-gradient {
+        background: linear-gradient(135deg, hsl(222 47% 15%) 0%, hsl(222 35% 22%) 50%, hsl(222 50% 10%) 100%);
+    }
 }
