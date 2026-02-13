@@ -34,7 +34,7 @@
 
                     <h1 class="text-5xl md:text-7xl font-bold font-heading text-white leading-[0.9] mb-8 tracking-tighter">
                         Move Goods. <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50">Without Borders.</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-brand to-amber-light">Beyond Borders.</span>
                     </h1>
                     
                     <p class="text-lg text-white/60 font-medium mb-10 max-w-xl leading-relaxed">
