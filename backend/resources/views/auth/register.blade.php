@@ -19,12 +19,12 @@
             <div class="mb-16" data-aos="fade-right">
                 <div class="inline-flex items-center gap-3 px-6 py-3 bg-amber-brand/10 border border-amber-brand/20 rounded-full mb-10 backdrop-blur-md">
                     <span class="w-2.5 h-2.5 rounded-full bg-amber-brand shadow-[0_0_15px_rgba(245,158,11,0.5)] animate-ping"></span>
-                    <span class="text-xs font-black text-amber-brand uppercase tracking-[0.4em]">Capacity Check: Verified</span>
+                    <span class="platform-label">Capacity Check: Verified</span>
                 </div>
                 <h2 class="text-7xl md:text-8xl font-bold font-heading text-white mb-10 tracking-tighter leading-[0.85]">
                     The <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-white">Propeller</span> <br>Hub.
                 </h2>
-                <p class="text-2xl text-white/40 leading-relaxed font-bold italic border-l-4 border-blue-500 pl-8">
+                <p class="mb-10 leading-relaxed italic border-l-4 border-blue-500 pl-8 platform-body text-white/40">
                     Your enterprise entry into the most advanced global trade infrastructure.
                 </p>
             </div>
@@ -39,7 +39,7 @@
                          </div>
                          <div>
                               <p class="text-2xl font-bold text-white mb-2 tracking-tight">Factory-Direct Terminal</p>
-                              <p class="text-sm text-white/30 leading-relaxed font-medium">Bypass middlemen. Connect directly to verified manufacturing nodes in CN, TR, and UAE.</p>
+                              <p class="leading-relaxed platform-body text-white/30">Bypass middlemen. Connect directly to verified manufacturing nodes in CN, TR, and UAE.</p>
                          </div>
                     </div>
 
@@ -49,7 +49,7 @@
                          </div>
                          <div>
                               <p class="text-2xl font-bold text-white mb-2 tracking-tight">Zero-Latency Pay</p>
-                              <p class="text-sm text-white/30 leading-relaxed font-medium">Settlements in RMB & USD executed on high-frequency rails with real-time conversion.</p>
+                              <p class="leading-relaxed platform-body text-white/30">Settlements in RMB & USD executed on high-frequency rails with real-time conversion.</p>
                          </div>
                     </div>
                  </div>
@@ -78,9 +78,9 @@
         
         <div class="max-w-2xl w-full" data-aos="fade-left">
             <div class="mb-16">
-                <span class="text-blue-600 font-black uppercase tracking-[0.5em] text-[10px] mb-6 block">Identity Protocol Initialize</span>
+                <span class="mb-6 block text-blue-600 platform-label">Identity Protocol Initialize</span>
                 <h1 class="text-6xl md:text-7xl font-bold font-heading text-navy-dark mb-6 tracking-tighter leading-tight">Join the <br><span class="italic text-slate-300">Network.</span></h1>
-                <p class="text-slate-500 font-bold text-lg leading-relaxed border-l-2 border-slate-100 pl-8 italic">Begin your journey into high-velocity global trade infrastructure.</p>
+                <p class="leading-relaxed border-l-2 border-slate-100 pl-8 italic platform-body text-slate-500">Begin your journey into high-velocity global trade infrastructure.</p>
             </div>
 
             <form method="POST" action="{{ route('register') }}" class="space-y-8">
@@ -88,9 +88,9 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
-                        <label class="text-xs font-black text-navy-dark/40 uppercase tracking-[0.3em] ml-2">Contact Principal</label>
+                        <label class="ml-2 text-navy-dark/40 platform-label">Contact Principal</label>
                         <input type="text" name="name" value="{{ old('name') }}" required autofocus
-                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('name') border-red-500 @enderror placeholder:text-slate-200" 
+                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('name') border-red-500 @enderror placeholder:text-slate-200 platform-body" 
                                placeholder="Full Name">
                         @error('name')
                             <p class="text-xs text-red-500 font-black mt-3 ml-6 italic">{{ $message }}</p>
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="space-y-4">
-                        <label class="text-xs font-black text-navy-dark/40 uppercase tracking-[0.3em] ml-2">Mobile Terminal</label>
+                        <label class="ml-2 text-navy-dark/40 platform-label">Mobile Terminal</label>
                         <input type="text" name="phone" value="{{ old('phone') }}" required
                                class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('phone') border-red-500 @enderror placeholder:text-slate-200" 
                                placeholder="+234 ...">
@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="space-y-4">
-                    <label class="text-xs font-black text-navy-dark/40 uppercase tracking-[0.3em] ml-2">Enterprise Email ID</label>
+                    <label class="ml-2 text-navy-dark/40 platform-label">Enterprise Email ID</label>
                     <input type="email" name="email" value="{{ old('email') }}" required
                            class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('email') border-red-500 @enderror placeholder:text-slate-200" 
                            placeholder="admin@company.com">
@@ -120,17 +120,17 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
-                        <label class="text-xs font-black text-navy-dark/40 uppercase tracking-[0.3em] ml-2">Registered Business</label>
+                        <label class="ml-2 text-navy-dark/40 platform-label">Registered Business</label>
                         <input type="text" name="business_name" value="{{ old('business_name') }}" required
-                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('business_name') border-red-500 @enderror placeholder:text-slate-200" 
+                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('business_name') border-red-500 @enderror placeholder:text-slate-200 platform-body" 
                                placeholder="Company Ltd">
                     </div>
 
                     <div class="space-y-4">
-                        <label class="text-xs font-black text-navy-dark/40 uppercase tracking-[0.3em] ml-2">Trade Specialization</label>
+                        <label class="ml-2 text-navy-dark/40 platform-label">Trade Specialization</label>
                         <div class="relative">
                              <select name="business_type" required
-                                     class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input appearance-none cursor-pointer">
+                                     class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input appearance-none cursor-pointer platform-body">
                                  <option value="importer">Importer / E-commerce</option>
                                  <option value="manufacturer">Factory Partner</option>
                                  <option value="logistics">Logistics Provider</option>
@@ -147,14 +147,14 @@
                     <div class="space-y-4">
                         <label class="text-xs font-black text-navy-dark/30 uppercase tracking-[0.3em] ml-2">Secret Key</label>
                         <input type="password" name="password" required
-                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('password') border-red-500 @enderror placeholder:text-slate-200" 
+                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input @error('password') border-red-500 @enderror placeholder:text-slate-200 platform-body" 
                                placeholder="••••••••">
                     </div>
 
                     <div class="space-y-4">
                         <label class="text-xs font-black text-navy-dark/30 uppercase tracking-[0.3em] ml-2">Confirm Secret</label>
                         <input type="password" name="password_confirmation" required
-                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input placeholder:text-slate-200" 
+                               class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] px-10 py-7 text-xl text-navy-dark font-black focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-input placeholder:text-slate-200 platform-body" 
                                placeholder="••••••••">
                     </div>
                 </div>
@@ -163,13 +163,13 @@
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" required name="terms" id="terms" class="sr-only peer">
                         <div class="w-14 h-8 bg-slate-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-blue-600"></div>
-                        <span class="ml-6 text-xs font-black text-slate-400 uppercase tracking-widest leading-relaxed italic cursor-pointer">
+                        <span class="ml-6 text-slate-400 leading-relaxed italic cursor-pointer platform-label">
                             Accept the <a href="{{ route('legal') }}" class="text-blue-600 hover:text-navy-dark transition-colors">Global Trade Protocol</a>.
                         </span>
                     </label>
                 </div>
 
-                <button type="submit" class="w-full bg-navy-dark hover:bg-blue-600 text-white py-12 rounded-[2.5rem] text-sm font-black uppercase tracking-[0.5em] transition-all shadow-btn italic active:scale-[0.98] group relative overflow-hidden">
+                <button type="submit" class="w-full bg-navy-dark hover:bg-blue-600 text-white py-12 rounded-[2.5rem] transition-all shadow-btn italic active:scale-[0.98] group relative overflow-hidden platform-label">
                     <span class="relative z-10 flex items-center justify-center gap-6">
                         Initialize Enterprise Node
                         <svg class="w-8 h-8 group-hover:translate-x-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -180,8 +180,8 @@
             </form>
 
             <div class="mt-20 pt-16 border-t-2 border-slate-50 text-center">
-                <p class="text-sm text-slate-400 font-bold italic mb-8">Already possess a GlobalLine Identity?</p>
-                <a href="{{ route('login') }}" class="group inline-flex items-center gap-6 px-16 py-6 bg-slate-50 text-navy-dark rounded-3xl font-black uppercase tracking-widest text-xs hover:bg-navy-dark hover:text-white transition-all italic border-2 border-slate-100">
+                <p class="text-slate-400 italic mb-8 platform-body">Already possess a GlobalLine Identity?</p>
+                <a href="{{ route('login') }}" class="group inline-flex items-center gap-6 px-16 py-6 bg-slate-50 text-navy-dark rounded-3xl hover:bg-navy-dark hover:text-white transition-all italic border-2 border-slate-100 platform-label">
                     Authenticate Account Access
                     <span class="group-hover:translate-x-3 transition-transform">&rarr;</span>
                 </a>

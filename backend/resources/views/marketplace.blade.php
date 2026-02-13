@@ -10,11 +10,11 @@
     <!-- Hero / Discovery Section -->
     <div class="container mx-auto px-6 relative z-10 mb-20">
         <div class="max-w-4xl px-2">
-            <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Direct Infrastructure</span>
+            <span class="text-amber-brand block mb-4 platform-label">Direct Infrastructure</span>
             <h1 class="text-5xl md:text-7xl font-bold font-heading text-white leading-[0.9] mb-8 tracking-tighter">
                 Global <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">Collective.</span>
             </h1>
-            <p class="text-white/60 text-lg max-w-2xl mb-12">
+            <p class="text-white/60 max-w-2xl mb-12 platform-body">
                 Scan across thousands of verified production nodes. Source direct from factories with integrated quality control and logistics.
             </p>
         </div>
@@ -34,14 +34,14 @@
 
                 <div class="flex flex-col lg:flex-row gap-2 h-full">
                     <!-- Node Filter -->
-                    <select name="node" class="bg-white/5 text-white text-sm font-bold px-6 py-4 rounded-xl border-none focus:ring-0 cursor-pointer outline-none">
-                        <option value="all" @if(request('node') == 'all') selected @endif>All Production Nodes</option>
-                        <option value="Factory Direct (CN)" @if(request('node') == 'Factory Direct (CN)') selected @endif>Factory Direct (CN)</option>
-                        <option value="Premium Tech (US)" @if(request('node') == 'Premium Tech (US)') selected @endif>Premium Tech (US)</option>
-                        <option value="Eco-Friendly Hub (EU)" @if(request('node') == 'Eco-Friendly Hub (EU)') selected @endif>Eco-Friendly Hub (EU)</option>
+                    <select name="node" class="bg-white/5 text-white px-6 py-4 rounded-xl border-none focus:ring-0 cursor-pointer outline-none platform-label">
+                        <option value="all" class="bg-navy-dark">All Production Nodes</option>
+                        <option value="Factory Direct (CN)" class="bg-navy-dark">Factory Direct (CN)</option>
+                        <option value="Premium Tech (US)" class="bg-navy-dark">Premium Tech (US)</option>
+                        <option value="Eco-Friendly Hub (EU)" class="bg-navy-dark">Eco-Friendly Hub (EU)</option>
                     </select>
 
-                    <button type="submit" class="bg-amber-brand hover:bg-amber-light text-navy-dark px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all hover:shadow-xl hover:shadow-amber-brand/20">
+                    <button type="submit" class="bg-amber-brand hover:bg-amber-light text-navy-dark px-10 py-5 rounded-2xl transition-all hover:shadow-xl hover:shadow-amber-brand/20 platform-label">
                         Search Collective
                     </button>
                 </div>
@@ -52,7 +52,7 @@
     <!-- Category Ticker / Filters -->
     <div class="border-y border-white/5 bg-navy/50 backdrop-blur-sm mb-16 py-4 overflow-hidden">
         <div class="container mx-auto px-6">
-            <div class="flex items-center gap-8 overflow-x-auto no-scrollbar whitespace-nowrap text-xs font-bold uppercase tracking-widest text-white/40">
+            <div class="flex items-center gap-8 overflow-x-auto no-scrollbar whitespace-nowrap text-white/40 platform-label">
                 <span class="text-amber-brand">Trending Now:</span>
                 <a href="#" class="hover:text-white transition-colors">Electronics</a>
                 <a href="#" class="hover:text-white transition-colors">Industrial Parts</a>
@@ -69,7 +69,7 @@
     <div class="fixed top-32 right-6 z-40 hidden xl:flex flex-col gap-2">
         @foreach($availableCurrencies as $curr)
         <a href="?currency={{ $curr }}&node={{ request('node', 'all') }}&query={{ request('query') }}" 
-           class="w-12 h-12 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all {{ $selectedCurrency == $curr ? 'bg-amber-brand text-navy-dark border-amber-brand' : 'bg-navy/50 text-white/40 border-white/10 hover:border-white/30' }}">
+           class="w-12 h-12 rounded-full flex items-center justify-center border transition-all platform-label {{ $selectedCurrency == $curr ? 'bg-amber-brand text-navy-dark border-amber-brand' : 'bg-navy/50 text-white/40 border-white/10 hover:border-white/30' }}">
             {{ $curr }}
         </a>
         @endforeach
@@ -83,7 +83,7 @@
                 
                 <!-- Badge Overlay -->
                 <div class="absolute top-6 left-6 z-20">
-                    <span class="bg-navy-dark/80 backdrop-blur-md border border-white/10 text-white text-[8px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-2">
+                    <span class="bg-navy-dark/80 backdrop-blur-md border border-white/10 text-white px-3 py-1.5 rounded-full flex items-center gap-2 platform-label">
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-brand animate-pulse"></span>
                         Verified Node: {{ $product['source'] }}
                     </span>
@@ -99,14 +99,14 @@
                 <div class="p-8 pt-4 flex flex-col h-full">
                     <h3 class="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-amber-brand transition-colors line-clamp-1">{{ $product['name'] }}</h3>
                     <div class="flex items-center gap-3 mb-6">
-                        <span class="text-[10px] text-white/40 uppercase font-bold tracking-widest">MOQ: {{ $product['moq'] ?? 'Variable' }} Units</span>
+                        <span class="text-white/40 platform-label">MOQ: {{ $product['moq'] ?? 'Variable' }} Units</span>
                         <span class="w-1 h-1 rounded-full bg-white/20"></span>
-                        <span class="text-[10px] text-emerald-400 uppercase font-bold tracking-widest">In Stock</span>
+                        <span class="text-emerald-400 platform-label">In Stock</span>
                     </div>
                     
                     <div class="mt-auto flex items-center justify-between gap-4">
                         <div>
-                            <p class="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] mb-1">Unit Valuation</p>
+                            <p class="text-white/30 mb-1 platform-label">Unit Valuation</p>
                             <p class="text-3xl font-bold text-white font-heading">
                                 {{ $product['symbol'] }}{{ number_format($product['display_price'], 2) }}
                             </p>
@@ -137,32 +137,32 @@
             
             <div class="flex flex-col lg:flex-row items-center gap-16 relative z-10">
                 <div class="lg:w-1/2">
-                    <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Bespoke Sourcing</span>
+                    <span class="text-amber-brand mb-6 block platform-label">Bespoke Sourcing</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-8">Can't Find <br> What You Need?</h2>
-                    <p class="text-white/50 text-lg mb-10 leading-relaxed">
+                    <p class="text-white/50 mb-10 leading-relaxed platform-body">
                         Our expert procurement teams can hunt down any item across our global manufacturing network. Simply share the details, and we'll bring you the best factory direct quotes.
                     </p>
-                    <a href="{{ route('contact') }}" class="inline-flex items-center gap-4 bg-white text-navy-dark px-10 py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-amber-brand transition-all">
+                    <a href="{{ route('contact') }}" class="inline-flex items-center gap-4 bg-white text-navy-dark px-10 py-5 rounded-2xl transition-all hover:bg-amber-brand platform-label">
                         Request a Quote (RFQ)
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
                 </div>
                 <div class="lg:w-1/2 grid grid-cols-2 gap-4">
-                    <div class="aspect-square bg-white/5 rounded-[2rem] border border-white/5 p-8 flex flex-col justify-center items-center text-center">
+                     <div class="aspect-square bg-white/5 rounded-[2rem] border border-white/5 p-8 flex flex-col justify-center items-center text-center">
                         <div class="text-3xl font-bold text-white mb-2">24h</div>
-                        <p class="text-[10px] text-white/40 uppercase font-bold tracking-widest">Quote Response</p>
+                        <p class="text-white/40 platform-label">Quote Response</p>
                     </div>
                     <div class="aspect-square bg-white/5 rounded-[2rem] border border-white/5 p-8 flex flex-col justify-center items-center text-center">
                         <div class="text-3xl font-bold text-white mb-2">100%</div>
-                        <p class="text-[10px] text-white/40 uppercase font-bold tracking-widest">Quality Guarantee</p>
+                        <p class="text-white/40 platform-label">Quality Guarantee</p>
                     </div>
                     <div class="aspect-square bg-white/5 rounded-[2rem] border border-white/5 p-8 flex flex-col justify-center items-center text-center">
                         <div class="text-3xl font-bold text-white mb-2">∞</div>
-                        <p class="text-[10px] text-white/40 uppercase font-bold tracking-widest">Scalability</p>
+                        <p class="text-white/40 platform-label">Scalability</p>
                     </div>
                     <div class="aspect-square bg-white/5 rounded-[2rem] border border-white/5 p-8 flex flex-col justify-center items-center text-center">
                         <div class="text-3xl font-bold text-white mb-2">Direct</div>
-                        <p class="text-[10px] text-white/40 uppercase font-bold tracking-widest">Factory Sync</p>
+                        <p class="text-white/40 platform-label">Factory Sync</p>
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="text-sm font-bold text-white tracking-tight line-clamp-1 group-hover:text-amber-brand transition-colors" x-text="item.name"></h4>
-                            <p class="text-[9px] font-bold text-white/30 mt-1 uppercase tracking-widest" x-text="'Verified Node: ' + item.source"></p>
+                            <p class="text-white/30 mt-1 platform-label" x-text="'Verified Node: ' + item.source"></p>
                             <div class="flex items-end justify-between mt-4">
                                 <p class="text-xl font-bold text-white" x-text="item.symbol + numberFormat(item.display_price)"></p>
                                 <div class="text-[10px] font-bold text-amber-brand px-3 py-1 bg-amber-brand/10 rounded-lg" x-text="'x' + item.qty"></div>

@@ -15,6 +15,12 @@
     <!-- Scripts & Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
+    <style>
+        .platform-body { font-size: 13px !important; font-weight: 700 !important; }
+        .platform-label { font-size: 11px !important; font-weight: 900 !important; text-transform: uppercase !important; letter-spacing: 0.1em !important; }
+        .platform-technical { font-family: 'Space Grotesk', ui-monospace, monospace; font-size: 12px; font-weight: 600; }
+    </style>
+    
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     @stack('styles')
@@ -34,20 +40,20 @@
                 </div>
                 <div class="flex flex-col">
                     <span class="text-xl font-bold font-heading text-white leading-none tracking-tight">GlobalLine</span>
-                    <span class="text-[10px] font-bold text-amber-brand uppercase tracking-[0.3em]">Logistics</span>
+                    <span class="text-amber-brand platform-label">Logistics</span>
                 </div>
             </a>
 
             <!-- Desktop Nav -->
             <div class="hidden lg:flex items-center gap-6">
                 <div class="flex items-center gap-6 text-[13px] font-bold text-white/90">
-                    <a href="{{ url('/') }}" class="hover:text-amber-brand transition-colors">Home</a>
-                    <a href="{{ route('marketplace.index') }}" class="hover:text-amber-brand transition-colors">Marketplace</a>
-                    <a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Services</a>
+                    <a href="{{ url('/') }}" class="hover:text-amber-brand transition-colors platform-body">Home</a>
+                    <a href="{{ route('marketplace.index') }}" class="hover:text-amber-brand transition-colors platform-body">Marketplace</a>
+                    <a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors platform-body">Services</a>
 
                     <!-- Solutions Dropdown -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button class="flex items-center gap-1 hover:text-amber-brand transition-colors py-4 uppercase tracking-widest text-[11px] font-black">
+                        <button class="flex items-center gap-1 hover:text-amber-brand transition-colors py-4 platform-label">
                             Solutions
                             <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -190,7 +196,7 @@
                         </div>
                         <span class="text-lg font-bold font-heading">GlobalLine</span>
                     </a>
-                    <p class="text-white/50 text-sm leading-relaxed">
+                    <p class="text-white/50 leading-relaxed platform-body">
                         The operating system for global trade. Connecting manufacturers to markets with speed, transparency, and reliability.
                     </p>
                     <div class="flex gap-4">
@@ -207,8 +213,8 @@
 
                 <!-- Links -->
                 <div>
-                    <h4 class="text-white font-bold mb-6 font-heading">Platform</h4>
-                    <ul class="space-y-4 text-sm text-white/60">
+                    <h4 class="text-white font-bold mb-6 font-heading platform-body">Platform</h4>
+                    <ul class="space-y-4 text-white/60 platform-body">
                         <li><a href="{{ route('marketplace.index') }}" class="hover:text-amber-brand transition-colors">Global Marketplace</a></li>
                         <li><a href="{{ route('calculator') }}" class="hover:text-amber-brand transition-colors">Shipping Calculator</a></li>
                         <li><a href="{{ url('/tracking') }}" class="hover:text-amber-brand transition-colors">Control Tower</a></li>
@@ -217,8 +223,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6 font-heading">Solutions</h4>
-                    <ul class="space-y-4 text-sm text-white/60">
+                    <h4 class="text-white font-bold mb-6 font-heading platform-body">Solutions</h4>
+                    <ul class="space-y-4 text-white/60 platform-body">
                         <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Intelligent Sourcing</a></li>
                         <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Trade Finance</a></li>
                         <li><a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Smart Consolidation</a></li>
@@ -227,8 +233,8 @@
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold mb-6 font-heading">Company</h4>
-                    <ul class="space-y-4 text-sm text-white/60">
+                    <h4 class="text-white font-bold mb-6 font-heading platform-body">Company</h4>
+                    <ul class="space-y-4 text-white/60 platform-body">
                         <li><a href="{{ route('about') }}" class="hover:text-amber-brand transition-colors">The Manifesto</a></li>
                         <li><a href="{{ route('pricing') }}" class="hover:text-amber-brand transition-colors">Pricing Tiers</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-amber-brand transition-colors">Global Support</a></li>

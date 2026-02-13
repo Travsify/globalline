@@ -21,12 +21,12 @@
             <div class="mb-20" data-aos="fade-right">
                 <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-full mb-10 backdrop-blur-md">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.5)] animate-pulse"></span>
-                    <span class="text-xs font-black text-white uppercase tracking-[0.4em]">Node Cluster: Optimal</span>
+                    <span class="platform-label">Node Cluster: Optimal</span>
                 </div>
                 <h2 class="text-7xl md:text-8xl font-bold font-heading text-white mb-10 tracking-tighter leading-[0.85]">
                     Enter the <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-brand via-white to-white/40 italic">Apex.</span>
                 </h2>
-                <p class="text-2xl text-white/60 leading-relaxed font-bold italic border-l-4 border-amber-brand pl-8">
+                <p class="mb-10 leading-relaxed italic border-l-4 border-amber-brand pl-8 platform-body text-white/60">
                     Your portal to high-velocity trade settlements and global logistics nodes.
                 </p>
             </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <p class="text-4xl font-bold text-white tracking-tighter">$1.4B+ Volume</p>
-                            <p class="text-sm text-white/40 font-black uppercase tracking-widest mt-1">Managed Trade Equity</p>
+                            <p class="mt-1 text-white/40 platform-label">Managed Trade Equity</p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div>
                             <p class="text-4xl font-bold text-white tracking-tighter">220 Nodes</p>
-                            <p class="text-sm text-white/40 font-black uppercase tracking-widest mt-1">Connected Global Hubs</p>
+                            <p class="mt-1 text-white/40 platform-label">Connected Global Hubs</p>
                         </div>
                     </div>
                 </div>
@@ -73,9 +73,9 @@
         <div class="max-w-lg w-full" data-aos="fade-left">
             
             <div class="mb-16">
-                <span class="text-amber-brand font-black uppercase tracking-[0.5em] text-[10px] mb-6 block">Secure Authentication</span>
+                <span class="mb-6 block text-amber-brand platform-label">Secure Authentication</span>
                 <h1 class="text-6xl md:text-7xl font-bold font-heading text-navy-dark mb-6 tracking-tighter leading-tight">Welcome <br><span class="italic text-slate-300">Terminal.</span></h1>
-                <p class="text-slate-500 font-bold text-lg leading-relaxed border-l-2 border-slate-100 pl-6 italic">Enter your enterprise key to initialize connection.</p>
+                <p class="leading-relaxed border-l-2 border-slate-100 pl-6 italic platform-body text-slate-500">Enter your enterprise key to initialize connection.</p>
             </div>
 
             @if (session('status'))
@@ -89,13 +89,13 @@
                 @csrf
                 
                 <div class="space-y-4">
-                    <label class="text-xs font-black text-navy-dark/30 uppercase tracking-[0.3em] ml-2">Enterprise Email Identifier</label>
+                    <label class="ml-2 text-navy-dark/30 platform-label">Enterprise Email Identifier</label>
                     <div class="relative group">
                          <div class="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none text-slate-300 group-focus-within:text-amber-brand transition-colors">
                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
                          </div>
                          <input type="email" name="email" value="{{ old('email') }}" required autofocus
-                                class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] pl-20 pr-8 py-8 text-xl text-navy-dark font-black focus:outline-none focus:border-amber-brand focus:bg-white transition-all shadow-input @error('email') border-red-500 @enderror placeholder:text-slate-200" 
+                                class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] pl-20 pr-8 py-8 text-xl text-navy-dark font-black focus:outline-none focus:border-amber-brand focus:bg-white transition-all shadow-input @error('email') border-red-500 @enderror placeholder:text-slate-200 platform-body" 
                                 placeholder="name@company.com">
                     </div>
                     @error('email')
@@ -105,15 +105,15 @@
 
                 <div class="space-y-4">
                     <div class="flex justify-between items-center px-4">
-                        <label class="text-xs font-black text-navy-dark/30 uppercase tracking-[0.3em]">Encrypted Secret Key</label>
-                        <a href="{{ route('password.request') }}" class="text-[10px] font-black text-amber-brand uppercase tracking-widest hover:text-navy-dark transition-colors italic">Bypass Key?</a>
+                        <label class="text-navy-dark/30 platform-label">Encrypted Secret Key</label>
+                        <a href="{{ route('password.request') }}" class="text-amber-brand hover:text-navy-dark transition-colors italic platform-label">Bypass Key?</a>
                     </div>
                     <div class="relative group">
                          <div class="absolute inset-y-0 left-0 pl-8 flex items-center pointer-events-none text-slate-300 group-focus-within:text-amber-brand transition-colors">
                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                          </div>
                          <input type="password" name="password" required
-                                class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] pl-20 pr-8 py-8 text-xl text-navy-dark font-black focus:outline-none focus:border-amber-brand focus:bg-white transition-all shadow-input placeholder:text-slate-200" 
+                                class="w-full bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] pl-20 pr-8 py-8 text-xl text-navy-dark font-black focus:outline-none focus:border-amber-brand focus:bg-white transition-all shadow-input placeholder:text-slate-200 platform-body" 
                                 placeholder="••••••••">
                     </div>
                 </div>
@@ -122,11 +122,11 @@
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" name="remember" id="remember" class="sr-only peer">
                         <div class="w-14 h-8 bg-slate-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-amber-brand"></div>
-                        <span class="ml-4 text-xs font-black text-slate-400 uppercase tracking-widest italic">Maintain Active Session</span>
+                        <span class="ml-4 text-slate-400 italic platform-label">Maintain Active Session</span>
                     </label>
                 </div>
 
-                <button type="submit" class="w-full bg-navy-dark hover:bg-amber-brand hover:text-navy-dark text-white py-10 rounded-[2.5rem] text-sm font-black uppercase tracking-[0.5em] transition-all shadow-btn italic active:scale-[0.98] group relative overflow-hidden">
+                <button type="submit" class="w-full bg-navy-dark hover:bg-amber-brand hover:text-navy-dark text-white py-10 rounded-[2.5rem] transition-all shadow-btn italic active:scale-[0.98] group relative overflow-hidden platform-label">
                     <span class="relative z-10 flex items-center justify-center gap-4">
                         Authorize Connection
                         <svg class="w-6 h-6 group-hover:translate-x-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -137,9 +137,9 @@
             </form>
 
             <div class="mt-24 pt-16 border-t-2 border-slate-50 text-center">
-                <p class="text-sm text-slate-400 font-bold italic mb-10 tracking-wide">New to the High-Velocity Network?</p>
-                <a href="{{ route('register') }}" class="group relative inline-flex items-center justify-center px-16 py-6 font-black text-navy-dark transition-all duration-300 bg-white border-2 border-slate-100 rounded-3xl hover:bg-navy-dark hover:text-white hover:border-navy-dark shadow-sm">
-                    <span class="text-xs uppercase tracking-widest">Initialize Node Identity</span>
+                <p class="text-slate-400 italic mb-10 tracking-wide platform-body">New to the High-Velocity Network?</p>
+                <a href="{{ route('register') }}" class="group relative inline-flex items-center justify-center px-16 py-6 text-navy-dark transition-all duration-300 bg-white border-2 border-slate-100 rounded-3xl hover:bg-navy-dark hover:text-white hover:border-navy-dark shadow-sm platform-label">
+                    <span>Initialize Node Identity</span>
                 </a>
             </div>
 

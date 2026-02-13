@@ -22,7 +22,7 @@
             <div class="max-w-4xl" data-aos="fade-up">
                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
-                    <span class="text-[10px] font-bold text-white/70 uppercase tracking-widest">Core Systems: v2.4.0 Live</span>
+                    <span class="text-white/70 platform-label">Core Systems: v2.4.0 Live</span>
                 </div>
 
                 <h1 class="text-6xl md:text-8xl font-bold font-heading text-white leading-[0.85] mb-8 tracking-tighter">
@@ -30,15 +30,15 @@
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-brand via-white to-white/40">Global Commerce.</span>
                 </h1>
                 
-                <p class="text-xl text-white/50 font-medium mb-12 max-w-2xl leading-relaxed">
+                <p class="mb-12 max-w-2xl leading-relaxed text-white/50 platform-body">
                     A multi-layered infrastructure designed to dissolve the boundaries between sourcing, logistics, and finance.
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                     <a href="#sourcing" class="px-8 py-4 bg-white text-navy-dark rounded-xl font-bold uppercase tracking-widest text-xs transition-all hover:bg-amber-brand">
+                     <a href="#sourcing" class="px-8 py-4 bg-white text-navy-dark rounded-xl transition-all hover:bg-amber-brand platform-label">
                         Explore Capabilities
                     </a>
-                    <a href="{{ route('register') }}" class="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold uppercase tracking-widest text-xs transition-all hover:bg-white/10">
+                    <a href="{{ route('register') }}" class="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-xl transition-all hover:bg-white/10 platform-label">
                         Join the Network
                     </a>
                 </div>
@@ -56,20 +56,20 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
-                    <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">Module :: 01</span>
+                    <span class="text-amber-brand mb-6 block platform-label">Module :: 01</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-8">Agentic Sourcing. <br>Beyond the Directory.</h2>
-                    <p class="text-white/50 text-lg mb-10 leading-relaxed">
+                    <p class="text-white/50 mb-10 leading-relaxed platform-body">
                         Say goodbye to endless catalog searching. Our sourcing protocols deploy on-the-ground agents to physically verify, negotiate, and audit manufacturers specifically for your requirements.
                     </p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
                         <div class="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                            <h4 class="text-white font-bold mb-2">Live Verification</h4>
-                            <p class="text-xs text-white/40">Physical inspection of facilities before any deposit is paid.</p>
+                            <h4 class="text-white mb-2 platform-body">Live Verification</h4>
+                            <p class="text-white/40 platform-body">Physical inspection of facilities before any deposit is paid.</p>
                         </div>
                         <div class="p-6 bg-white/5 border border-white/10 rounded-2xl">
-                            <h4 class="text-white font-bold mb-2">Negotiation Engine</h4>
-                            <p class="text-xs text-white/40">Local language speakers to drive down prices by up to 25%.</p>
+                            <h4 class="text-white mb-2 platform-body">Negotiation Engine</h4>
+                            <p class="text-white/40 platform-body">Local language speakers to drive down prices by up to 25%.</p>
                         </div>
                     </div>
                 </div>
@@ -79,23 +79,23 @@
                     <div class="bg-gradient-to-br from-white/10 to-transparent p-1 rounded-[3rem] border border-white/10 shadow-2xl overflow-hidden">
                         <div class="bg-navy-dark/80 backdrop-blur-xl rounded-[2.9rem] p-10">
                              <div class="flex items-center justify-between mb-8">
-                                 <div class="text-xs font-mono text-emerald-500 uppercase tracking-widest">Request Status :: ACTIVE</div>
-                                 <div class="text-white/20 text-[10px] font-bold">NODE: GZ-HQ</div>
+                                 <div class="text-emerald-500 platform-label">Request Status :: ACTIVE</div>
+                                 <div class="text-white/20 platform-label">NODE: GZ-HQ</div>
                              </div>
                              <div class="space-y-4 mb-8">
                                  <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
                                      <div class="h-full w-4/5 bg-amber-brand animate-expand"></div>
                                  </div>
-                                 <p class="text-xs text-white/60">Scanning 42 factories for <span class="text-white font-bold">"Industrial LED Panels"</span></p>
+                                 <p class="text-white/60 platform-body">Scanning 42 factories for <span class="text-white font-bold">"Industrial LED Panels"</span></p>
                              </div>
                              <div class="grid grid-cols-3 gap-4">
                                  <div class="aspect-square bg-white/5 rounded-xl border border-white/5 flex flex-col items-center justify-center">
                                      <div class="text-amber-brand font-bold text-lg italic">12</div>
-                                     <p class="text-[8px] text-white/30 uppercase tracking-tighter">Verified</p>
+                                     <p class="text-white/30 platform-label">Verified</p>
                                  </div>
                                  <div class="aspect-square bg-white/5 rounded-xl border border-white/5 flex flex-col items-center justify-center">
                                      <div class="text-emerald-500 font-bold text-lg italic">08</div>
-                                     <p class="text-[8px] text-white/30 uppercase tracking-tighter">Audited</p>
+                                     <p class="text-white/30 platform-label">Audited</p>
                                  </div>
                                  <div class="aspect-square bg-white/5 rounded-xl border border-white/5 flex flex-col items-center justify-center">
                                      <div class="text-blue-400 font-bold text-lg italic">03</div>
@@ -114,21 +114,21 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row-reverse items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-left">
-                     <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">Module :: 02</span>
+                     <span class="text-amber-brand mb-6 block platform-label">Module :: 02</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-heading text-navy-dark mb-8">Instant Trade Finance. <br>High-Frequency Liquidity.</h2>
-                    <p class="text-slate-600 text-lg mb-10 leading-relaxed">
+                    <p class="text-slate-600 mb-10 leading-relaxed platform-body">
                         Convert currency at the speed of code. Pay your global suppliers in RMB, USD, or EUR directly from your local wallet without the friction of traditional banking lags.
                     </p>
                     <ul class="space-y-4 mb-10">
-                         <li class="flex items-center gap-4 text-navy-dark font-bold">
+                         <li class="flex items-center gap-4 text-navy-dark platform-body">
                              <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">✓</span>
                              Sub-30 second settlement to CN nodes
                          </li>
-                         <li class="flex items-center gap-4 text-navy-dark font-bold">
+                         <li class="flex items-center gap-4 text-navy-dark platform-body">
                              <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">✓</span>
                              Zero-lag Currency Transformation
                          </li>
-                         <li class="flex items-center gap-4 text-navy-dark font-bold">
+                         <li class="flex items-center gap-4 text-navy-dark platform-body">
                              <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">✓</span>
                              Embedded Trade Credit Lines (COMING SOON)
                          </li>
@@ -139,7 +139,7 @@
                         <div class="absolute inset-0 bg-navy-dark/5 rounded-[4rem] rotate-3"></div>
                         <div class="relative bg-navy-dark p-12 rounded-[4rem] text-white shadow-3xl">
                              <div class="mb-12">
-                                 <p class="text-xs text-white/30 uppercase tracking-[0.3em] mb-2 font-mono italic">Account Balance (Global Unified)</p>
+                                 <p class="text-white/30 italic mb-2 platform-label">Account Balance (Global Unified)</p>
                                  <h3 class="text-4xl md:text-5xl font-bold font-heading">$142,506.88</h3>
                              </div>
                              <div class="space-y-6">
@@ -212,9 +212,9 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <div class="lg:w-1/3" data-aos="fade-right">
-                    <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">Module :: 04</span>
+                    <span class="text-amber-brand mb-6 block platform-label">Module :: 04</span>
                     <h2 class="text-4xl font-bold font-heading mb-8 uppercase tracking-tighter">The Trust <br> Network.</h2>
-                    <p class="text-white/40 mb-10">
+                    <p class="text-white/40 mb-10 platform-body">
                         Every manufacturer on our grid is multi-factor verified. We don't just check websites; we check machine capacity, labor compliance, and bank reputation.
                     </p>
                 </div>
@@ -226,8 +226,8 @@
                              <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.9L9.03 1.703c.628-.292 1.319-.292 1.947 0L17.835 4.9c.433.201.7 6.002.7 6.1s-.267 5.9-6.368 7.3a1.94 1.94 0 01-1.934 0C5.167 16.9 3.9 11.1 3.9 11s-.267-5.9.7-6.1zM10.5 8.5V6.7l-3.3 1.5v2.8h3.3v-2.5zm1.5-1.5v2.5h3.3V7.7l-3.3-1.5z" clip-rule="evenodd"></path></svg>
                          </div>
                          <div>
-                             <p class="text-[8px] font-bold text-white/30 tracking-widest uppercase mb-1">Node ID: CN-GZ-{{ rand(1000,9999) }}</p>
-                             <p class="text-[10px] font-bold text-white uppercase group-hover:text-amber-brand transition-colors">Factory Audited</p>
+                             <p class="text-white/30 mb-1 platform-label">Node ID: CN-GZ-{{ rand(1000,9999) }}</p>
+                             <p class="text-white group-hover:text-amber-brand transition-colors platform-label">Factory Audited</p>
                          </div>
                      </div>
                      @endfor
@@ -240,9 +240,9 @@
     <section class="py-32 bg-white relative">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto text-center mb-20" data-aos="fade-up">
-                 <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">Module :: 05</span>
+                 <span class="text-amber-brand mb-6 block platform-label">Module :: 05</span>
                  <h2 class="text-4xl md:text-5xl font-bold font-heading text-navy-dark mb-8">Code-Driven Compliance.</h2>
-                 <p class="text-slate-600 text-lg">
+                 <p class="text-slate-600 platform-body">
                     Human brokers are slow. Our Customs Engine automatically categorizes goods using HS-Code intelligence, calculates duties in real-time, and files digital declarations across 220+ jurisdictions.
                  </p>
             </div>
@@ -256,17 +256,17 @@
                                  <svg class="w-6 h-6 text-amber-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                              </div>
                              <h3 class="text-3xl font-bold mb-6 italic tracking-tighter">Zero-Manual Clearance.</h3>
-                             <p class="text-white/50 text-sm leading-relaxed mb-8">
+                             <p class="text-white/50 mb-8 platform-body">
                                  From T1 documentation to EUR1 certifications, we automate the paperwork that usually stops trade.
                              </p>
                              <div class="flex gap-4">
-                                 <span class="px-4 py-2 bg-white/5 rounded-xl border border-white/5 text-[9px] font-bold uppercase tracking-widest">HS-Classification</span>
-                                 <span class="px-4 py-2 bg-white/5 rounded-xl border border-white/5 text-[9px] font-bold uppercase tracking-widest">VAT Auto-Reclaim</span>
+                                 <span class="px-4 py-2 bg-white/5 rounded-xl border border-white/5 platform-label">HS-Classification</span>
+                                 <span class="px-4 py-2 bg-white/5 rounded-xl border border-white/5 platform-label">VAT Auto-Reclaim</span>
                              </div>
                          </div>
                          <div class="lg:w-1/2 bg-white/5 p-10 rounded-[2.5rem] border border-white/10 font-mono">
                              <div class="text-emerald-500 mb-4 animate-pulse-slow font-bold text-xs uppercase">&gt; INITIALIZING_COMPLIANCE_PROTOCOL</div>
-                             <div class="text-[10px] text-white/40 space-y-1">
+                             <div class="text-white/40 space-y-1 platform-technical">
                                  <div>[AUTH] :: Verified User ID #892</div>
                                  <div>[SCAN] :: Cargo Manifest (GZ-Hub)</div>
                                  <div>[RUN] :: Duty Analysis (NIGERIA/CET)</div>
@@ -285,9 +285,9 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="lg:w-1/2" data-aos="fade-right">
-                     <span class="text-amber-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block font-mono">Module :: 06</span>
+                     <span class="text-amber-brand mb-6 block platform-label">Module :: 06</span>
                      <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-8">Virtual HQ. <br>Local Presence.</h2>
-                     <p class="text-white/50 text-lg mb-10 leading-relaxed">
+                     <p class="text-white/50 mb-10 leading-relaxed platform-body">
                         Control your goods remotely with our high-res virtual warehouse interface. Inspect products via HD video, manage inventory across continents, and trigger shipments with a tap.
                      </p>
                      
