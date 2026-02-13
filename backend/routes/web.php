@@ -25,6 +25,9 @@ Route::post('/marketplace/add', [GlobalMarketplaceController::class, 'addToColle
 
 Route::get('/services', fn() => view('services'))->name('services');
 Route::get('/pricing', fn() => view('pricing'))->name('pricing');
+Route::get('/calculator', fn() => view('calculator'))->name('calculator');
+Route::get('/network', fn() => view('network'))->name('network');
+Route::get('/developers', fn() => view('developers'))->name('developers');
 
 Route::get('/about', function () {
     return view('about');
