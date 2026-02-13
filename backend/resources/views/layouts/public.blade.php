@@ -38,38 +38,31 @@
             </a>
 
             <!-- Desktop Nav -->
-            <div class="hidden lg:flex items-center gap-8">
-                <div class="flex items-center gap-8 text-sm font-medium text-white/80">
+            <div class="hidden lg:flex items-center gap-6">
+                <div class="flex items-center gap-6 text-[13px] font-bold text-white/90">
                     <a href="{{ url('/') }}" class="hover:text-amber-brand transition-colors">Home</a>
-                    
-                    <!-- Platform Dropdown -->
+                    <a href="{{ route('marketplace.index') }}" class="hover:text-amber-brand transition-colors">Marketplace</a>
+                    <a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Services</a>
+
+                    <!-- Solutions Dropdown -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button class="flex items-center gap-1 hover:text-amber-brand transition-colors py-4">
-                            Platform
-                            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <button class="flex items-center gap-1 hover:text-amber-brand transition-colors py-4 uppercase tracking-widest text-[11px] font-black">
+                            Solutions
+                            <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" 
                              x-transition:enter="transition ease-out duration-200"
                              x-transition:enter-start="opacity-0 translate-y-2"
                              x-transition:enter-end="opacity-100 translate-y-0"
-                             class="absolute top-full left-0 w-64 bg-navy-dark border border-white/10 rounded-2xl p-4 shadow-3xl backdrop-blur-3xl z-[100]">
+                             class="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-navy-dark border border-white/10 rounded-2xl p-4 shadow-3xl backdrop-blur-3xl z-[100]">
                             <div class="space-y-2">
-                                <a href="{{ route('marketplace.index') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item">
-                                    <div class="w-8 h-8 rounded-lg bg-amber-brand/10 flex items-center justify-center text-amber-brand">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-bold text-white group-hover/item:text-amber-brand">Marketplace</p>
-                                        <p class="text-[9px] text-white/30">Direct Hub Sourcing</p>
-                                    </div>
-                                </a>
                                 <a href="{{ route('calculator') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item">
                                     <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                     </div>
                                     <div>
                                         <p class="text-xs font-bold text-white group-hover/item:text-blue-400">Calculator</p>
-                                        <p class="text-[9px] text-white/30">Landed Cost Projection</p>
+                                        <p class="text-[9px] text-white/30">Landed Cost Projections</p>
                                     </div>
                                 </a>
                                 <a href="{{ route('network') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item">
@@ -77,8 +70,8 @@
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     </div>
                                     <div>
-                                        <p class="text-xs font-bold text-white group-hover/item:text-emerald-400">Network Map</p>
-                                        <p class="text-[9px] text-white/30">Global Node Visibility</p>
+                                        <p class="text-xs font-bold text-white group-hover/item:text-emerald-400">Global Grid</p>
+                                        <p class="text-[9px] text-white/30">Interactive Node Map</p>
                                     </div>
                                 </a>
                                 <a href="{{ route('developers') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all group/item">
@@ -87,32 +80,47 @@
                                     </div>
                                     <div>
                                         <p class="text-xs font-bold text-white group-hover/item:text-indigo-400">Developers</p>
-                                        <p class="text-[9px] text-white/30">API Infrastructure</p>
+                                        <p class="text-[9px] text-white/30">API Documentation</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <a href="{{ url('/services') }}" class="hover:text-amber-brand transition-colors">Services</a>
-                    <a href="{{ route('pricing') }}" class="hover:text-amber-brand transition-colors">Pricing</a>
-                    <a href="{{ url('/about') }}" class="hover:text-amber-brand transition-colors">Manifesto</a>
+                    <!-- Company Dropdown -->
+                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="flex items-center gap-1 hover:text-amber-brand transition-colors py-4 uppercase tracking-widest text-[11px] font-black">
+                            Company
+                            <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" 
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 translate-y-2"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             class="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-navy-dark border border-white/10 rounded-2xl p-4 shadow-3xl backdrop-blur-3xl z-[100]">
+                            <div class="space-y-2">
+                                <a href="{{ url('/about') }}" class="block p-3 rounded-xl hover:bg-white/5 text-xs font-bold text-white hover:text-amber-brand transition-all">Manifesto</a>
+                                <a href="{{ route('pricing') }}" class="block p-3 rounded-xl hover:bg-white/5 text-xs font-bold text-white hover:text-amber-brand transition-all">Pricing Tiers</a>
+                                <a href="{{ url('/contact') }}" class="block p-3 rounded-xl hover:bg-white/5 text-xs font-bold text-white hover:text-amber-brand transition-all">Contact Hub</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="h-6 w-px bg-white/10"></div>
 
                 <div class="flex items-center gap-4">
-                    <a href="{{ url('/tracking') }}" class="text-white hover:text-amber-brand text-xs font-black uppercase tracking-widest transition-colors flex items-center gap-2">
+                    <a href="{{ url('/tracking') }}" class="text-white hover:text-amber-brand text-[11px] font-black uppercase tracking-widest transition-colors flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full">
                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                          Track
                     </a>
                     @auth
-                        <a href="{{ route('portal.dashboard') }}" class="bg-amber-brand hover:bg-amber-light text-navy-dark px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all hover:shadow-lg hover:shadow-amber-brand/20">
-                            Dashboard
+                        <a href="{{ route('portal.dashboard') }}" class="bg-amber-brand hover:bg-amber-light text-navy-dark px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all shadow-lg shadow-amber-brand/20">
+                            Portal
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-white hover:text-amber-brand text-xs font-bold uppercase tracking-wider transition-colors">Login</a>
-                        <a href="{{ route('register') }}" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-6 py-2.5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all backdrop-blur-sm">
+                        <a href="{{ route('login') }}" class="text-white hover:text-amber-brand text-[11px] font-black uppercase tracking-wider transition-colors">Login</a>
+                        <a href="{{ route('register') }}" class="bg-white/10 hover:bg-white/20 border border-white/10 text-white px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-wider transition-all backdrop-blur-sm">
                             Get Started
                         </a>
                     @endauth
@@ -136,13 +144,15 @@
              x-transition:leave-end="opacity-0 -translate-y-2"
              class="lg:hidden absolute top-full left-0 w-full bg-navy/95 backdrop-blur-xl border-t border-white/5 py-4 px-6 shadow-2xl" x-cloak>
             <div class="flex flex-col gap-4">
-                <a href="{{ url('/') }}" class="text-white font-medium py-2 border-b border-white/5">Home</a>
-                <a href="{{ route('marketplace.index') }}" class="text-white font-medium py-2 border-b border-white/5">Marketplace</a>
-                <a href="{{ url('/services') }}" class="text-white font-medium py-2 border-b border-white/5">Services</a>
-                <a href="{{ route('calculator') }}" class="text-white font-medium py-2 border-b border-white/5">Calculator</a>
-                <a href="{{ route('network') }}" class="text-white font-medium py-2 border-b border-white/5">Network Map</a>
-                <a href="{{ route('developers') }}" class="text-white font-medium py-2 border-b border-white/5">Developers</a>
-                <a href="{{ url('/about') }}" class="text-white font-medium py-2 border-b border-white/5">Manifesto</a>
+                <a href="{{ url('/') }}" class="text-white font-medium py-3 border-b border-white/5">Home</a>
+                <a href="{{ route('marketplace.index') }}" class="text-white font-medium py-3 border-b border-white/5">Marketplace</a>
+                <a href="{{ url('/services') }}" class="text-white font-medium py-3 border-b border-white/5">Services</a>
+                <a href="{{ route('calculator') }}" class="text-white font-medium py-3 border-b border-white/5">Calculator</a>
+                <a href="{{ route('network') }}" class="text-white font-medium py-3 border-b border-white/5">Network Map</a>
+                <a href="{{ route('developers') }}" class="text-white font-medium py-3 border-b border-white/5">Developers</a>
+                <a href="{{ url('/about') }}" class="text-white font-medium py-3 border-b border-white/5">Manifesto</a>
+                <a href="{{ route('pricing') }}" class="text-white font-medium py-3 border-b border-white/5">Pricing</a>
+                <a href="{{ url('/tracking') }}" class="text-white font-medium py-3 border-b border-white/5">Track Shipment</a>
                 
                 <div class="flex flex-col gap-3 mt-4">
                     @auth
