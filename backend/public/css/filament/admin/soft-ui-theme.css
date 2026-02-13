@@ -4,190 +4,99 @@
    ═══════════════════════════════════════════════════ */
 
 :root {
-    /* Core Palette - Deep Space Logistics */
-    --gl-void: #020617;       /* Slate 950 - Main Background */
-    --gl-surface: #0f172a;    /* Slate 900 - Card Background */
-    --gl-surface-up: #1e293b; /* Slate 800 - Input/Hover */
-    
     /* Brand Accents */
     --gl-gold: #C5A059;       /* Primary Brand */
     --gl-gold-dims: rgba(197, 160, 89, 0.15);
     --gl-neon-blue: #3b82f6;  /* Info/Actions */
     --gl-neon-green: #10b981; /* Success/Status */
     --gl-neon-red: #ef4444;   /* Alerts */
-    
-    /* Text */
-    --gl-text-primary: #f8fafc; /* Slate 50 */
-    --gl-text-secondary: #94a3b8; /* Slate 400 */
-    
-    /* Interface */
-    --gl-border: rgba(255, 255, 255, 0.08);
-    --gl-glass: rgba(15, 23, 42, 0.7);
-    --gl-radius: 0.5rem;      /* Tighter radius for technical feel */
 }
 
-/* ════ GLOBAL OVERRIDES ════ */
+/* ════ GLOBAL TEXTURE & BRANDING ════ */
+/* 
+   We rely on Filament's native DARK MODE for base colors (Slate 950/900).
+   We only override for specific texture and brand alignment.
+*/
 
-/* Force dark mode assumption for this theme */
+/* Deep Space Background Texture */
 body.fi-body {
-    background-color: var(--gl-void) !important;
-    color: var(--gl-text-primary) !important;
-    font-family: 'Inter', system-ui, sans-serif !important;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(197, 160, 89, 0.03), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.03), transparent 25%);
+    background-attachment: fixed;
 }
 
 /* ════ SIDEBAR (COMMAND RAIL) ════ */
-.fi-sidebar {
-    background-color: var(--gl-void) !important;
-    border-right: 1px solid var(--gl-border) !important;
-}
-
-.fi-sidebar-header {
-    background-color: var(--gl-void) !important;
-    border-bottom: 1px solid var(--gl-border) !important;
-}
-
-.fi-sidebar-item-button {
-    color: var(--gl-text-secondary) !important;
-    transition: all 0.2s ease !important;
-}
-
-.fi-sidebar-item-button:hover {
-    background-color: var(--gl-surface-up) !important;
-    color: var(--gl-text-primary) !important;
+.fi-sidebar-group-label {
+    font-family: 'JetBrains Mono', monospace !important;
+    letter-spacing: 0.1em !important;
 }
 
 .fi-sidebar-item-active .fi-sidebar-item-button {
     background: linear-gradient(90deg, rgba(197, 160, 89, 0.15) 0%, transparent 100%) !important;
     border-left: 2px solid var(--gl-gold) !important;
-    color: var(--gl-gold) !important;
     border-radius: 0 !important; /* Technical edge */
 }
 
-.fi-sidebar-item-active .fi-sidebar-item-icon {
-    color: var(--gl-gold) !important;
-}
-
-.fi-sidebar-group-label {
-    color: rgba(255,255,255,0.3) !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    letter-spacing: 0.1em !important;
-}
-
-/* ════ TOPBAR (HUD) ════ */
+/* ════ HUD & WIDGETS ════ */
+/* Glassmorphism for Topbar */
 .fi-topbar {
     background-color: rgba(2, 6, 23, 0.8) !important;
     backdrop-filter: blur(12px) !important;
-    border-bottom: 1px solid var(--gl-border) !important;
 }
 
-/* ════ CARDS & PANELS (MODULES) ════ */
-.fi-section,
-.fi-ta-ctn, 
+/* Stats Cards - Tech Look */
 .fi-wi-stats-overview-stat {
-    background-color: var(--gl-surface) !important;
-    border: 1px solid var(--gl-border) !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
-    border-radius: var(--gl-radius) !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* ════ DATA TABLES (GRID) ════ */
-.fi-ta-header-cell {
-    background-color: rgba(30, 41, 59, 0.5) !important;
-    color: var(--gl-text-secondary) !important;
+.fi-wi-stats-overview-stat-value {
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.75rem !important;
+    letter-spacing: -0.05em !important;
+}
+
+/* ════ DATA TABLES ════ */
+/* Monospace Data */
+.fi-ta-header-cell {
+    font-family: 'JetBrains Mono', monospace !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
-}
-
-.fi-ta-row {
-    border-bottom: 1px solid var(--gl-border) !important;
-    transition: background-color 0.15s !important;
-}
-
-.fi-ta-row:hover {
-    background-color: rgba(255,255,255,0.03) !important;
+    font-size: 0.7rem !important;
 }
 
 .fi-ta-cell {
-    color: var(--gl-text-primary) !important;
+    font-variant-numeric: tabular-nums !important;
 }
 
-/* ════ INPUTS (CONTROLS) ════ */
-/* Scoped to main area to verify isolation */
-.fi-main .fi-input-wrp {
-    background-color: var(--gl-void) !important;
-    border: 1px solid var(--gl-border) !important;
-    border-radius: 0.375rem !important;
-    color: white !important;
-}
-
+/* ════ INPUTS & CONTROLS ════ */
+/* 
+   Scope to .fi-main to PROTECT the Login Page 
+   The login page has its own styles, we don't want to break it.
+*/
 .fi-main .fi-input-wrp:focus-within {
     border-color: var(--gl-gold) !important;
     box-shadow: 0 0 0 1px var(--gl-gold) !important;
-    background-color: var(--gl-surface) !important;
 }
 
-.fi-main input, 
-.fi-main select, 
-.fi-main textarea {
-    color: white !important;
-}
-
-/* ════ BUTTONS (ACTIONS) ════ */
-.fi-btn-color-primary {
-    background: var(--gl-gold) !important;
-    color: #000000 !important; /* High contrast on gold */
+.fi-main .fi-btn-color-primary {
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
     border-radius: 0.25rem !important;
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3) !important; /* Glow effect */
-}
-
-.fi-btn-color-primary:hover {
-    background: #d6b068 !important;
-    box-shadow: 0 0 25px rgba(197, 160, 89, 0.5) !important;
-}
-
-.fi-btn-color-gray {
-    background: rgba(255,255,255,0.05) !important;
-    color: var(--gl-text-secondary) !important;
-    border: 1px solid var(--gl-border) !important;
-}
-
-/* ════ BADGES (STATUS INDICATORS) ════ */
-.fi-badge {
-    border-radius: 0.25rem !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    letter-spacing: 0.05em !important;
-}
-
-/* ════ STATS WIDGETS (TELEMETRY) ════ */
-.fi-wi-stats-overview-stat-value {
-    color: white !important;
-    font-family: 'Outfit', sans-serif !important;
-    font-weight: 700 !important;
-}
-
-.fi-wi-stats-overview-stat-label {
-    color: var(--gl-text-secondary) !important;
-    text-transform: uppercase !important;
-    font-size: 0.7rem !important;
-    letter-spacing: 0.1em !important;
 }
 
 /* ════ SCROLLBARS ════ */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: var(--gl-void);
+    background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: var(--gl-surface-up);
-    border-radius: 4px;
+    background: #334155;
+    border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: var(--gl-gold);

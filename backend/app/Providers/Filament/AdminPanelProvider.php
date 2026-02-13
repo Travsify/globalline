@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -28,10 +29,11 @@ class AdminPanelProvider extends PanelProvider
             ->login(\App\Filament\Pages\Auth\CustomLogin::class)
             ->brandName('GlobalLine')
             ->brandLogo(fn () => view('filament.components.logo'))
-            ->darkMode(false)
+            ->darkMode(true)
+            ->defaultThemeMode(\Filament\Enums\ThemeMode::Dark)
             ->colors([
-                'primary' => Color::Indigo,
-                'gray' => Color::Slate,
+                'primary' => Color::hex('#C5A059'), // Brand Gold
+                'gray' => Color::Slate,            // Command Center Slate
                 'danger' => Color::Rose,
                 'info' => Color::Sky,
                 'success' => Color::Emerald,
