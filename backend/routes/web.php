@@ -14,6 +14,7 @@ use App\Http\Controllers\GlobalMarketplaceController;
 
 // Public Routes
 Route::get('/ping', fn() => 'GlobalLine Terminal: Online');
+Route::get('/preview', fn() => view('preview_sections')); // Design Preview
 Route::get('/health', function () {
     return response()->json(['status' => 'operational', 'timestamp' => now(), 'service' => 'GlobalLine Backend']);
 });
