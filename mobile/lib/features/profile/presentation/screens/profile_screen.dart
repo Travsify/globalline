@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile/features/addresses/presentation/screens/address_list_screen.dart';
+import 'package:mobile/features/support/presentation/screens/support_ticket_list_screen.dart';
+import 'package:mobile/features/kyc/presentation/screens/kyc_upload_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -117,10 +120,11 @@ class ProfileScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       _buildMenuItem(context, "My Orders", Icons.history, () => context.push('/orders')),
-                      _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => context.push('/addresses')),
+                      _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddressListScreen()))),
                       _buildMenuItem(context, "Payment Methods", Icons.credit_card, () {}),
                       Divider(color: Colors.white.withOpacity(0.1), height: 32),
-                      _buildMenuItem(context, "Help & Support", Icons.help_outline, () {}),
+                      _buildMenuItem(context, "Help & Support", Icons.help_outline, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportTicketListScreen()))),
+                      _buildMenuItem(context, "KYC Verification", Icons.verified_user_outlined, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const KycUploadScreen()))),
                       _buildMenuItem(context, "Privacy Policy", Icons.privacy_tip_outlined, () {}),
                       const SizedBox(height: 24),
                       TextButton(

@@ -1,24 +1,50 @@
-
 class Address {
-  final String id;
-  final String label; // "Home", "Office"
+  final int? id;
+  final String label;
   final String recipientName;
   final String street;
   final String city;
   final String country;
-  final String zip;
+  final String? zipCode;
   final String phone;
   final bool isDefault;
 
   Address({
-    required this.id,
+    this.id,
     required this.label,
     required this.recipientName,
     required this.street,
     required this.city,
     required this.country,
-    required this.zip,
+    this.zipCode,
     required this.phone,
-    required this.isDefault,
+    this.isDefault = false,
   });
+
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(
+      id: json['id'] is int ? json['id'] : int.tryParse(json['id']?.toString() ?? ''),
+      label: json['label'] ?? '',
+      recipientName: json['recipient_name'] ?? '',
+      street: json['street'] ?? '',
+      city: json['city'] ?? '',
+      country: json['country'] ?? '',
+      zipCode: json['zip_code'],
+      phone: json['phone'] ?? '',
+      isDefault: json['is_default'] == 1 || json['is_default'] == true,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'label': label,
+      'recipient_name': recipientName,
+      'street': street,
+      'city': city,
+      'country': country,
+      'zip_code': zipCode,
+      'phone': phone,
+      'is_default': isDefault,
+    };
+  }
 }

@@ -26,6 +26,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/marketplace/products', [App\Http\Controllers\Api\MarketplaceController::class, 'search']);
     Route::get('/marketplace/products/{id}', [App\Http\Controllers\Api\MarketplaceController::class, 'show']);
 
+    // Addresses
+    Route::apiResource('addresses', App\Http\Controllers\Api\AddressController::class);
+
+    // Support
+    Route::get('/support/tickets', [App\Http\Controllers\Api\SupportTicketController::class, 'index']);
+    Route::post('/support/tickets', [App\Http\Controllers\Api\SupportTicketController::class, 'store']);
+    Route::get('/support/tickets/{supportTicket}', [App\Http\Controllers\Api\SupportTicketController::class, 'show']);
+    Route::post('/support/tickets/{supportTicket}/reply', [App\Http\Controllers\Api\SupportTicketController::class, 'reply']);
+
+    // KYC
+    Route::get('/kyc/verifications', [App\Http\Controllers\Api\KycController::class, 'index']);
+    Route::post('/kyc/upload', [App\Http\Controllers\Api\KycController::class, 'upload']);
+    Route::get('/kyc/status', [App\Http\Controllers\Api\KycController::class, 'status']);
+
     // Enterprise v4 Routes
     Route::group(['prefix' => 'enterprise'], function () {
         Route::get('/wallets', [App\Http\Controllers\Api\EnterpriseController::class, 'wallets']);
