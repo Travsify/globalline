@@ -1,15 +1,15 @@
 
 class User {
-  final String id;
-  final String email;
-  final String name;
-  final String? avatarUrl;
+  final int loyaltyPoints;
+  final String tier;
 
   User({
     required this.id,
     required this.email,
     required this.name,
     this.avatarUrl,
+    this.loyaltyPoints = 0,
+    this.tier = 'bronze',
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -18,6 +18,8 @@ class User {
       email: json['email'] as String,
       name: json['name'] as String,
       avatarUrl: json['avatar_url'] as String?,
+      loyaltyPoints: json['loyalty_points'] ?? 0,
+      tier: json['tier'] ?? 'bronze',
     );
   }
 
@@ -27,6 +29,8 @@ class User {
       'email': email,
       'name': name,
       'avatar_url': avatarUrl,
+      'loyalty_points': loyaltyPoints,
+      'tier': tier,
     };
   }
 }

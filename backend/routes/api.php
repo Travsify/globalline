@@ -40,6 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/kyc/upload', [App\Http\Controllers\Api\KycController::class, 'upload']);
     Route::get('/kyc/status', [App\Http\Controllers\Api\KycController::class, 'status']);
 
+    // Loyalty
+    Route::get('/loyalty/stats', [App\Http\Controllers\Api\LoyaltyController::class, 'getStats']);
+
     // Enterprise v4 Routes
     Route::group(['prefix' => 'enterprise'], function () {
         Route::get('/wallets', [App\Http\Controllers\Api\EnterpriseController::class, 'wallets']);

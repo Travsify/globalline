@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/support/data/repositories/support_repository.dart';
 import 'package:mobile/features/support/presentation/screens/create_ticket_screen.dart';
 import 'package:mobile/features/support/presentation/screens/ticket_detail_screen.dart';
+import 'package:mobile/shared/widgets/status_widgets.dart';
 
 class SupportTicketListScreen extends ConsumerWidget {
   const SupportTicketListScreen({super.key});
@@ -65,8 +66,11 @@ class SupportTicketListScreen extends ConsumerWidget {
                   },
                 ),
               ),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(child: Text('Error: $err')),
+        loading: () => const AppLoadingWidget(),
+        error: (err, stack) => AppErrorWidget(
+          message: err.toString(),
+          onRetry: () => ref.invalidate(ticketsProvider),
+        ),
       ),
     );
   }

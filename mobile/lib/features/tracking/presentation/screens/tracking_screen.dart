@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/logistics/presentation/providers/logistics_provider.dart';
 import 'package:mobile/features/logistics/data/models/logistics_models.dart';
+import 'package:mobile/features/tracking/presentation/screens/global_network_map_screen.dart';
 
 class TrackingScreen extends ConsumerStatefulWidget {
   const TrackingScreen({super.key});
@@ -106,6 +107,31 @@ class _TrackingScreenState extends ConsumerState<TrackingScreen> with SingleTick
             child: Column(
               children: [
                 const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: InkWell(
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const GlobalNetworkMapScreen())),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.white.withOpacity(0.2)),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.public, color: Colors.white, size: 24),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Text('View Live Global Network Map', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                          ),
+                          const Icon(Icons.chevron_right, color: Colors.white),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
                 // Search Bar
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),

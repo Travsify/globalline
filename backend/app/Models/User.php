@@ -18,7 +18,7 @@ class User extends Authenticatable implements FilamentUser
 
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'role', 'wallet_balance', 'is_active',
-        'business_name', 'business_type', 'admin_role',
+        'business_name', 'business_type', 'admin_role', 'loyalty_points', 'tier',
     ];
 
     protected $hidden = [
@@ -33,6 +33,7 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
             'wallet_balance' => 'decimal:2',
             'is_active' => 'boolean',
+            'loyalty_points' => 'integer',
         ];
     }
 

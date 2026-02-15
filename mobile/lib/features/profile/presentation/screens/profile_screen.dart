@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile/features/addresses/presentation/screens/address_list_screen.dart';
 import 'package:mobile/features/support/presentation/screens/support_ticket_list_screen.dart';
 import 'package:mobile/features/kyc/presentation/screens/kyc_upload_screen.dart';
+import 'package:mobile/features/loyalty/presentation/screens/loyalty_dashboard_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -121,6 +122,7 @@ class ProfileScreen extends ConsumerWidget {
                     children: [
                       _buildMenuItem(context, "My Orders", Icons.history, () => context.push('/orders')),
                       _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddressListScreen()))),
+                      _buildMenuItem(context, "Loyalty & Tiers", Icons.stars, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LoyaltyDashboardScreen()))),
                       _buildMenuItem(context, "Payment Methods", Icons.credit_card, () {}),
                       Divider(color: Colors.white.withOpacity(0.1), height: 32),
                       _buildMenuItem(context, "Help & Support", Icons.help_outline, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportTicketListScreen()))),
