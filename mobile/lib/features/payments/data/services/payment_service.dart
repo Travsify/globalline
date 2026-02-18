@@ -64,9 +64,9 @@ class PaymentService {
       publicKey: publicKey,
       context: context,
       secretKey: 'not_needed_for_client_side', // Usually just public key needed
-      email: email,
+      customerEmail: email,
       amount: (amount * 100).toInt().toString(), // String in kobo/cents usually
-      ref: reference,
+      reference: reference,
       onClosed: () {
         debugPrint('Paystack closed');
       },
