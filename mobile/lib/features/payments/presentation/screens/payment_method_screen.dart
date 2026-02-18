@@ -72,14 +72,13 @@ class _PaymentMethodScreenState extends ConsumerState<PaymentMethodScreen> {
         );
       } else if (gateway == 'paystack') {
         if (!mounted) return;
-        await paymentService.initializePaystack(data['public_key']);
-        if (!mounted) return;
         await paymentService.processPaystackPayment(
           context: context,
           accessCode: data['access_code'],
           reference: data['reference'],
           email: widget.email,
           amount: widget.amount,
+          publicKey: data['public_key'],
         );
       }
       

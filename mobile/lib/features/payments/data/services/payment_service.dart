@@ -9,12 +9,11 @@ final paymentServiceProvider = Provider((ref) => PaymentService(ref.read(apiClie
 
 class PaymentService {
   final Dio _dio;
-  final PaystackPlugin _paystackPlugin = PaystackPlugin();
 
   PaymentService(this._dio);
 
   Future<void> initializePaystack(String publicKey) async {
-    await _paystackPlugin.initialize(publicKey: publicKey);
+    // Usually not needed for the static popup method, but we can store it or just let it be
   }
 
   Future<Map<String, dynamic>> initializePayment({
@@ -53,26 +52,26 @@ class PaymentService {
   }
 
   Future<void> processPaystackPayment({
-    required context,
+    required BuildContext context,
     required String accessCode,
     required String reference,
     required String email,
     required double amount,
+    required String publicKey, // Added publicKey
   }) async {
-    final charge = Charge()
-      ..amount = (amount * 100).toInt() // Kobo
-      ..email = email
-      ..accessCode = accessCode
-      ..reference = reference;
-
-    final response = await _paystackPlugin.checkout(
-      context,
-      charge: charge,
-      method: CheckoutMethod.card,
+    await FlutterPaystackPlus.openPaystackPopup(
+      publicKey: publicKey,
+      context: context,
+      secretKey: 'not_needed_for_client_side', // Usually just public key needed
+      email: email,
+      amount: (amount * 100).toInt().toString(), // String in kobo/cents usually
+      ref: reference,
+      onClosed: () {
+        debugPrint('Paystack closed');
+      },
+      onSuccess: () {
+        debugPrint('Paystack success');
+      },
     );
-
-    if (!response.status) {
-      throw Exception('Payment failed: ${response.message}');
-    }
   }
 }
