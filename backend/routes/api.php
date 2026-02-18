@@ -60,6 +60,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/payment/initialize', [App\Http\Controllers\Api\PaymentController::class, 'initialize']);
     Route::post('/payment/verify', [App\Http\Controllers\Api\PaymentController::class, 'verify']);
 
+    // Virtual Shipping Addresses (Global)
+    Route::get('/logistics/virtual-addresses/regions', [App\Http\Controllers\Api\VirtualAddressController::class, 'getRegions']);
+    Route::get('/logistics/virtual-addresses/my', [App\Http\Controllers\Api\VirtualAddressController::class, 'myAddresses']);
+    Route::post('/logistics/virtual-addresses/request', [App\Http\Controllers\Api\VirtualAddressController::class, 'requestAddress']);
+
+    // Admin Logistics Settings (Monetization & Control)
+    Route::group(['middleware' => 'admin', 'prefix' => 'admin/logistics'], function () {
+        Route::get('/settings', [App\Http\Controllers\Admin\LogisticsController::class, 'index']);
+        Route::post('/settings', [App\Http\Controllers\Admin\LogisticsController::class, 'update']);
+    });
+
     // Enterprise v4 Routes
     Route::group(['prefix' => 'enterprise'], function () {
         Route::get('/wallets', [App\Http\Controllers\Api\EnterpriseController::class, 'wallets']);
