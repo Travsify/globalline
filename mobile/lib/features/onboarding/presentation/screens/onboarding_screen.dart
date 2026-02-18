@@ -367,17 +367,23 @@ class _OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 36),
-      child: FadeTransition(
-        opacity: fadeAnimation,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Hero Icon with glowing rings
-            Stack(
-              alignment: Alignment.center,
-              children: [
+    return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 36),
+        child: FadeTransition(
+          opacity: fadeAnimation,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min, // Important for scrolling
+            children: [
+              const SizedBox(height: 20), // Top spacing
+              // Hero Icon with glowing rings
+              Stack(
+                alignment: Alignment.center,
+                children: [
+// ... (rest of the icon stack logic remains same, just ensuring it's inside scroll)
+
                 // Outer glow ring
                 Container(
                   width: 200,
@@ -494,6 +500,7 @@ class _OnboardingPage extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }

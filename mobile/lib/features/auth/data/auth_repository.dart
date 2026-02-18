@@ -7,7 +7,7 @@ import './models/auth_models.dart';
 
 abstract class AuthRepository {
   Future<AuthResponse> login(String email, String password);
-  Future<void> register(String name, String email, String password, String passwordConfirmation);
+  Future<AuthResponse> register(String name, String email, String password, String passwordConfirmation);
   Future<void> logout();
   Future<void> forgotPassword(String email);
   Future<void> resetPassword(String email, String token, String password, String passwordConfirmation);
@@ -40,7 +40,7 @@ class RealAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> register(String name, String email, String password, String passwordConfirmation) async {
+  Future<AuthResponse> register(String name, String email, String password, String passwordConfirmation) async {
     try {
       final response = await _dio.post('auth/register', data: {
         'name': name,
@@ -51,6 +51,7 @@ class RealAuthRepository implements AuthRepository {
       
       final authResponse = AuthResponse.fromJson(response.data);
       await _storage.saveToken(authResponse.token);
+      return authResponse;
     } on DioException catch (e) {
       throw e.error!;
     }

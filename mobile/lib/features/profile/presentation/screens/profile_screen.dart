@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
+import 'package:mobile/features/wallet/presentation/providers/wallet_provider.dart';
+import 'package:mobile/features/orders/data/repositories/order_repository.dart';
 import 'package:mobile/features/addresses/presentation/screens/address_list_screen.dart';
 import 'package:mobile/features/support/presentation/screens/support_ticket_list_screen.dart';
 import 'package:mobile/features/kyc/presentation/screens/kyc_upload_screen.dart';
@@ -9,8 +12,14 @@ import 'package:mobile/features/loyalty/presentation/screens/loyalty_dashboard_s
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authControllerProvider);
+    final user = authState.user;
+    final walletAsync = ref.watch(walletControllerProvider);
+    final ordersAsync = ref.watch(ordersProvider);
+
     return Scaffold(
       backgroundColor: const Color(0xFF002366),
       extendBodyBehindAppBar: true,
@@ -22,7 +31,7 @@ class ProfileScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined, color: Colors.white),
-            onPressed: () {},
+            onPressed: () => context.push('/notifications'),
           ),
           IconButton(
             icon: const Icon(Icons.settings_outlined, color: Colors.white),
@@ -68,16 +77,24 @@ class ProfileScreen extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        child: const CircleAvatar(
+                        child: CircleAvatar(
                           radius: 50,
                           backgroundColor: Colors.white,
-                          child: Icon(Icons.person, size: 60, color: Color(0xFF002366)),
+                          backgroundImage: user != null && user.avatarUrl != null && user.avatarUrl!.isNotEmpty
+                              ? NetworkImage(user.avatarUrl!)
+                              : null,
+                          child: user == null || user.avatarUrl == null || user.avatarUrl!.isEmpty
+                              ? Text(
+                                  user?.name.isNotEmpty == true ? user!.name[0].toUpperCase() : '?',
+                                  style: const TextStyle(fontSize: 40, color: Color(0xFF002366), fontWeight: FontWeight.bold),
+                                )
+                              : null,
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        "John Doe",
-                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Outfit'),
+                      Text(
+                        user?.name ?? "Guest",
+                        style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Outfit'),
                       ),
                       const SizedBox(height: 8),
                       Container(
@@ -86,9 +103,9 @@ class ProfileScreen extends ConsumerWidget {
                           color: const Color(0xFFFFD700),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Text(
-                          "PRO MEMBER",
-                          style: TextStyle(color: Color(0xFF002366), fontWeight: FontWeight.bold, fontSize: 12),
+                        child: Text(
+                          (user?.tier ?? "MEMBER").toUpperCase(),
+                          style: const TextStyle(color: Color(0xFF002366), fontWeight: FontWeight.bold, fontSize: 12),
                         ),
                       ),
                     ],
@@ -101,11 +118,27 @@ class ProfileScreen extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Row(
                     children: [
-                      _buildStatCard("Shipments", "12", Icons.local_shipping),
+                      _buildStatCard(
+                        "Shipments", 
+                        ordersAsync.when(
+                          data: (orders) => orders.length.toString(), 
+                          loading: () => "...", 
+                          error: (_,__) => "0"
+                        ), 
+                        Icons.local_shipping
+                      ),
                       const SizedBox(width: 16),
-                      _buildStatCard("Wallet", "\$1.2k", Icons.account_balance_wallet),
+                      _buildStatCard(
+                        "Wallet", 
+                        walletAsync.when(
+                          data: (w) => "\$${w.balance.toStringAsFixed(2)}", 
+                          loading: () => "...", 
+                          error: (_,__) => "\$0.00"
+                        ), 
+                        Icons.account_balance_wallet
+                      ),
                       const SizedBox(width: 16),
-                      _buildStatCard("Points", "450", Icons.star),
+                      _buildStatCard("Points", "${user?.loyaltyPoints ?? 0}", Icons.star),
                     ],
                   ),
                 ),
@@ -125,16 +158,17 @@ class ProfileScreen extends ConsumerWidget {
                       _buildMenuItem(context, "Change Password", Icons.lock_outline, () => context.push('/profile/password')),
                       _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddressListScreen()))),
                       _buildMenuItem(context, "Loyalty & Tiers", Icons.stars, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LoyaltyDashboardScreen()))),
-                      _buildMenuItem(context, "Payment Methods", Icons.credit_card, () {}),
+                      // Temporary navigation to existing PaymentMethodScreen for management (or TODO: create separate list)
+                      _buildMenuItem(context, "Payment Methods", Icons.credit_card, () => context.push('/checkout/payment', extra: {'amount': 0.0, 'currency': 'USD', 'email': user?.email ?? '', 'isFunding': true})), 
                       Divider(color: Colors.white.withOpacity(0.1), height: 32),
                       _buildMenuItem(context, "Help & Support", Icons.help_outline, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportTicketListScreen()))),
                       _buildMenuItem(context, "KYC Verification", Icons.verified_user_outlined, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const KycUploadScreen()))),
-                      _buildMenuItem(context, "Privacy Policy", Icons.privacy_tip_outlined, () {}),
+                      _buildMenuItem(context, "Privacy Policy", Icons.privacy_tip_outlined, () => _showPrivacyPolicy(context)),
                       const SizedBox(height: 24),
                       TextButton(
-                        onPressed: () {
-                           // Logout logic would go here
-                           context.go('/auth/login');
+                        onPressed: () async {
+                           await ref.read(authControllerProvider.notifier).logout();
+                           if (context.mounted) context.go('/login');
                         },
                         child: Text("Log Out", style: TextStyle(color: Colors.red[300], fontSize: 16)),
                       )
@@ -149,7 +183,34 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
+  void _showPrivacyPolicy(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text("Privacy Policy", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF002366))),
+            const SizedBox(height: 16),
+            const Text("At GlobalLine, we take your privacy seriously. This is a placeholder for the full privacy policy content.", style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF002366), foregroundColor: Colors.white),
+              child: const Text("Close"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildStatCard(String label, String value, IconData icon) {
+
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),

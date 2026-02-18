@@ -15,8 +15,8 @@ class AuthController extends Notifier<AuthState> {
   Future<bool> login(String email, String password) async {
     state = state.copyWith(isLoading: true, error: null);
     try {
-      await _repository.login(email, password);
-      state = state.copyWith(isLoading: false, isAuthenticated: true);
+      final response = await _repository.login(email, password);
+      state = state.copyWith(isLoading: false, isAuthenticated: true, user: response.user);
       return true;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
@@ -27,8 +27,8 @@ class AuthController extends Notifier<AuthState> {
   Future<bool> register(String name, String email, String password, String passwordConfirmation) async {
     state = state.copyWith(isLoading: true, error: null);
     try {
-      await _repository.register(name, email, password, passwordConfirmation);
-      state = state.copyWith(isLoading: false, isAuthenticated: true);
+      final response = await _repository.register(name, email, password, passwordConfirmation);
+      state = state.copyWith(isLoading: false, isAuthenticated: true, user: response.user);
       return true;
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
