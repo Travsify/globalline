@@ -34,17 +34,7 @@ class _PaymentMethodScreenState extends ConsumerState<PaymentMethodScreen> {
       
       if (gateway == 'wallet') {
           // Process Wallet Payment (Deduction)
-          final walletRepo = ref.read(walletRepositoryProvider); // Access via provider, need to ensure it's available or use dio directly
-          // For simplicity/speed using apiClient/dio via provider if repository not exposed here, 
-          // or better: utilize the walletController which uses repository.
-          // Let's assume we can access the repository or call API directly.
-          // Since we don't have walletRepositoryProvider readily imported, let's use the apiClient from paymentService or similar.
-          // Actually, let's use the paymentService to handle this "wallet" gateway logic if we extend it, 
-          // OR better, just call the API endpoint directly here using the same dio instance or ref.
-          
-          // To keep it clean, let's assume we can add `payWithWallet` to PaymentService or use Dio.
-          // Quickest valid way:
-          final dio = ref.read(apiClientProvider);
+          final dio = ref.read(dioProvider);
           await dio.post('wallet/deduct', data: {
             'amount': widget.amount,
             'description': 'Payment for Order',
@@ -84,7 +74,7 @@ class _PaymentMethodScreenState extends ConsumerState<PaymentMethodScreen> {
       
       // 3. Post-Process: If this was a Funding operation, credit the wallet
       if (widget.isFunding) {
-         final dio = ref.read(apiClientProvider);
+         final dio = ref.read(dioProvider);
          await dio.post('wallet/fund', data: {
             'amount': widget.amount,
             'currency': widget.currency, // Send selected currency

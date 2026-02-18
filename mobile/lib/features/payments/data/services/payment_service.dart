@@ -6,7 +6,7 @@ import 'package:flutter_paystack_plus/flutter_paystack_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/core/network/api_client.dart';
 
-final paymentServiceProvider = Provider((ref) => PaymentService(ref.read(apiClientProvider)));
+final paymentServiceProvider = Provider((ref) => PaymentService(ref.read(dioProvider)));
 
 class PaymentService {
   final Dio _dio;

@@ -258,6 +258,11 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     await Future.delayed(const Duration(seconds: 1));
 
     if (mounted) {
+      final total = ref.read(cartTotalProvider);
+      final symbol = ref.read(cartSymbolProvider);
+      final shippingFee = symbol == '₦' ? 22500.0 : (symbol == 'TL' ? 450.0 : 15.0);
+      final grandTotal = total + shippingFee;
+
       ref.read(cartProvider.notifier).clearCart();
       setState(() => _isLoading = false);
 

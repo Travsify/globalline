@@ -35,7 +35,7 @@ class _PaySupplierScreenState extends ConsumerState<PaySupplierScreen> {
     setState(() => _isLoading = true);
 
     try {
-      final dio = ref.read(apiClientProvider);
+      final dio = ref.read(dioProvider);
       
       final payload = {
         'amount': double.parse(_amountController.text),
