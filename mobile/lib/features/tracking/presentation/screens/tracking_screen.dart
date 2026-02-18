@@ -11,21 +11,24 @@ class TrackingScreen extends ConsumerStatefulWidget {
   ConsumerState<TrackingScreen> createState() => _TrackingScreenState();
 }
 
-class _TrackingScreenState extends ConsumerState<TrackingScreen> with SingleTickerProviderStateMixin {
+class _TrackingScreenState extends ConsumerState<TrackingScreen> with TickerProviderStateMixin {
   final _searchController = TextEditingController();
   String? _trackingNumber;
   late AnimationController _animationController;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 1000));
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _tabController.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -132,75 +135,97 @@ class _TrackingScreenState extends ConsumerState<TrackingScreen> with SingleTick
                   ),
                 ),
                 const SizedBox(height: 12),
-                // Search Bar
+                // Tab Bar
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Container(
+                    padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.white.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
                     ),
-                    child: TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: 'Enter Tracking Number (e.g., GL123...)',
-                        hintStyle: TextStyle(color: Colors.grey[400]),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                        suffixIcon: Container(
-                          margin: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFD700),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(Icons.search, color: Color(0xFF002366)),
-                            onPressed: () => _handleSearch(_searchController.text),
-                          ),
-                        ),
+                    child: TabBar(
+                      controller: _tabController,
+                      indicatorColor: Colors.transparent,
+                      dividerColor: Colors.transparent,
+                      labelColor: const Color(0xFF002366),
+                      unselectedLabelColor: Colors.white,
+                      indicator: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      onSubmitted: _handleSearch,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      tabs: const [
+                        Tab(text: 'Track'),
+                        Tab(text: 'Warehouse'),
+                      ],
                     ),
                   ),
                 ),
-                
-                const SizedBox(height: 32),
-                
+                const SizedBox(height: 12),
+                // Search Bar
                 Expanded(
-                  child: _trackingNumber != null && _trackingNumber!.isNotEmpty
-                      ? Consumer(
-                          builder: (context, ref, child) {
-                            final trackingAsync = ref.watch(shipmentTrackingProvider(_trackingNumber!));
-
-                            return trackingAsync.when(
-                              data: (shipment) => _TrackingDetails(
-                                shipment: shipment,
-                                animation: _animationController,
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      // Tab 1: Track Shipment
+                      Column(
+                        children: [
+                          // Search Bar
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
                               ),
-                              loading: () => const Center(
-                                child: CircularProgressIndicator(color: Color(0xFF002366)),
-                              ),
-                              error: (err, stack) => Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.error_outline, size: 48, color: Colors.red),
-                                    const SizedBox(height: 16),
-                                    Text('Tracking Failed: $err', style: const TextStyle(color: Colors.red)),
-                                  ],
+                              child: TextField(
+                                controller: _searchController,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter Tracking Number',
+                                  hintStyle: TextStyle(color: Colors.grey[400]),
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(Icons.search, color: Color(0xFF002366)),
+                                    onPressed: () => _handleSearch(_searchController.text),
+                                  ),
                                 ),
+                                onSubmitted: _handleSearch,
                               ),
-                            );
-                          },
-                        )
-                      : const _EmptyState(),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          Expanded(
+                            child: _trackingNumber != null && _trackingNumber!.isNotEmpty
+                                ? Consumer(
+                                    builder: (context, ref, child) {
+                                      final trackingAsync = ref.watch(shipmentTrackingProvider(_trackingNumber!));
+                                      return trackingAsync.when(
+                                        data: (shipment) => _TrackingDetails(
+                                          shipment: shipment,
+                                          animation: _animationController,
+                                        ),
+                                        loading: () => const Center(child: CircularProgressIndicator()),
+                                        error: (err, stack) => Center(child: Text('Error: $err')),
+                                      );
+                                    },
+                                  )
+                                : const _EmptyState(),
+                          ),
+                        ],
+                      ),
+                      // Tab 2: My Warehouse
+                      const _WarehousePackages(),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -382,6 +407,129 @@ class _TrackingDetails extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _WarehousePackages extends ConsumerWidget {
+  const _WarehousePackages();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.info_outline, color: Color(0xFF002366)),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    'Packages received at your Global Suites will appear here for forwarding.',
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          Expanded(
+            child: ListView(
+              children: const [
+                _WarehouseItem(
+                  id: 'PKG-US-9982',
+                  origin: 'Amazon US',
+                  weight: '2.5 kg',
+                  status: 'Received',
+                  arrivalDate: '2026-02-18',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WarehouseItem extends StatelessWidget {
+  final String id;
+  final String origin;
+  final String weight;
+  final String status;
+  final String arrivalDate;
+
+  const _WarehouseItem({
+    required this.id,
+    required this.origin,
+    required this.weight,
+    required this.status,
+    required this.arrivalDate,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(origin, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Text(status, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              const Icon(Icons.inventory_2_outlined, size: 16, color: Colors.grey),
+              const SizedBox(width: 8),
+              Text(id, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              const Spacer(),
+              Text(weight, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            ],
+          ),
+          const Divider(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Arrival Date', style: TextStyle(color: Colors.grey[500], fontSize: 10)),
+                  Text(arrivalDate, style: const TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF002366),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                child: const Text('Forward'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
