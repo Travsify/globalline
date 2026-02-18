@@ -15,12 +15,13 @@ final dioProvider = Provider((ref) {
   
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://globalline-api-debug.loca.lt/api', 
+      baseUrl: 'https://globalline.onrender.com/api/', 
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'bypass-tunnel-reminder': 'true',
       },
     ),
   );
@@ -36,10 +37,27 @@ final dioProvider = Provider((ref) {
     },
     onResponse: (response, handler) {
       ref.read(loggerProvider).i('Response: ${response.statusCode}');
+      
+      // Defensive check: if we expect JSON but get something else (like an HTML string)
+      if (response.requestOptions.responseType == ResponseType.json || 
+          response.headers.value('content-type')?.contains('application/json') == true) {
+        if (response.data is! Map && response.data is! List) {
+          return handler.reject(DioException(
+            requestOptions: response.requestOptions,
+            response: response,
+            type: DioExceptionType.badResponse,
+            error: ResponseException('Server returned invalid data format. Expected JSON.'),
+          ));
+        }
+      }
       return handler.next(response);
     },
     onError: (DioException e, handler) {
       ref.read(loggerProvider).e('Error: ${e.message}');
+      if (e.response != null) {
+        ref.read(loggerProvider).e('Response body: ${e.response?.data}');
+        ref.read(loggerProvider).e('Response headers: ${e.response?.headers}');
+      }
       final exception = _mapDioError(e);
       return handler.next(DioException(
         requestOptions: e.requestOptions,

@@ -59,5 +59,5 @@ final cartTotalProvider = Provider<double>((ref) {
 
 final cartSymbolProvider = Provider<String>((ref) {
   final cart = ref.watch(cartProvider);
-  return cart.isNotEmpty ? cart.first.symbol : '$';
+  return cart.isNotEmpty ? cart.first.symbol : '\$';
 });

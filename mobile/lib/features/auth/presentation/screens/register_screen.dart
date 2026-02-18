@@ -54,6 +54,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> with SingleTick
         _nameController.text,
         _emailController.text,
         _passwordController.text,
+        _confirmPasswordController.text,
       );
       
       if (success && mounted) {

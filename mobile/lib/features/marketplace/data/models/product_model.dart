@@ -38,7 +38,7 @@ class Product {
       price: (json['price'] as num).toDouble(),
       baseUsdPrice: (json['base_usd_price'] as num).toDouble(),
       displayPrice: (json['display_price'] as num).toDouble(),
-      symbol: json['symbol'] as String? ?? '$',
+      symbol: json['symbol'] as String? ?? '\$',
       currency: json['currency'] as String,
       supplierName: json['supplier_name'] as String,
       moq: json['moq'] as String,

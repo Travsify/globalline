@@ -16,25 +16,25 @@ class RealAddressRepository implements AddressRepository {
 
   @override
   Future<List<Address>> getAddresses() async {
-    final response = await _dio.get('/addresses');
+    final response = await _dio.get('addresses');
     return (response.data as List).map((e) => Address.fromJson(e)).toList();
   }
 
   @override
   Future<Address> createAddress(Address address) async {
-    final response = await _dio.post('/addresses', data: address.toJson());
+    final response = await _dio.post('addresses', data: address.toJson());
     return Address.fromJson(response.data);
   }
 
   @override
   Future<Address> updateAddress(Address address) async {
-    final response = await _dio.put('/addresses/${address.id}', data: address.toJson());
+    final response = await _dio.put('addresses/${address.id}', data: address.toJson());
     return Address.fromJson(response.data);
   }
 
   @override
   Future<void> deleteAddress(int id) async {
-    await _dio.delete('/addresses/$id');
+    await _dio.delete('addresses/$id');
   }
 }
 

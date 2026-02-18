@@ -28,7 +28,7 @@ class WalletScreen extends ConsumerWidget {
                   children: [
                     _BalanceCard(label: "USD Balance", amount: "\$1,245.00", color: Colors.blue[900]!),
                     _BalanceCard(label: "CNY Balance", amount: "¥8,450.00", color: Colors.red[900]!),
-                    _BalanceCard(label: "NGN Balance", amount: "₦1,800,000", color: Colors.emerald[900]!),
+                    _BalanceCard(label: "NGN Balance", amount: "₦1,800,000", color: Colors.green[900]!),
                   ],
                 ),
               ),

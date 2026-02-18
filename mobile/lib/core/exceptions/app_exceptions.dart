@@ -25,3 +25,7 @@ class ValidationException extends AppException {
   final Map<String, dynamic>? errors;
   ValidationException(String message, [this.errors]) : super(message, 'validation_error');
 }
+
+class ResponseException extends AppException {
+  ResponseException(String message) : super(message, 'response_error');
+}

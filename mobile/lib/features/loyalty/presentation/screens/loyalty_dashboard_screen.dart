@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/loyalty/data/repositories/loyalty_repository.dart';
+import 'package:mobile/features/loyalty/data/models/loyalty_model.dart';
 
 class LoyaltyDashboardScreen extends ConsumerWidget {
   const LoyaltyDashboardScreen({super.key});
@@ -18,7 +19,7 @@ class LoyaltyDashboardScreen extends ConsumerWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: statsAsync.when(
-        data: (stats) => SingleChildScrollView(
+        data: (LoyaltyStats stats) => SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +44,7 @@ class LoyaltyDashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildTierCard(dynamic stats) {
+  Widget _buildTierCard(LoyaltyStats stats) {
     final tierColor = _getTierColor(stats.tier);
     return Container(
       padding: const EdgeInsets.all(24),
@@ -78,7 +79,7 @@ class LoyaltyDashboardScreen extends ConsumerWidget {
             children: [
               Text('${stats.points} Points', style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
               if (stats.nextTier != null)
-                Text('Next: ${stats.nextTier.toUpperCase()}', style: const TextStyle(color: Colors.white70, fontSize: 14)),
+                Text('Next: ${stats.nextTier?.toUpperCase()}', style: const TextStyle(color: Colors.white70, fontSize: 14)),
             ],
           ),
           const SizedBox(height: 12),
@@ -94,7 +95,7 @@ class LoyaltyDashboardScreen extends ConsumerWidget {
           if (stats.pointsNeeded > 0)
             Padding(
               padding: const EdgeInsets.only(top: 12),
-              child: Text('Ship more to earn ${stats.pointsNeeded} more points for ${stats.nextTier}!', 
+              child: Text('Ship more to earn ${stats.pointsNeeded} more points for ${stats.nextTier ?? ''}!', 
                   style: const TextStyle(color: Colors.white70, fontSize: 13, fontStyle: FontStyle.italic)),
             ),
         ],

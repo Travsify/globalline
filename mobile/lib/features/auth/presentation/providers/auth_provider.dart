@@ -24,10 +24,10 @@ class AuthController extends Notifier<AuthState> {
     }
   }
 
-  Future<bool> register(String name, String email, String password) async {
+  Future<bool> register(String name, String email, String password, String passwordConfirmation) async {
     state = state.copyWith(isLoading: true, error: null);
     try {
-      await _repository.register(name, email, password);
+      await _repository.register(name, email, password, passwordConfirmation);
       state = state.copyWith(isLoading: false, isAuthenticated: true);
       return true;
     } catch (e) {

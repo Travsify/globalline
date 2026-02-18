@@ -1,6 +1,7 @@
 import 'package:mobile/features/marketplace/presentation/providers/currency_provider.dart';
 import 'package:mobile/features/marketplace/presentation/screens/ai_sourcing_screen.dart';
-import 'package:mobile/features/marketplace/data/models/marketplace_models.dart';
+import 'package:mobile/features/marketplace/presentation/providers/marketplace_provider.dart';
+import 'package:mobile/features/marketplace/data/models/product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

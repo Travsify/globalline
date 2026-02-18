@@ -113,7 +113,7 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> {
           ),
           boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5))],
         ),
-        child: Text(text, style: TextStyle(color: isAi ? Colors.black87 : Colors.white, fontSize: 14, lineHeight: 1.5)),
+        child: Text(text, style: TextStyle(color: isAi ? Colors.black87 : Colors.white, fontSize: 14, height: 1.5)),
       ),
     );
   }

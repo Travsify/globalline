@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -22,6 +23,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $isJson = $request->wantsJson() || $request->is('api/*');
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -30,13 +33,17 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
             $request->session()->regenerate();
 
-            if ($request->wantsJson()) {
+            if ($isJson) {
                 $user = Auth::user();
                 $token = $user->createToken('auth_token')->plainTextToken;
                 return response()->json(['token' => $token, 'user' => $user]);
             }
 
             return redirect()->intended('/portal/dashboard');
+        }
+
+        if ($isJson) {
+            return response()->json(['message' => 'The provided credentials are incorrect.'], 422);
         }
 
         throw ValidationException::withMessages([
@@ -46,6 +53,8 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $isJson = $request->wantsJson() || $request->is('api/*');
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -55,23 +64,25 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'business_name' => $request->business_name,
-            'business_type' => $request->business_type,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-        ]);
+        return DB::transaction(function () use ($request, $isJson) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'business_name' => $request->business_name,
+                'business_type' => $request->business_type,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+            ]);
 
-        Auth::login($user);
+            Auth::login($user);
 
-        if ($request->wantsJson()) {
-            $token = $user->createToken('auth_token')->plainTextToken;
-            return response()->json(['token' => $token, 'user' => $user]);
-        }
+            if ($isJson) {
+                $token = $user->createToken('auth_token')->plainTextToken;
+                return response()->json(['token' => $token, 'user' => $user]);
+            }
 
-        return redirect('/portal/dashboard');
+            return redirect('/portal/dashboard');
+        });
     }
 
     public function logout(Request $request)

@@ -16,13 +16,13 @@ class RealSupportRepository implements SupportRepository {
 
   @override
   Future<List<SupportTicket>> getTickets() async {
-    final response = await _dio.get('/support/tickets');
+    final response = await _dio.get('support/tickets');
     return (response.data as List).map((e) => SupportTicket.fromJson(e)).toList();
   }
 
   @override
   Future<SupportTicket> createTicket(String subject, String category, String priority, String message) async {
-    final response = await _dio.post('/support/tickets', data: {
+    final response = await _dio.post('support/tickets', data: {
       'subject': subject,
       'category': category,
       'priority': priority,
@@ -33,13 +33,13 @@ class RealSupportRepository implements SupportRepository {
 
   @override
   Future<SupportTicket> getTicketDetails(int id) async {
-    final response = await _dio.get('/support/tickets/$id');
+    final response = await _dio.get('support/tickets/$id');
     return SupportTicket.fromJson(response.data);
   }
 
   @override
   Future<SupportMessage> replyToTicket(int ticketId, String message) async {
-    final response = await _dio.post('/support/tickets/$ticketId/reply', data: {
+    final response = await _dio.post('support/tickets/$ticketId/reply', data: {
       'message': message,
     });
     return SupportMessage.fromJson(response.data);

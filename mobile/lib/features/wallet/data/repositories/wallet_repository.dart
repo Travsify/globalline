@@ -14,7 +14,7 @@ class RealWalletRepository implements WalletRepository {
   @override
   Future<Wallet> getWallet() async {
     try {
-      final response = await _dio.get('/wallet/balance');
+      final response = await _dio.get('wallet/balance');
       return Wallet.fromJson(response.data);
     } on DioException catch (e) {
       throw e.error!;
@@ -24,7 +24,7 @@ class RealWalletRepository implements WalletRepository {
   @override
   Future<void> fundWallet(double amount) async {
     try {
-      await _dio.post('/wallet/fund', data: {'amount': amount});
+      await _dio.post('wallet/fund', data: {'amount': amount});
     } on DioException catch (e) {
       throw e.error!;
     }

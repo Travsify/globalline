@@ -13,7 +13,7 @@ class RealLoyaltyRepository implements LoyaltyRepository {
 
   @override
   Future<LoyaltyStats> getStats() async {
-    final response = await _dio.get('/loyalty/stats');
+    final response = await _dio.get('loyalty/stats');
     return LoyaltyStats.fromJson(response.data);
   }
 }

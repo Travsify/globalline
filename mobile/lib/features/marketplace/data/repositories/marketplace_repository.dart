@@ -14,7 +14,7 @@ class RealMarketplaceRepository implements MarketplaceRepository {
   @override
   Future<List<Product>> searchProducts(String query, {String currency = 'USD'}) async {
     try {
-      final response = await _dio.get('/marketplace/products', queryParameters: {
+      final response = await _dio.get('marketplace/products', queryParameters: {
         'query': query,
         'currency': currency,
       });
@@ -29,7 +29,7 @@ class RealMarketplaceRepository implements MarketplaceRepository {
   @override
   Future<Product> getProductDetails(String id, {String currency = 'USD'}) async {
     try {
-      final response = await _dio.get('/marketplace/products/$id', queryParameters: {
+      final response = await _dio.get('marketplace/products/$id', queryParameters: {
         'currency': currency,
       });
       return Product.fromJson(response.data);

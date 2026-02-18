@@ -30,7 +30,7 @@ class RealLogisticsRepository implements LogisticsRepository {
     required double weight,
   }) async {
     try {
-      final response = await _dio.get('/logistics/rates', queryParameters: {
+      final response = await _dio.get('logistics/rates', queryParameters: {
         'origin': origin,
         'destination': destination,
         'weight': weight,
@@ -52,7 +52,7 @@ class RealLogisticsRepository implements LogisticsRepository {
     required String serviceName,
   }) async {
     try {
-      final response = await _dio.post('/logistics/shipments', data: {
+      final response = await _dio.post('logistics/shipments', data: {
         'origin': origin,
         'destination': destination,
         'weight': weight,
@@ -68,7 +68,7 @@ class RealLogisticsRepository implements LogisticsRepository {
   @override
   Future<Shipment> trackShipment(String trackingNumber) async {
     try {
-      final response = await _dio.get('/logistics/track/$trackingNumber');
+      final response = await _dio.get('logistics/track/$trackingNumber');
       return Shipment.fromJson(response.data);
     } on DioException catch (e) {
       throw e.error!;

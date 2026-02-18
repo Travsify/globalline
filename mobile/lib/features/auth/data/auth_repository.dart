@@ -2,11 +2,12 @@
 import 'package:dio/dio.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/storage/secure_storage_service.dart';
+import '../../../../core/exceptions/app_exceptions.dart';
 import './models/auth_models.dart';
 
 abstract class AuthRepository {
   Future<AuthResponse> login(String email, String password);
-  Future<void> register(String name, String email, String password);
+  Future<void> register(String name, String email, String password, String passwordConfirmation);
   Future<void> logout();
 }
 
@@ -19,10 +20,14 @@ class RealAuthRepository implements AuthRepository {
   @override
   Future<AuthResponse> login(String email, String password) async {
     try {
-      final response = await _dio.post('/auth/login', data: {
+      final response = await _dio.post('auth/login', data: {
         'email': email,
         'password': password,
       });
+      
+      if (response.data is! Map<String, dynamic>) {
+        throw ResponseException('Invalid response format from server');
+      }
       
       final authResponse = AuthResponse.fromJson(response.data);
       await _storage.saveToken(authResponse.token);
@@ -33,12 +38,13 @@ class RealAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> register(String name, String email, String password) async {
+  Future<void> register(String name, String email, String password, String passwordConfirmation) async {
     try {
-      final response = await _dio.post('/auth/register', data: {
+      final response = await _dio.post('auth/register', data: {
         'name': name,
         'email': email,
         'password': password,
+        'password_confirmation': passwordConfirmation,
       });
       
       final authResponse = AuthResponse.fromJson(response.data);

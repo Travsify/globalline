@@ -16,7 +16,7 @@ class RealKycRepository implements KycRepository {
 
   @override
   Future<List<KycVerification>> getVerifications() async {
-    final response = await _dio.get('/kyc/verifications');
+    final response = await _dio.get('kyc/verifications');
     return (response.data as List).map((e) => KycVerification.fromJson(e)).toList();
   }
 
@@ -28,13 +28,13 @@ class RealKycRepository implements KycRepository {
       'document': await MultipartFile.fromFile(document.path),
     });
 
-    final response = await _dio.post('/kyc/upload', data: formData);
+    final response = await _dio.post('kyc/upload', data: formData);
     return KycVerification.fromJson(response.data);
   }
 
   @override
   Future<String> getKycStatus() async {
-    final response = await _dio.get('/kyc/status');
+    final response = await _dio.get('kyc/status');
     return response.data['status'] ?? 'none';
   }
 }
