@@ -17,9 +17,19 @@ class WalletScreen extends ConsumerWidget {
         title: const Text('My Wallet'),
         actions: [
           TextButton.icon(
+            onPressed: () => _showFundWalletDialog(context),
+            icon: const Icon(Icons.add, color: Colors.white),
+            label: const Text("Fund", style: TextStyle(color: Colors.white)),
+          ),
+          TextButton.icon(
             onPressed: () => context.push('/wallet/convert'),
             icon: const Icon(Icons.swap_horiz, color: Colors.white),
             label: const Text("Convert", style: TextStyle(color: Colors.white)),
+          ),
+          TextButton.icon(
+            onPressed: () => context.push('/wallet/pay-supplier'),
+            icon: const Icon(Icons.outbound, color: Colors.white),
+            label: const Text("Pay Supplier", style: TextStyle(color: Colors.white)),
           ),
           const SizedBox(width: 8),
         ],
@@ -56,6 +66,55 @@ class WalletScreen extends ConsumerWidget {
           message: err.toString(),
           onRetry: () => ref.read(walletControllerProvider.notifier).refresh(),
         ),
+      ),
+    );
+  }
+  void _showFundWalletDialog(BuildContext context) {
+    final amountController = TextEditingController();
+    // Default to NGN for direct funding as per "Local First" policy
+    const fixedCurrency = 'NGN'; 
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Fund Local Wallet (NGN)"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              "You can only fund your local wallet directly. Use the 'Convert' feature to get USD or CNY.",
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: amountController,
+              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              decoration: const InputDecoration(
+                labelText: "Amount (NGN)",
+                hintText: "Enter amount to fund",
+                prefixText: "₦ ",
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text("Cancel")),
+          ElevatedButton(
+            onPressed: () {
+              final amount = double.tryParse(amountController.text);
+              if (amount != null && amount > 0) {
+                Navigator.pop(ctx);
+                context.push('/checkout/payment', extra: {
+                  'amount': amount,
+                  'currency': fixedCurrency,
+                  'email': 'user@globalline.com', 
+                  'isFunding': true,
+                });
+              }
+            },
+            child: const Text("Proceed"),
+          ),
+        ],
       ),
     );
   }

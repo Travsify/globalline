@@ -261,41 +261,11 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
       ref.read(cartProvider.notifier).clearCart();
       setState(() => _isLoading = false);
 
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => AlertDialog(
-          backgroundColor: const Color(0xFF002366),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.white.withOpacity(0.1))),
-          title: const Text("Sourcing Complete!", style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, fontFamily: 'Outfit'), textAlign: TextAlign.center),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.hub_outlined, color: Color(0xFFFFD700), size: 48),
-              ),
-              const SizedBox(height: 16),
-              const Text("Your order has been synchronized with the GlobalLine Collective Settle station.", textAlign: TextAlign.center, style: TextStyle(color: Colors.white70)),
-            ],
-          ),
-          actions: [
-            Center(
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  context.go('/home');
-                },
-                child: const Text("Back to Home", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-              ),
-            ),
-          ],
-        ),
-      );
+      context.push('/checkout/payment', extra: {
+        'amount': grandTotal,
+        'currency': symbol == '₦' ? 'NGN' : (symbol == 'TL' ? 'TRY' : 'USD'),
+        'email': 'user@globalline.com', // Mock email for now
+      });
     }
   }
 }

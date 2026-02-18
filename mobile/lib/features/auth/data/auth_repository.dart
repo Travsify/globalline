@@ -9,6 +9,8 @@ abstract class AuthRepository {
   Future<AuthResponse> login(String email, String password);
   Future<void> register(String name, String email, String password, String passwordConfirmation);
   Future<void> logout();
+  Future<void> forgotPassword(String email);
+  Future<void> resetPassword(String email, String token, String password, String passwordConfirmation);
 }
 
 class RealAuthRepository implements AuthRepository {
@@ -57,5 +59,30 @@ class RealAuthRepository implements AuthRepository {
   @override
   Future<void> logout() async {
     await _storage.deleteToken();
+  }
+
+  @override
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _dio.post('auth/forgot-password', data: {
+        'email': email,
+      });
+    } on DioException catch (e) {
+      throw e.error!;
+    }
+  }
+
+  @override
+  Future<void> resetPassword(String email, String token, String password, String passwordConfirmation) async {
+    try {
+      await _dio.post('auth/reset-password', data: {
+        'email': email,
+        'token': token,
+        'password': password,
+        'password_confirmation': passwordConfirmation,
+      });
+    } on DioException catch (e) {
+      throw e.error!;
+    }
   }
 }

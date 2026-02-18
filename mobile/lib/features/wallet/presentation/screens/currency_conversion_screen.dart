@@ -13,8 +13,8 @@ class CurrencyConversionScreen extends ConsumerStatefulWidget {
 
 class _CurrencyConversionScreenState extends ConsumerState<CurrencyConversionScreen> {
   final _amountController = TextEditingController();
-  String _fromCurrency = 'USD';
-  String _toCurrency = 'NGN';
+  String _fromCurrency = 'NGN';
+  String _toCurrency = 'USD';
   bool _isConverting = false;
 
   final List<String> _currencies = ['USD', 'NGN', 'CNY'];

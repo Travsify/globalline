@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../providers/auth_provider.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
+class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  ConsumerState<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with SingleTickerProviderStateMixin {
+class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> with SingleTickerProviderStateMixin {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   late AnimationController _animationController;
@@ -161,13 +162,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> with Single
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                // Mock send
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text("Reset link sent to your email")),
-                                );
-                                context.pop();
+                                final success = await ref.read(authControllerProvider.notifier).forgotPassword(_emailController.text);
+                                
+                                if (success && mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text("Reset link sent to your email")),
+                                  );
+                                  context.pop();
+                                }
                               }
                             },
                              style: ElevatedButton.styleFrom(

@@ -121,6 +121,8 @@ class ProfileScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       _buildMenuItem(context, "My Orders", Icons.history, () => context.push('/orders')),
+                      _buildMenuItem(context, "Edit Profile", Icons.person_outline, () => context.push('/profile/edit')),
+                      _buildMenuItem(context, "Change Password", Icons.lock_outline, () => context.push('/profile/password')),
                       _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddressListScreen()))),
                       _buildMenuItem(context, "Loyalty & Tiers", Icons.stars, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LoyaltyDashboardScreen()))),
                       _buildMenuItem(context, "Payment Methods", Icons.credit_card, () {}),

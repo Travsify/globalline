@@ -106,4 +106,28 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+        
+        // In a real app, we would send a reset link here.
+        // For this demo, we'll just simulate success.
+        
+        return response()->json(['message' => 'If your email exists in our system, you will receive a password reset link shortly.']);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'token' => 'required',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        // In a real app, we would verify the token and update the password.
+        // For this demo, we'll just simulate success.
+
+        return response()->json(['message' => 'Password has been reset successfully.']);
+    }
 }

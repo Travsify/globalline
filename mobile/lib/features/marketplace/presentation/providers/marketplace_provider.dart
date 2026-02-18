@@ -8,7 +8,8 @@ import 'package:mobile/features/marketplace/presentation/providers/marketplace_r
 final productSearchProvider = FutureProvider.autoDispose.family<List<Product>, String>((ref, query) async {
   final repository = ref.watch(marketplaceRepositoryProvider);
   final currency = ref.watch(selectedCurrencyProvider);
-  return repository.searchProducts(query, currency: currency);
+  // Default to 'all' or specific logic for unified search
+  return repository.searchProducts(query, currency: currency, source: 'all');
 });
 
 final productDetailsProvider = FutureProvider.autoDispose.family<Product, String>((ref, id) async {

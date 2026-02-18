@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:mobile/features/marketplace/data/models/product_model.dart';
 
 abstract class MarketplaceRepository {
-  Future<List<Product>> searchProducts(String query, {String currency = 'USD'});
+  Future<List<Product>> searchProducts(String query, {String currency = 'USD', String source = 'local'});
   Future<Product> getProductDetails(String id, {String currency = 'USD'});
   Future<List<dynamic>> getSourcingRequests();
   Future<void> submitSourcingRequest({required String productName, required String description});
@@ -14,11 +14,12 @@ class RealMarketplaceRepository implements MarketplaceRepository {
   RealMarketplaceRepository(this._dio);
 
   @override
-  Future<List<Product>> searchProducts(String query, {String currency = 'USD'}) async {
+  Future<List<Product>> searchProducts(String query, {String currency = 'USD', String source = 'local'}) async {
     try {
       final response = await _dio.get('marketplace/products', queryParameters: {
         'query': query,
         'currency': currency,
+        'source': source,
       });
       return (response.data['products'] as List)
           .map((e) => Product.fromJson(e))

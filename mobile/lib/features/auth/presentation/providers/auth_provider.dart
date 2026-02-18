@@ -40,6 +40,30 @@ class AuthController extends Notifier<AuthState> {
     await _repository.logout();
     state = const AuthState(isAuthenticated: false);
   }
+
+  Future<bool> forgotPassword(String email) async {
+    state = state.copyWith(isLoading: true, error: null);
+    try {
+      await _repository.forgotPassword(email);
+      state = state.copyWith(isLoading: false);
+      return true;
+    } catch (e) {
+      state = state.copyWith(isLoading: false, error: e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> resetPassword(String email, String token, String password, String passwordConfirmation) async {
+    state = state.copyWith(isLoading: true, error: null);
+    try {
+      await _repository.resetPassword(email, token, password, passwordConfirmation);
+      state = state.copyWith(isLoading: false);
+      return true;
+    } catch (e) {
+      state = state.copyWith(isLoading: false, error: e.toString());
+      return false;
+    }
+  }
 }
 
 final authControllerProvider = NotifierProvider<AuthController, AuthState>(AuthController.new);

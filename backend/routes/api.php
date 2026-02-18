@@ -6,12 +6,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('/auth/reset-password', [AuthController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    // Profile Management
+    Route::put('/user/profile', [App\Http\Controllers\Api\ProfileController::class, 'updateProfile']);
+    Route::put('/user/password', [App\Http\Controllers\Api\ProfileController::class, 'changePassword']);
 
     // Logistics
     Route::get('/logistics', [App\Http\Controllers\Api\LogisticsController::class, 'index']);
@@ -22,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Wallet
     Route::get('/wallet/balance', [App\Http\Controllers\Api\WalletController::class, 'getBalance']);
     Route::post('/wallet/fund', [App\Http\Controllers\Api\WalletController::class, 'fundWallet']);
+    Route::post('/wallet/deduct', [App\Http\Controllers\Api\WalletController::class, 'deduct']);
+    Route::post('/pay-supplier', [App\Http\Controllers\Api\PaySupplierController::class, 'store']);
 
     // Marketplace
     Route::get('/marketplace/products', [App\Http\Controllers\Api\MarketplaceController::class, 'search']);
@@ -43,6 +51,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Loyalty
     Route::get('/loyalty/stats', [App\Http\Controllers\Api\LoyaltyController::class, 'getStats']);
+
+    // Supplier Payments
+    Route::get('/payments', [App\Http\Controllers\Api\SupplierPaymentController::class, 'index']);
+    Route::post('/payments', [App\Http\Controllers\Api\SupplierPaymentController::class, 'store']);
+
+    // Payment Gateway
+    Route::post('/payment/initialize', [App\Http\Controllers\Api\PaymentController::class, 'initialize']);
+    Route::post('/payment/verify', [App\Http\Controllers\Api\PaymentController::class, 'verify']);
 
     // Enterprise v4 Routes
     Route::group(['prefix' => 'enterprise'], function () {

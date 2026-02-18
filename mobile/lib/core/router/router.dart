@@ -9,6 +9,8 @@ import 'package:mobile/features/auth/presentation/screens/register_screen.dart';
 import 'package:mobile/features/home/presentation/screens/home_screen.dart';
 import 'package:mobile/features/tracking/presentation/screens/tracking_screen.dart';
 import 'package:mobile/features/profile/presentation/screens/profile_screen.dart';
+import 'package:mobile/features/profile/presentation/screens/edit_profile_screen.dart';
+import 'package:mobile/features/profile/presentation/screens/change_password_screen.dart';
 import 'package:mobile/shared/widgets/scaffold_with_navbar.dart';
 import 'package:mobile/features/logistics/presentation/screens/shipping_calculator_screen.dart';
 import 'package:mobile/features/logistics/presentation/screens/create_shipment_screen.dart';
@@ -17,6 +19,10 @@ import 'package:mobile/features/addresses/presentation/screens/address_list_scre
 import 'package:mobile/features/notifications/presentation/screens/notification_screen.dart';
 import 'package:mobile/features/logistics/presentation/screens/consolidation_screen.dart';
 import 'package:mobile/features/logistics/presentation/screens/ship_for_me_screen.dart';
+import 'package:mobile/features/payments/presentation/screens/supplier_payment_list_screen.dart';
+import 'package:mobile/features/payments/presentation/screens/log_payment_screen.dart';
+import 'package:mobile/features/payments/presentation/screens/payment_method_screen.dart';
+import 'package:mobile/features/payments/presentation/screens/pay_supplier_screen.dart';
 
 import 'package:mobile/features/marketplace/presentation/screens/marketplace_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/product_details_screen.dart';
@@ -106,6 +112,19 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const CheckoutScreen(),
       ),
       GoRoute(
+        path: '/checkout/payment',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) {
+           final extra = state.extra as Map<String, dynamic>;
+           return PaymentMethodScreen(
+              amount: extra['amount'],
+              currency: extra['currency'],
+              email: extra['email'],
+              isFunding: extra['isFunding'] ?? false,
+           );
+        },
+      ),
+      GoRoute(
         path: '/marketplace/sourcing',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const SourcingListScreen(),
@@ -130,6 +149,23 @@ final routerProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const NotificationScreen(),
       ),
+      GoRoute(
+        path: '/payments',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const SupplierPaymentListScreen(),
+        routes: [
+          GoRoute(
+            path: 'log',
+            parentNavigatorKey: rootNavigatorKey,
+            builder: (context, state) => const LogPaymentScreen(),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/wallet/pay-supplier',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const PaySupplierScreen(),
+      ),
       ShellRoute(
         navigatorKey: shellNavigatorKey,
         builder: (context, state, child) {
@@ -151,6 +187,18 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/profile',
             builder: (context, state) => const ProfileScreen(),
+            routes: [
+              GoRoute(
+                path: 'edit',
+                parentNavigatorKey: rootNavigatorKey,
+                builder: (context, state) => const EditProfileScreen(),
+              ),
+              GoRoute(
+                path: 'password',
+                parentNavigatorKey: rootNavigatorKey,
+                builder: (context, state) => const ChangePasswordScreen(),
+              ),
+            ],
           ),
         ],
       ),

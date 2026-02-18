@@ -122,7 +122,6 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                               fontFamily: 'Outfit',
                             ),
                           ),
-                          const SizedBox(height: 8),
                         ],
                       ),
                     ),
