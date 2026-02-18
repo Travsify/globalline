@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -8,7 +9,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _opacityAnimation;
@@ -26,7 +28,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     );
 
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.5, 1.0, curve: Curves.easeIn)),
+      CurvedAnimation(
+          parent: _controller,
+          curve: const Interval(0.5, 1.0, curve: Curves.easeIn)),
     );
 
     _controller.forward();
@@ -39,9 +43,20 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.dispose();
   }
 
-  _navigateToNext() async {
-    await Future.delayed(const Duration(seconds: 4)); // Slightly longer for animation
-    if (mounted) {
+  Future<void> _navigateToNext() async {
+    await Future.delayed(const Duration(seconds: 3));
+    if (!mounted) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    final hasCompletedOnboarding =
+        prefs.getBool('has_completed_onboarding') ?? false;
+
+    if (!mounted) return;
+
+    if (hasCompletedOnboarding) {
+      // Skip onboarding — go straight to login (or home if token exists)
+      context.go('/login');
+    } else {
       context.go('/onboarding');
     }
   }
@@ -56,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             end: Alignment.bottomRight,
             colors: [
               Theme.of(context).colorScheme.primary,
-              const Color(0xFF001233), // Darker shade of Royal Blue
+              const Color(0xFF001233),
             ],
           ),
         ),
@@ -73,7 +88,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(0.5),
                         blurRadius: 30,
                         spreadRadius: 10,
                       ),
@@ -98,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
                         letterSpacing: 2.0,
-                        fontFamily: 'Outfit', // Ensure font matches theme
+                        fontFamily: 'Outfit',
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -106,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       'Logistics & Sourcing Simplified',
                       style: TextStyle(
                         fontSize: 18,
-                        color: Theme.of(context).colorScheme.secondary, // Gold
+                        color: Theme.of(context).colorScheme.secondary,
                         letterSpacing: 1.2,
                       ),
                     ),

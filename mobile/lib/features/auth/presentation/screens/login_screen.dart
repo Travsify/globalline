@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
 import 'package:mobile/core/utils/validation_utils.dart';
 
@@ -51,7 +52,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
           );
       
       if (success && mounted) {
-        context.go('/home');
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('has_completed_onboarding', true);
+        if (mounted) context.go('/home');
       }
     }
   }
