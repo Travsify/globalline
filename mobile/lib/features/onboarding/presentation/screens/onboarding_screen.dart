@@ -186,7 +186,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 // Skip button
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -232,103 +232,105 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 ),
 
                 // Bottom controls
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 48),
-                  child: Column(
-                    children: [
-                      // Page indicators
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          _contents.length,
-                          (index) => AnimatedContainer(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeOutCubic,
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            height: 6,
-                            width: _currentPage == index ? 36 : 6,
-                            decoration: BoxDecoration(
-                              color: _currentPage == index
-                                  ? const Color(0xFFFFD700)
-                                  : Colors.white.withOpacity(0.25),
-                              borderRadius: BorderRadius.circular(3),
-                              boxShadow: _currentPage == index
-                                  ? [
-                                      BoxShadow(
-                                        color: const Color(0xFFFFD700)
-                                            .withOpacity(0.4),
-                                        blurRadius: 8,
-                                      ),
-                                    ]
-                                  : null,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-
-                      // CTA Button
-                      SizedBox(
-                        width: double.infinity,
-                        height: 58,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFFFFD700), Color(0xFFFFA000)],
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                    const Color(0xFFFFD700).withOpacity(0.35),
-                                blurRadius: 20,
-                                offset: const Offset(0, 8),
-                              ),
-                            ],
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_currentPage == _contents.length - 1) {
-                                _completeOnboarding();
-                              } else {
-                                _pageController.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeOutCubic,
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  _currentPage == _contents.length - 1
-                                      ? "Start Your Journey"
-                                      : "Continue",
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF002366),
-                                    letterSpacing: 0.5,
-                                  ),
+                SafeArea(
+                  top: false,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Page indicators
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            _contents.length,
+                            (index) => AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeOutCubic,
+                              margin: const EdgeInsets.symmetric(horizontal: 4),
+                              height: 6,
+                              width: _currentPage == index ? 36 : 6,
+                              decoration: BoxDecoration(
+                                color: _currentPage == index
+                                    ? const Color(0xFFFFD700)
+                                    : Colors.white.withOpacity(0.25),
+                                borderRadius: BorderRadius.circular(3),
+                                boxShadow: _currentPage == index
+                                    ? [
+                                        BoxShadow(
+                                          color: const Color(0xFFFFD700)
+                                              .withOpacity(0.4),
+                                          blurRadius: 8,
+                                        ),
+                                      ]
+                                    : null,
                                 ),
-                                if (_currentPage != _contents.length - 1) ...[
-                                  const SizedBox(width: 8),
-                                  const Icon(Icons.arrow_forward_rounded,
-                                      color: Color(0xFF002366), size: 20),
-                                ],
+                              ),
+                            ),
+                          ),
+                        const SizedBox(height: 24),
+                        // CTA Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 58,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFFFFD700), Color(0xFFFFA000)],
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFFFFD700).withOpacity(0.3),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 8),
+                                ),
                               ],
                             ),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_currentPage == _contents.length - 1) {
+                                  _completeOnboarding();
+                                } else {
+                                  _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeOutCubic,
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    _currentPage == _contents.length - 1
+                                        ? "Start Your Journey"
+                                        : "Continue",
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF002366),
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                  if (_currentPage != _contents.length - 1) ...[
+                                    const SizedBox(width: 8),
+                                    const Icon(Icons.arrow_forward_rounded,
+                                        color: Color(0xFF002366), size: 20),
+                                  ],
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

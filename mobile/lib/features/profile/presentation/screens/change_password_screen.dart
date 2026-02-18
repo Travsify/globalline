@@ -57,7 +57,8 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
             children: [
               if (state.error != null)
                 Padding(
