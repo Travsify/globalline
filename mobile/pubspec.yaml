@@ -46,7 +46,7 @@ dependencies:
   connectivity_plus: ^7.0.0
   image_picker: ^1.1.2
   flutter_stripe: ^10.1.1
-  flutter_paystack: any
+  flutter_paystack_plus: ^1.0.2
 
 dev_dependencies:
   flutter_test:
