@@ -23,6 +23,7 @@ import 'package:mobile/features/payments/presentation/screens/supplier_payment_l
 import 'package:mobile/features/payments/presentation/screens/log_payment_screen.dart';
 import 'package:mobile/features/payments/presentation/screens/payment_method_screen.dart';
 import 'package:mobile/features/payments/presentation/screens/pay_supplier_screen.dart';
+import 'package:mobile/features/logistics/presentation/screens/my_addresses_screen.dart';
 
 import 'package:mobile/features/marketplace/presentation/screens/marketplace_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/product_details_screen.dart';
@@ -165,6 +166,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/wallet/pay-supplier',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const PaySupplierScreen(),
+      ),
+      GoRoute(
+        path: '/logistics/virtual-addresses',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const MyAddressesScreen(),
       ),
       ShellRoute(
         navigatorKey: shellNavigatorKey,

@@ -255,6 +255,13 @@ class HomeScreen extends ConsumerWidget {
                           color: const Color(0xFF002366),
                           onTap: () => context.push('/wallet'),
                         ),
+                        _ServiceCard(
+                          title: "Global Suite",
+                          subtitle: "Your unique warehouses",
+                          icon: Icons.map_outlined,
+                          color: Colors.blue.shade800,
+                          onTap: () => context.push('/logistics/virtual-addresses'),
+                        ),
                       ],
                     ),
                   const SizedBox(height: 32),
