@@ -114,61 +114,64 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           const Spacer(),
                           // Wallet Balance Card
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(24),
-                              border: Border.all(color: Colors.white.withOpacity(0.2)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 10),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Total Balance",
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.8),
-                                        fontSize: 14,
+                          GestureDetector(
+                            onTap: () => context.push('/wallet'),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(24),
+                                border: Border.all(color: Colors.white.withOpacity(0.2)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Total Balance",
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.8),
+                                          fontSize: 14,
+                                        ),
                                       ),
+                                      const SizedBox(height: 8),
+                                      const Text(
+                                        "\$12,450.00",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Outfit',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.secondary,
+                                      borderRadius: BorderRadius.circular(16),
                                     ),
-                                    const SizedBox(height: 8),
-                                    const Text(
-                                      "\$12,450.00",
+                                    child: const Text(
+                                      "Top Up",
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 32,
+                                        color: Color(0xFF002366),
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'Outfit',
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(16),
                                   ),
-                                  child: const Text(
-                                    "Top Up",
-                                    style: TextStyle(
-                                      color: Color(0xFF002366),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -238,12 +241,19 @@ class HomeScreen extends ConsumerWidget {
                           color: Colors.orange.shade800,
                           onTap: () => context.push('/calculator'),
                         ),
-                        _ServiceCard(
+                         _ServiceCard(
                           title: "Sourcing",
                           subtitle: "Buy from China",
                           icon: Icons.storefront_outlined,
                           color: Colors.red.shade700,
                           onTap: () => context.go('/shop'),
+                        ),
+                        _ServiceCard(
+                          title: "Wallet",
+                          subtitle: "Manage funds & payouts",
+                          icon: Icons.account_balance_wallet_outlined,
+                          color: const Color(0xFF002366),
+                          onTap: () => context.push('/wallet'),
                         ),
                       ],
                     ),
