@@ -30,20 +30,22 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
-            $request->session()->regenerate();
+        // Stateless (API) Login
+        if ($isJson) {
+            $user = User::where('email', $request->email)->first();
 
-            if ($isJson) {
-                $user = Auth::user();
-                $token = $user->createToken('auth_token')->plainTextToken;
-                return response()->json(['token' => $token, 'user' => $user]);
+            if (! $user || ! Hash::check($request->password, $user->password)) {
+                return response()->json(['message' => 'The provided credentials are incorrect.'], 422);
             }
 
-            return redirect()->intended('/portal/dashboard');
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json(['token' => $token, 'user' => $user]);
         }
 
-        if ($isJson) {
-            return response()->json(['message' => 'The provided credentials are incorrect.'], 422);
+        // Stateful (Web) Login
+        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+            $request->session()->regenerate();
+            return redirect()->intended('/portal/dashboard');
         }
 
         throw ValidationException::withMessages([
@@ -74,30 +76,33 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            Auth::login($user);
-
+            // Stateless (API) Register
             if ($isJson) {
                 $token = $user->createToken('auth_token')->plainTextToken;
                 return response()->json(['token' => $token, 'user' => $user]);
             }
 
+            // Stateful (Web) Register
+            Auth::login($user);
             return redirect('/portal/dashboard');
         });
     }
 
     public function logout(Request $request)
     {
-        $isJson = $request->wantsJson();
+        $isJson = $request->wantsJson() || $request->is('api/*');
         
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
+        // Stateless (API) Logout
         if ($isJson && $request->user()) {
             $request->user()->currentAccessToken()->delete();
             return response()->json(['message' => 'Logged out successfully']);
         }
+
+        // Stateful (Web) Logout
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect('/');
     }

@@ -16,3 +16,8 @@ final productDetailsProvider = FutureProvider.autoDispose.family<Product, String
   final currency = ref.watch(selectedCurrencyProvider);
   return repository.getProductDetails(id, currency: currency);
 });
+
+final sourcingRequestsProvider = FutureProvider.autoDispose<List<dynamic>>((ref) async {
+  final repository = ref.watch(marketplaceRepositoryProvider);
+  return repository.getSourcingRequests();
+});

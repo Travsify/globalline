@@ -15,13 +15,18 @@ import 'package:mobile/features/logistics/presentation/screens/create_shipment_s
 import 'package:mobile/features/orders/presentation/screens/order_history_screen.dart';
 import 'package:mobile/features/addresses/presentation/screens/address_list_screen.dart';
 import 'package:mobile/features/notifications/presentation/screens/notification_screen.dart';
+import 'package:mobile/features/logistics/presentation/screens/consolidation_screen.dart';
+import 'package:mobile/features/logistics/presentation/screens/ship_for_me_screen.dart';
 
 import 'package:mobile/features/marketplace/presentation/screens/marketplace_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/product_details_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/cart_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/checkout_screen.dart';
+import 'package:mobile/features/marketplace/presentation/screens/sourcing_list_screen.dart';
+import 'package:mobile/features/marketplace/presentation/screens/create_sourcing_request_screen.dart';
 
 import 'package:mobile/features/wallet/presentation/screens/wallet_screen.dart';
+import 'package:mobile/features/wallet/presentation/screens/currency_conversion_screen.dart';
 
 import 'package:mobile/features/onboarding/presentation/screens/splash_screen.dart';
 import 'package:mobile/features/onboarding/presentation/screens/onboarding_screen.dart';
@@ -58,6 +63,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const WalletScreen(),
       ),
       GoRoute(
+        path: '/wallet/convert',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const CurrencyConversionScreen(),
+      ),
+      GoRoute(
         path: '/calculator',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const ShippingCalculatorScreen(),
@@ -66,6 +76,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/ship/create',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CreateShipmentScreen(),
+      ),
+      GoRoute(
+        path: '/ship/consolidate',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ConsolidationScreen(),
+      ),
+      GoRoute(
+        path: '/ship/for-me',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ShipForMeScreen(),
       ),
       GoRoute(
         path: '/product/:id',
@@ -84,6 +104,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/checkout',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CheckoutScreen(),
+      ),
+      GoRoute(
+        path: '/marketplace/sourcing',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const SourcingListScreen(),
+      ),
+      GoRoute(
+        path: '/marketplace/sourcing/create',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const CreateSourcingRequestScreen(),
       ),
       GoRoute(
         path: '/orders',

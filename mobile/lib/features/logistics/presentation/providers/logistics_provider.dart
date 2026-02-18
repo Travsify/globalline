@@ -20,6 +20,12 @@ final shipmentTrackingProvider = FutureProvider.autoDispose.family<Shipment, Str
   return repository.trackShipment(trackingNumber);
 });
 
+// List of all user shipments for consolidation
+final userShipmentsProvider = FutureProvider.autoDispose<List<Shipment>>((ref) async {
+  final repository = ref.watch(logisticsRepositoryProvider);
+  return repository.getShipments();
+});
+
 // Mock implementation for development/testing if needed
 class MockLogisticsRepository implements LogisticsRepository {
   @override
@@ -28,4 +34,12 @@ class MockLogisticsRepository implements LogisticsRepository {
   Future<Shipment> createShipment({required String origin, required String destination, required double weight, required String serviceName}) async => throw UnimplementedError();
   @override
   Future<Shipment> trackShipment(String trackingNumber) async => throw UnimplementedError();
+  @override
+  Future<List<Shipment>> getShipments() async => [];
+  @override
+  Future<void> consolidateShipments(List<String> shipmentIds) async => throw UnimplementedError();
+  @override
+  Future<List<dynamic>> getConsolidations() async => throw UnimplementedError();
+  @override
+  Future<Shipment> shipForMe({required String externalTracking, required String itemName, required int quantity, String? notes}) async => throw UnimplementedError();
 }

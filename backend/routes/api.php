@@ -14,6 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Logistics
+    Route::get('/logistics', [App\Http\Controllers\Api\LogisticsController::class, 'index']);
     Route::get('/logistics/rates', [App\Http\Controllers\Api\LogisticsController::class, 'getRates']);
     Route::post('/logistics/shipments', [App\Http\Controllers\Api\LogisticsController::class, 'createShipment']);
     Route::get('/logistics/track/{trackingNumber}', [App\Http\Controllers\Api\LogisticsController::class, 'trackShipment']);
@@ -47,6 +48,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'enterprise'], function () {
         Route::get('/wallets', [App\Http\Controllers\Api\EnterpriseController::class, 'wallets']);
         Route::get('/consolidations', [App\Http\Controllers\Api\EnterpriseController::class, 'consolidations']);
+        Route::post('/consolidate', [App\Http\Controllers\Api\EnterpriseController::class, 'storeConsolidation']);
         Route::post('/sourcing-request', [App\Http\Controllers\Api\EnterpriseController::class, 'storeSourcingRequest']);
+        Route::get('/sourcing-orders', [App\Http\Controllers\Api\EnterpriseController::class, 'sourcingOrders']);
+        Route::post('/convert', [App\Http\Controllers\Api\EnterpriseController::class, 'convert']);
+        Route::post('/ship-for-me', [App\Http\Controllers\Api\EnterpriseController::class, 'shipForMe']);
     });
 });

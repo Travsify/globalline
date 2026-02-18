@@ -168,6 +168,17 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             ),
             actions: [
               IconButton(
+                onPressed: () => context.push('/marketplace/sourcing'),
+                icon: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.assignment_outlined, color: Colors.white),
+                ),
+              ),
+              IconButton(
                 onPressed: () => context.push('/cart'),
                 icon: Container(
                   padding: const EdgeInsets.all(8),

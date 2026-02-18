@@ -35,6 +35,24 @@ class WalletController extends AsyncNotifier<Wallet> {
       state = AsyncValue.error(e, st);
     }
   }
+
+  Future<void> convert({required String from, required String to, required double amount}) async {
+    state = const AsyncValue.loading();
+    try {
+      final repository = ref.read(walletRepositoryProvider);
+      await repository.convertCurrency(from: from, to: to, amount: amount);
+      final wallet = await _fetchWallet();
+      state = AsyncValue.data(wallet);
+      ref.invalidate(multiCurrencyBalancesProvider);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
 }
 
 final walletControllerProvider = AsyncNotifierProvider<WalletController, Wallet>(() => WalletController());
+
+final multiCurrencyBalancesProvider = FutureProvider.autoDispose<List<dynamic>>((ref) async {
+  final repository = ref.watch(walletRepositoryProvider);
+  return repository.getMultiCurrencyBalances();
+});

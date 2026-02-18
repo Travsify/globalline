@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class LogisticsController extends Controller
 {
+    public function index(Request $request)
+    {
+        $shipments = Shipment::where('user_id', Auth::id())->latest()->get();
+        return response()->json($shipments);
+    }
+
     public function getRates(Request $request)
     {
         $request->validate([

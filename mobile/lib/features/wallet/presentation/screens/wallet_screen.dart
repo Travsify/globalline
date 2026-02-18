@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/wallet/presentation/providers/wallet_provider.dart';
 import 'package:mobile/features/wallet/data/models/wallet_models.dart';
 import 'package:mobile/shared/widgets/status_widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class WalletScreen extends ConsumerWidget {
   const WalletScreen({super.key});
@@ -12,7 +13,17 @@ class WalletScreen extends ConsumerWidget {
     final walletAsync = ref.watch(walletControllerProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('My Wallet')),
+      appBar: AppBar(
+        title: const Text('My Wallet'),
+        actions: [
+          TextButton.icon(
+            onPressed: () => context.push('/wallet/convert'),
+            icon: const Icon(Icons.swap_horiz, color: Colors.white),
+            label: const Text("Convert", style: TextStyle(color: Colors.white)),
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: walletAsync.when(
         data: (wallet) => RefreshIndicator(
           onRefresh: () async {

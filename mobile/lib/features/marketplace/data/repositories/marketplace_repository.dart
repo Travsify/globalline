@@ -4,6 +4,8 @@ import 'package:mobile/features/marketplace/data/models/product_model.dart';
 abstract class MarketplaceRepository {
   Future<List<Product>> searchProducts(String query, {String currency = 'USD'});
   Future<Product> getProductDetails(String id, {String currency = 'USD'});
+  Future<List<dynamic>> getSourcingRequests();
+  Future<void> submitSourcingRequest({required String productName, required String description});
 }
 
 class RealMarketplaceRepository implements MarketplaceRepository {
@@ -33,6 +35,28 @@ class RealMarketplaceRepository implements MarketplaceRepository {
         'currency': currency,
       });
       return Product.fromJson(response.data);
+    } on DioException catch (e) {
+      throw e.error!;
+    }
+  }
+
+  @override
+  Future<List<dynamic>> getSourcingRequests() async {
+    try {
+      final response = await _dio.get('enterprise/sourcing-orders');
+      return response.data['data'] as List;
+    } on DioException catch (e) {
+      throw e.error!;
+    }
+  }
+
+  @override
+  Future<void> submitSourcingRequest({required String productName, required String description}) async {
+    try {
+      await _dio.post('enterprise/sourcing-request', data: {
+        'product_name': productName,
+        'description': description,
+      });
     } on DioException catch (e) {
       throw e.error!;
     }
