@@ -75,31 +75,125 @@ class _SourcingRequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final status = request['status'] ?? 'pending';
-    final color = status == 'open' ? Colors.blue : (status == 'completed' ? Colors.green : Colors.orange);
+    
+    // Mapping status to pipeline steps
+    final int currentStep;
+    switch (status.toString().toLowerCase()) {
+      case 'pending': currentStep = 0; break;
+      case 'reviewing': currentStep = 1; break;
+      case 'quotes_ready': currentStep = 2; break;
+      case 'ordered': currentStep = 3; break;
+      case 'completed': currentStep = 4; break;
+      default: currentStep = 0;
+    }
 
     return Card(
       color: Colors.white.withOpacity(0.05),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(24),
         side: BorderSide(color: Colors.white.withOpacity(0.1)),
       ),
-      margin: const EdgeInsets.only(bottom: 12),
-      child: ListTile(
-        title: Text(request['product_name'] ?? 'Untitled Item', 
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        subtitle: Text(request['description'] ?? '', 
-          style: const TextStyle(color: Colors.white70), maxLines: 2, overflow: TextOverflow.ellipsis),
-        trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: color.withOpacity(0.5)),
-          ),
-          child: Text(status.toUpperCase(), 
-            style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold)),
+      margin: const EdgeInsets.only(bottom: 16),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        request['product_name'] ?? 'Untitled Item', 
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18, fontFamily: 'Outfit'),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Ref: ${request['id'] ?? 'N/A'}", 
+                        style: TextStyle(color: Colors.white.withOpacity(0.4), fontSize: 10),
+                      ),
+                    ],
+                  ),
+                ),
+                _buildStatusIcon(status),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              request['description'] ?? '', 
+              style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 13),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 24),
+            _buildPipeline(currentStep),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStatusIcon(String status) {
+    IconData icon = Icons.hourglass_empty;
+    Color color = Colors.orange;
+    
+    if (status == 'completed') {
+      icon = Icons.check_circle_outline;
+      color = Colors.green;
+    } else if (status == 'quotes_ready') {
+      icon = Icons.request_quote_outlined;
+      color = Colors.blue;
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
+      child: Icon(icon, color: color, size: 20),
+    );
+  }
+
+  Widget _buildPipeline(int currentStep) {
+    final steps = ['Submitted', 'Reviewing', 'Quotes', 'Ordered'];
+    
+    return Row(
+      children: List.generate(steps.length, (index) {
+        final isActive = index <= currentStep;
+        final isLast = index == steps.length - 1;
+        
+        return Expanded(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(child: Container(height: 2, color: index == 0 ? Colors.transparent : (isActive ? const Color(0xFFFFD700) : Colors.white10))),
+                  Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      color: isActive ? const Color(0xFFFFD700) : Colors.transparent,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: isActive ? const Color(0xFFFFD700) : Colors.white24, width: 2),
+                    ),
+                  ),
+                  Expanded(child: Container(height: 2, color: isLast ? Colors.transparent : (index < currentStep ? const Color(0xFFFFD700) : Colors.white10))),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                steps[index],
+                style: TextStyle(
+                  color: isActive ? Colors.white : Colors.white24,
+                  fontSize: 8,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }

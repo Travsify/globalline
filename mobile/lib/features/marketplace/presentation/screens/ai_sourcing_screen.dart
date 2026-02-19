@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AiSourcingScreen extends StatefulWidget {
   const AiSourcingScreen({super.key});
@@ -7,15 +10,34 @@ class AiSourcingScreen extends StatefulWidget {
   State<AiSourcingScreen> createState() => _AiSourcingScreenState();
 }
 
-class _AiSourcingScreenState extends State<AiSourcingScreen> {
+class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProviderStateMixin {
+  late AnimationController _neuralController;
   final List<Map<String, dynamic>> _messages = [
     {
       'isAi': true,
-      'text': 'Hello! I am your GlobalLine Sourcing Assistant. What item would you like to procure from China, USA, or Europe today?',
+      'text': 'NEURAL LINK ESTABLISHED. I am your GlobalLine Sourcing Agent. I have active pipelines to Shenzhen, Istanbul, and Dubai. What procurement node shall we activate today?',
     }
   ];
   final _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   bool _isTyping = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _neuralController = AnimationController(
+      duration: const Duration(seconds: 4),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _neuralController.dispose();
+    _scrollController.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _sendMessage() {
     if (_controller.text.trim().isEmpty) return;
@@ -27,21 +49,40 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> {
 
     final input = _controller.text.toLowerCase();
     _controller.clear();
+    _scrollToBottom();
 
-    // Simulated AI Response logic
+    // Neural Processing Simulation
     Future.delayed(const Duration(seconds: 2), () {
-      String response = "I've started searching my verified supplier database for those items. Would you like a quote for Air or Sea shipping?";
+      String response = "SUPPLIER NODES SCANNED. I've found 4 potential high-fidelity matches for your request. Initial verification suggests we can achieve a 12% margin below market average. Should I finalize the RFQ parameters?";
+      
       if (input.contains('iphone') || input.contains('phone') || input.contains('laptop')) {
-        response = "Great choice! I have 15+ verified electronics suppliers in Shenzhen. Typical lead time is 3 days to our warehouse. Should I request a bulk quote for you?";
+        response = "ELECTRONICS GRID ACCESSED. 22 verified manufacturers in Shenzhen are active. One factory has a surplus of A-Grade components ready for immediate dispatch. Shall we bridge to an official RFQ?";
       } else if (input.contains('shoe') || input.contains('cloth')) {
-        response = "I can find high-quality fashion manufacturers for you. I'll need your target quantity to get the best wholesale price. How many are you looking to source?";
+        response = "TEXTILE AGGREGATOR SYNCED. Turkey and China nodes show optimal price-to-quality ratios for this quantity. I suggest the Turkey node for faster lead times. Confirm target MOQ?";
       }
 
       if (mounted) {
         setState(() {
           _isTyping = false;
-          _messages.add({'isAi': true, 'text': response});
+          _messages.add({
+            'isAi': true, 
+            'text': response,
+            'hasAction': true,
+          });
         });
+        _scrollToBottom();
+      }
+    });
+  }
+
+  void _scrollToBottom() {
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
       }
     });
   }
@@ -49,102 +90,259 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        title: Row(
-          children: [
-            const CircleAvatar(
-              backgroundColor: Color(0xFF002366),
-              child: Icon(Icons.auto_awesome, color: Colors.white, size: 20),
-            ),
-            const SizedBox(width: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('AI Sourcing Agent', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                Text('Always Online', style: TextStyle(fontSize: 10, color: Colors.green[700])),
-              ],
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(icon: const Icon(Icons.info_outline), onPressed: () {}),
-        ],
-      ),
-      body: Column(
+      backgroundColor: const Color(0xFF001540), // GlobalLine Deep Navy
+      body: Stack(
         children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(20),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                final msg = _messages[index];
-                return _buildMessageBubble(msg['text'], msg['isAi']);
+          // 1. Neural Field Background
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _neuralController,
+              builder: (context, child) {
+                return CustomPaint(
+                  painter: _NeuralLinkPainter(_neuralController.value),
+                );
               },
             ),
           ),
-          if (_isTyping)
-            Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 10),
-              child: Row(
-                children: [
-                  Text('AI is searching suppliers...', style: TextStyle(color: Colors.grey[600], fontSize: 12, fontStyle: FontStyle.italic)),
-                ],
+
+          // 2. Chat Interface
+          Column(
+            children: [
+              _buildHeader(),
+              Expanded(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  itemCount: _messages.length,
+                  itemBuilder: (context, index) {
+                    final msg = _messages[index];
+                    return _buildNeuralBubble(msg);
+                  },
+                ),
               ),
-            ),
-          _buildInputArea(),
+              if (_isTyping) _buildScanningIndicator(),
+              _buildInputMatrix(),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildMessageBubble(String text, bool isAi) {
-    return Align(
-      alignment: isAi ? Alignment.centerLeft : Alignment.centerRight,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        padding: const EdgeInsets.all(16),
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
-        decoration: BoxDecoration(
-          color: isAi ? Colors.white : const Color(0xFF002366),
-          borderRadius: BorderRadius.circular(20).copyWith(
-            bottomLeft: isAi ? const Radius.circular(0) : const Radius.circular(20),
-            bottomRight: isAi ? const Radius.circular(20) : const Radius.circular(0),
-          ),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5))],
-        ),
-        child: Text(text, style: TextStyle(color: isAi ? Colors.black87 : Colors.white, fontSize: 14, height: 1.5)),
-      ),
-    );
-  }
-
-  Widget _buildInputArea() {
+  Widget _buildHeader() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(24, 60, 24, 20),
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -5))],
+        color: Colors.black.withOpacity(0.4),
+        border: Border(bottom: BorderSide(color: const Color(0xFFFFD700).withOpacity(0.1))),
       ),
       child: Row(
         children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(color: Colors.grey[100], borderRadius: BorderRadius.circular(30)),
-              child: TextField(
-                controller: _controller,
-                decoration: const InputDecoration(hintText: 'Describe what you want to find...', border: InputBorder.none),
-                onSubmitted: (_) => _sendMessage(),
-              ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFD700).withOpacity(0.1),
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFFFFD700).withOpacity(0.2)),
             ),
+            child: const Icon(Icons.auto_awesome, color: Color(0xFFFFD700), size: 20),
           ),
-          const SizedBox(width: 12),
-          CircleAvatar(
-            backgroundColor: const Color(0xFF002366),
-            child: IconButton(icon: const Icon(Icons.send, color: Colors.white, size: 20), onPressed: _sendMessage),
+          const SizedBox(width: 16),
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('NEURAL AGENT v1.0', 
+                style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, letterSpacing: 3, fontWeight: FontWeight.bold)),
+              Text('Syncing Global Nodes...', 
+                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Outfit')),
+            ],
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.close, color: Colors.white70),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildNeuralBubble(Map<String, dynamic> msg) {
+    bool isAi = msg['isAi'] ?? false;
+    return Column(
+      crossAxisAlignment: isAi ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+      children: [
+        Align(
+          alignment: isAi ? Alignment.centerLeft : Alignment.centerRight,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 24),
+            padding: const EdgeInsets.all(20),
+            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
+            decoration: BoxDecoration(
+              color: isAi ? Colors.white.withOpacity(0.05) : const Color(0xFFFFD700).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(24).copyWith(
+                bottomLeft: isAi ? const Radius.circular(4) : const Radius.circular(24),
+                bottomRight: isAi ? const Radius.circular(24) : const Radius.circular(4),
+              ),
+              border: Border.all(
+                color: isAi ? Colors.white.withOpacity(0.1) : const Color(0xFFFFD700).withOpacity(0.3),
+              ),
+            ),
+            child: Text(
+              msg['text'], 
+              style: TextStyle(
+                color: isAi ? Colors.white.withOpacity(0.9) : const Color(0xFFFFD700), 
+                fontSize: 14, 
+                height: 1.6,
+                fontFamily: 'Outfit'
+              )
+            ),
+          ),
+        ),
+        if (isAi && msg['hasAction'] == true) ...[
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24, left: 8),
+            child: Row(
+              children: [
+                _buildNodeAction("FINALIZE RFQ", Icons.assignment_turned_in),
+                const SizedBox(width: 12),
+                _buildNodeAction("SCAN TURKEY", Icons.gps_fixed, isSecondary: true),
+              ],
+            ),
+          ),
+        ]
+      ],
+    );
+  }
+
+  Widget _buildNodeAction(String label, IconData icon, {bool isSecondary = false}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: isSecondary ? Colors.transparent : const Color(0xFFFFD700),
+        borderRadius: BorderRadius.circular(12),
+        border: isSecondary ? Border.all(color: const Color(0xFFFFD700).withOpacity(0.5)) : null,
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 14, color: isSecondary ? const Color(0xFFFFD700) : const Color(0xFF001540)),
+          const SizedBox(width: 8),
+          Text(label, style: TextStyle(
+            color: isSecondary ? const Color(0xFFFFD700) : const Color(0xFF001540), 
+            fontWeight: FontWeight.bold, 
+            fontSize: 10,
+            letterSpacing: 1,
+          )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildScanningIndicator() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 12,
+            height: 12,
+            child: CircularProgressIndicator(strokeWidth: 1, color: Color(0xFFFFD700)),
+          ),
+          const SizedBox(width: 12),
+          Text("DECRYPTING SUPPLIER FREQUENCIES...", 
+            style: TextStyle(color: const Color(0xFFFFD700).withOpacity(0.6), fontSize: 10, letterSpacing: 2, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInputMatrix() {
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: Container(
+          padding: EdgeInsets.fromLTRB(24, 20, 24, MediaQuery.of(context).padding.bottom + 20),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.4),
+            border: Border(top: BorderSide(color: Colors.white.withOpacity(0.05))),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.03),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: TextField(
+                    controller: _controller,
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                    decoration: InputDecoration(
+                      hintText: 'Transmit procurement intent...',
+                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.2), fontSize: 14),
+                      border: InputBorder.none,
+                    ),
+                    onSubmitted: (_) => _sendMessage(),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              GestureDetector(
+                onTap: _sendMessage,
+                child: Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFD700),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(color: const Color(0xFFFFD700).withOpacity(0.3), blurRadius: 20, spreadRadius: -5),
+                    ],
+                  ),
+                  child: const Icon(Icons.flash_on, color: Color(0xFF001540)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NeuralLinkPainter extends CustomPainter {
+  final double progress;
+  _NeuralLinkPainter(this.progress);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 0.5;
+
+    final random = math.Random(1337);
+    for (var i = 0; i < 15; i++) {
+      paint.color = const Color(0xFFFFD700).withOpacity(0.05 + (0.05 * math.sin(progress * 2 * math.pi + i)));
+      
+      final startX = size.width * random.nextDouble();
+      final startY = size.height * random.nextDouble();
+      final endX = size.width * random.nextDouble();
+      final endY = size.height * random.nextDouble();
+
+      final p1 = Offset(startX, startY);
+      final p2 = Offset(endX, endY);
+      
+      canvas.drawLine(p1, p2, paint);
+      
+      // Draw node particles
+      paint.style = PaintingStyle.fill;
+      canvas.drawCircle(p1, 1.5, paint);
+      paint.style = PaintingStyle.stroke;
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

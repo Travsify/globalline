@@ -10,9 +10,25 @@ abstract class LogisticsRepository {
 
   Future<Shipment> createShipment({
     required String origin,
+    required String originCountry,
     required String destination,
+    required String destinationCountry,
     required double weight,
     required String serviceName,
+    required String senderName,
+    required String senderPhone,
+    required String receiverName,
+    required String receiverPhone,
+    String? senderEmail,
+    String? receiverEmail,
+    String? description,
+    String? packageType,
+    double? length,
+    double? width,
+    double? height,
+    double? declaredValue,
+    bool isInsured = false,
+    String pickupType = 'drop_off',
   });
 
   Future<Shipment> trackShipment(String trackingNumber);
@@ -60,18 +76,51 @@ class RealLogisticsRepository implements LogisticsRepository {
   @override
   Future<Shipment> createShipment({
     required String origin,
+    required String originCountry,
     required String destination,
+    required String destinationCountry,
     required double weight,
     required String serviceName,
+    required String senderName,
+    required String senderPhone,
+    required String receiverName,
+    required String receiverPhone,
+    String? senderEmail,
+    String? receiverEmail,
+    String? description,
+    String? packageType,
+    double? length,
+    double? width,
+    double? height,
+    double? declaredValue,
+    bool isInsured = false,
+    String pickupType = 'drop_off',
   }) async {
     try {
-      final response = await _dio.post('logistics/shipments', data: {
+      final data = <String, dynamic>{
         'origin': origin,
+        'origin_country': originCountry,
         'destination': destination,
+        'destination_country': destinationCountry,
         'weight': weight,
         'service_name': serviceName,
-      });
+        'sender_name': senderName,
+        'sender_phone': senderPhone,
+        'receiver_name': receiverName,
+        'receiver_phone': receiverPhone,
+        'is_insured': isInsured,
+        'pickup_type': pickupType,
+      };
+      if (senderEmail != null) data['sender_email'] = senderEmail;
+      if (receiverEmail != null) data['receiver_email'] = receiverEmail;
+      if (description != null) data['description'] = description;
+      if (packageType != null) data['package_type'] = packageType;
+      if (length != null) data['length'] = length;
+      if (width != null) data['width'] = width;
+      if (height != null) data['height'] = height;
+      if (declaredValue != null) data['declared_value'] = declaredValue;
 
+      final response = await _dio.post('logistics/shipments', data: data);
       return Shipment.fromJson(response.data);
     } on DioException catch (e) {
       throw e.error!;

@@ -31,7 +31,28 @@ class MockLogisticsRepository implements LogisticsRepository {
   @override
   Future<List<ShippingRate>> getRates({required String origin, required String destination, required double weight}) async => [];
   @override
-  Future<Shipment> createShipment({required String origin, required String destination, required double weight, required String serviceName}) async => throw UnimplementedError();
+  Future<Shipment> createShipment({
+    required String origin,
+    required String originCountry,
+    required String destination,
+    required String destinationCountry,
+    required double weight,
+    required String serviceName,
+    required String senderName,
+    required String senderPhone,
+    required String receiverName,
+    required String receiverPhone,
+    String? senderEmail,
+    String? receiverEmail,
+    String? description,
+    String? packageType,
+    double? length,
+    double? width,
+    double? height,
+    double? declaredValue,
+    bool isInsured = false,
+    String pickupType = 'drop_off',
+  }) async => throw UnimplementedError();
   @override
   Future<Shipment> trackShipment(String trackingNumber) async => throw UnimplementedError();
   @override

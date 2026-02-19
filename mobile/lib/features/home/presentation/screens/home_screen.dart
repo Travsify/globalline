@@ -1,423 +1,336 @@
+import 'dart:math' as math;
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStateMixin {
+  late AnimationController _pulseController;
+  late AnimationController _gridController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulseController = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
+
+    _gridController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) _gridController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    _gridController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F4F8), // Soft premium grey/blue background
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 280.0,
-            floating: false,
-            pinned: true,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            elevation: 0,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
+      backgroundColor: const Color(0xFF001540), // GlobalLine Deep Navy
+      body: Stack(
+        children: [
+          // 1. The Pulse: Generative Flow Background
+          Positioned.fill(
+            child: AnimatedBuilder(
+              animation: _pulseController,
+              builder: (context, child) {
+                return CustomPaint(
+                  painter: _PulseFlowPainter(_pulseController.value),
+                );
+              },
+            ),
+          ),
+
+          // 2. Glassmorphism Content Layer
+          SafeArea(
+            child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                _buildDynamicHeader(),
+                _buildPrioritySurgeCard(),
+                _buildBentoServiceGrid(),
+                const SliverToBoxAdapter(child: SizedBox(height: 120)),
+              ],
+            ),
+          ),
+
+          // 3. The Universal Action Node
+          _buildUniversalActionNode(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDynamicHeader() {
+    return SliverPadding(
+      padding: const EdgeInsets.all(24.0),
+      sliver: SliverToBoxAdapter(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("THE PULSE", 
+                  style: TextStyle(color: Color(0xFFFFD700), 
+                  fontSize: 10, letterSpacing: 4, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                const Text("Welcome, Alexander", 
+                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Outfit')),
+              ],
+            ),
+            _buildNotificationNode(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNotificationNode() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.white10),
+      ),
+      child: IconButton(
+        onPressed: () => context.push('/notifications'),
+        icon: const Icon(Icons.blur_on_rounded, color: Color(0xFFFFD700), size: 28),
+      ),
+    );
+  }
+
+  Widget _buildPrioritySurgeCard() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(32),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: Container(
+              padding: const EdgeInsets.all(32),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.03),
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.white.withOpacity(0.05), Colors.transparent],
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   // Gradient Background
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          const Color(0xFF002366),
-                          const Color(0xFF0D47A1).withOpacity(0.9),
-                        ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("\$82,450.00", 
+                        style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.w900, fontFamily: 'Outfit')),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(color: const Color(0xFFFFD700).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.trending_up, color: Color(0xFFFFD700), size: 12),
+                            SizedBox(width: 4),
+                            Text("2.4%", style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                   // Decorative Circles
-                  Positioned(
-                    top: -100,
-                    right: -100,
-                    child: Container(
-                      width: 300,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.05),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 100,
-                    left: -50,
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-                      ),
-                    ),
-                  ),
-                  // Content
-                  SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 24,
-                                    backgroundColor: Colors.white.withOpacity(0.2),
-                                    child: const Icon(Icons.person, color: Colors.white),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Welcome back,",
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.8),
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                      const Text(
-                                        "Alexander", // Placeholder name
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () => context.push('/notifications'),
-                                icon: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: const Icon(Icons.notifications_outlined, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          // Wallet Balance Card
-                          GestureDetector(
-                            onTap: () => context.push('/wallet'),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(24),
-                                border: Border.all(color: Colors.white.withOpacity(0.2)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 10),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Total Balance",
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.8),
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      const Text(
-                                        "\$12,450.00",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Outfit',
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).colorScheme.secondary,
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: const Text(
-                                      "Top Up",
-                                      style: TextStyle(
-                                        color: Color(0xFF002366),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  const Text("CURRENT LIQUIDITY", 
+                    style: TextStyle(color: Colors.white30, fontSize: 10, letterSpacing: 2, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 32),
+                  Row(
+                    children: [
+                      _buildQuickAction(Icons.add_circle_outline, "Top Up", const Color(0xFFFFD700)),
+                      const SizedBox(width: 24),
+                      _buildQuickAction(Icons.send_outlined, "Transfer", Colors.white),
+                      const SizedBox(width: 24),
+                      _buildQuickAction(Icons.qr_code_scanner, "Scan", Colors.white),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Quick Services",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF002366),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 1.1,
-                      children: [
-                        _ServiceCard(
-                          title: "New Shipment",
-                          subtitle: "Send to 200+ countries",
-                          icon: Icons.local_shipping_outlined,
-                          color: const Color(0xFF002366),
-                          onTap: () => context.push('/ship/create'),
-                        ),
-                        _ServiceCard(
-                          title: "Track Package",
-                          subtitle: "Real-time updates",
-                          icon: Icons.track_changes,
-                          color: const Color(0xFFFFD700),
-                          isGold: true,
-                          onTap: () => context.go('/tracking'),
-                        ),
-                        _ServiceCard(
-                          title: "Ship for Me",
-                          subtitle: "We buy & ship for you",
-                          icon: Icons.shopping_cart_checkout_outlined,
-                          color: Colors.green.shade700,
-                          onTap: () => context.push('/ship/for-me'),
-                        ),
-                        _ServiceCard(
-                          title: "Consolidate",
-                          subtitle: "Combine and save",
-                          icon: Icons.inventory_2_outlined,
-                          color: Colors.purple.shade700,
-                          onTap: () => context.push('/ship/consolidate'),
-                        ),
-                        _ServiceCard(
-                          title: "Calculator",
-                          subtitle: "Get instant quotes",
-                          icon: Icons.calculate_outlined,
-                          color: Colors.orange.shade800,
-                          onTap: () => context.push('/calculator'),
-                        ),
-                         _ServiceCard(
-                          title: "Sourcing",
-                          subtitle: "Buy from China",
-                          icon: Icons.storefront_outlined,
-                          color: Colors.red.shade700,
-                          onTap: () => context.go('/shop'),
-                        ),
-                        _ServiceCard(
-                          title: "Wallet",
-                          subtitle: "Manage funds & payouts",
-                          icon: Icons.account_balance_wallet_outlined,
-                          color: const Color(0xFF002366),
-                          onTap: () => context.push('/wallet'),
-                        ),
-                        _ServiceCard(
-                          title: "Global Suite",
-                          subtitle: "Your unique warehouses",
-                          icon: Icons.map_outlined,
-                          color: Colors.blue.shade800,
-                          onTap: () => context.push('/logistics/virtual-addresses'),
-                        ),
-                      ],
-                    ),
-                  const SizedBox(height: 32),
-                  
-                  // Promo / Info Card
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF2E3192), Color(0xFF1BFFFF)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(24),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF2E3192).withOpacity(0.3),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: const Text(
-                                  "PRO TIP",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              const Text(
-                                "Consolidate & Save",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                "Combine multiple packages into one shipment to save up to 70% on shipping.",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  height: 1.4,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Conceptual 3D Image placeholder
-                        const Icon(Icons.inventory_2_outlined, size: 80, color: Colors.white24),
-                      ],
-                    ),
-                  ),
+        ),
+      ),
+    );
+  }
 
-                   const SizedBox(height: 100), // Bottom padding
-                ],
-              ),
-            ),
+  Widget _buildQuickAction(IconData icon, String label, Color color) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.05),
+            shape: BoxShape.circle,
+            border: Border.all(color: color.withOpacity(0.1)),
+          ),
+          child: Icon(icon, color: color, size: 20),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: TextStyle(color: color.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+
+  Widget _buildBentoServiceGrid() {
+    return SliverPadding(
+      padding: const EdgeInsets.all(24),
+      sliver: SliverGrid.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        childAspectRatio: 1.1,
+        children: [
+          _BentoCard(
+            title: "Ship For Me",
+            subtitle: "Global Procurement",
+            icon: Icons.shopping_bag_outlined,
+            color: const Color(0xFFFFD700),
+            onTap: () => context.push('/ship/for-me'),
+          ),
+          _BentoCard(
+            title: "Sourcing Hub",
+            subtitle: "China Factories",
+            icon: Icons.factory_outlined,
+            color: const Color(0xFFFFD700),
+            onTap: () => context.push('/sourcing'),
+          ),
+          _BentoCard(
+            title: "The Oracle",
+            subtitle: "Quantum Calculator",
+            icon: Icons.blur_circular,
+            color: Colors.white,
+            onTap: () => context.push('/calculator'),
+          ),
+          _BentoCard(
+            title: "Global Suite",
+            subtitle: "Warehouse Nodes",
+            icon: Icons.hub_outlined,
+            color: Colors.white70,
+            onTap: () => context.push('/logistics/virtual-addresses'),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildUniversalActionNode() {
+    return Positioned(
+      bottom: 40,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: GestureDetector(
+          onTap: () {}, // Action center logic
+          child: Container(
+            width: 72,
+            height: 72,
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFD700),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(color: const Color(0xFFFFD700).withOpacity(0.4), blurRadius: 40, spreadRadius: 10),
+              ],
+            ),
+            child: const Icon(Icons.flash_on, color: Color(0xFF001540), size: 32),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _ServiceCard extends StatelessWidget {
+class _BentoCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
   final Color color;
   final VoidCallback onTap;
-  final bool isGold;
 
-  const _ServiceCard({
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-    required this.onTap,
-    this.isGold = false,
-  });
+  const _BentoCard({required this.title, required this.subtitle, required this.icon, required this.color, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.04),
           borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.05),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
+          border: Border.all(color: Colors.white.withOpacity(0.05)),
         ),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: isGold ? color.withOpacity(0.2) : color.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                color: isGold ? Colors.orange.shade800 : color, // Gold icon needs contrast
-                size: 28,
-              ),
-            ),
-             Column(
+            Icon(icon, color: color, size: 28),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF002366),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[500],
-                  ),
-                ),
+                Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                const SizedBox(height: 2),
+                Text(subtitle, style: TextStyle(color: Colors.white.withOpacity(0.3), fontSize: 10)),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+class _PulseFlowPainter extends CustomPainter {
+  final double progress;
+  _PulseFlowPainter(this.progress);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.fill;
+
+    final random = math.Random(42);
+    for (var i = 0; i < 6; i++) {
+      paint.color = const Color(0xFFFFD700).withOpacity(0.03);
+
+      final x = size.width * random.nextDouble() + (math.sin(progress * math.pi * 2 + i) * 50);
+      final y = size.height * random.nextDouble() + (math.cos(progress * math.pi * 2 + i) * 50);
+      final radius = 100 + random.nextDouble() * 200;
+
+      canvas.drawCircle(Offset(x, y), radius, paint);
+    }
+
+    // Secondary subtle bloom in brand Navy tone
+    paint.color = const Color(0xFF002366).withOpacity(0.05);
+    canvas.drawCircle(Offset(size.width / 2, size.height / 2), size.width * (0.5 + 0.1 * math.sin(progress * 2 * math.pi)), paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

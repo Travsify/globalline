@@ -29,8 +29,8 @@ import 'package:mobile/features/marketplace/presentation/screens/marketplace_scr
 import 'package:mobile/features/marketplace/presentation/screens/product_details_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/cart_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/checkout_screen.dart';
-import 'package:mobile/features/marketplace/presentation/screens/sourcing_list_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/create_sourcing_request_screen.dart';
+import 'package:mobile/features/marketplace/presentation/screens/sourcing_hub_screen.dart';
 
 import 'package:mobile/features/wallet/presentation/screens/wallet_screen.dart';
 import 'package:mobile/features/wallet/presentation/screens/currency_conversion_screen.dart';
@@ -124,6 +124,11 @@ final routerProvider = Provider<GoRouter>((ref) {
               isFunding: extra['isFunding'] ?? false,
            );
         },
+      ),
+      GoRoute(
+        path: '/sourcing',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const SourcingHubScreen(),
       ),
       GoRoute(
         path: '/marketplace/sourcing',

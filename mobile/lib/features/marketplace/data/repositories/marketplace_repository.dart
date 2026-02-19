@@ -5,7 +5,14 @@ abstract class MarketplaceRepository {
   Future<List<Product>> searchProducts(String query, {String currency = 'USD', String source = 'local'});
   Future<Product> getProductDetails(String id, {String currency = 'USD'});
   Future<List<dynamic>> getSourcingRequests();
-  Future<void> submitSourcingRequest({required String productName, required String description});
+  Future<void> submitSourcingRequest({
+    required String productName,
+    required String description,
+    String? targetPrice,
+    String? quantity,
+    String? preferredOrigin,
+    String? deadline,
+  });
 }
 
 class RealMarketplaceRepository implements MarketplaceRepository {
@@ -52,11 +59,22 @@ class RealMarketplaceRepository implements MarketplaceRepository {
   }
 
   @override
-  Future<void> submitSourcingRequest({required String productName, required String description}) async {
+  Future<void> submitSourcingRequest({
+    required String productName,
+    required String description,
+    String? targetPrice,
+    String? quantity,
+    String? preferredOrigin,
+    String? deadline,
+  }) async {
     try {
       await _dio.post('enterprise/sourcing-request', data: {
         'product_name': productName,
         'description': description,
+        'target_price': targetPrice,
+        'quantity': quantity,
+        'preferred_origin': preferredOrigin,
+        'deadline': deadline,
       });
     } on DioException catch (e) {
       throw e.error!;
