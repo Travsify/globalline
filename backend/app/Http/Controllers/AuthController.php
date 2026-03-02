@@ -111,22 +111,50 @@ class AuthController extends Controller
     {
         $request->validate(['email' => 'required|email']);
         
-        // In a real app, we would send a reset link here.
-        // For this demo, we'll just simulate success.
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json(['message' => 'If your email exists in our system, you will receive a verification code shortly.']);
+        }
+
+        $otpService = new \App\Services\OtpService();
+        $otpService->generate($user->email);
         
-        return response()->json(['message' => 'If your email exists in our system, you will receive a password reset link shortly.']);
+        return response()->json(['message' => 'Verification code sent to your email.']);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'otp' => 'required|string|size:6',
+        ]);
+
+        $otpService = new \App\Services\OtpService();
+        if (!$otpService->verify($request->email, $request->otp)) {
+            return response()->json(['message' => 'Invalid or expired verification code.'], 422);
+        }
+
+        return response()->json(['message' => 'OTP verified successfully.']);
     }
 
     public function resetPassword(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
-            'token' => 'required',
+            'otp' => 'required|string|size:6',
             'password' => 'required|min:8|confirmed',
         ]);
 
-        // In a real app, we would verify the token and update the password.
-        // For this demo, we'll just simulate success.
+        $otpService = new \App\Services\OtpService();
+        if (!$otpService->verify($request->email, $request->otp)) {
+            return response()->json(['message' => 'Invalid or expired verification code.'], 422);
+        }
+
+        $user = User::where('email', $request->email)->firstOrFail();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        $otpService->clear($request->email);
 
         return response()->json(['message' => 'Password has been reset successfully.']);
     }

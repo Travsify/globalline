@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/wallet/presentation/providers/wallet_provider.dart';
+import 'package:mobile/features/wallet/data/models/wallet_models.dart';
 import 'package:mobile/shared/widgets/status_widgets.dart';
 
 class CurrencyConversionScreen extends ConsumerStatefulWidget {
@@ -70,7 +71,7 @@ class _CurrencyConversionScreenState extends ConsumerState<CurrencyConversionScr
     );
   }
 
-  Widget _buildBalanceRibbon(List<dynamic> balances) {
+  Widget _buildBalanceRibbon(List<CurrencyBalance> balances) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -80,13 +81,19 @@ class _CurrencyConversionScreenState extends ConsumerState<CurrencyConversionScr
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: balances.map((b) => Column(
-          children: [
-            Text(b['currency'], style: const TextStyle(color: Colors.white70, fontSize: 12)),
-            const SizedBox(height: 4),
-            Text("${b['amount']}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          ],
-        )).toList(),
+        children: balances.map((b) {
+          String symbol = '';
+          if (b.currency == 'NGN') symbol = '₦';
+          if (b.currency == 'USD') symbol = '\$';
+          if (b.currency == 'CNY') symbol = '¥';
+          return Column(
+            children: [
+              Text(b.currency, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+              const SizedBox(height: 4),
+              Text("$symbol${b.amount.toStringAsFixed(2)}", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            ],
+          );
+        }).toList(),
       ),
     );
   }

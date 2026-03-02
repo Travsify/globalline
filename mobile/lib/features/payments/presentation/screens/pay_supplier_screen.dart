@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/shared/widgets/status_widgets.dart';
 
 // You'll need to create a provider for this logic, but for now we'll put UI first
 import 'package:mobile/core/network/api_client.dart'; 

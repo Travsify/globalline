@@ -19,15 +19,15 @@ class SupportTicket {
 
   factory SupportTicket.fromJson(Map<String, dynamic> json) {
     return SupportTicket(
-      id: json['id'],
-      subject: json['subject'],
-      category: json['category'],
-      priority: json['priority'],
-      status: json['status'],
-      createdAt: DateTime.parse(json['created_at']),
-      messages: json['messages'] != null
-          ? (json['messages'] as List).map((e) => SupportMessage.fromJson(e)).toList()
-          : [],
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      subject: json['subject']?.toString() ?? '',
+      category: json['category']?.toString() ?? '',
+      priority: json['priority']?.toString() ?? '',
+      status: json['status']?.toString() ?? '',
+      createdAt: DateTime.tryParse(json['created_at']?.toString() ?? '') ?? DateTime.now(),
+      messages: (json['messages'] as List?)
+          ?.map((e) => SupportMessage.fromJson(e as Map<String, dynamic>))
+          .toList() ?? [],
     );
   }
 }
@@ -53,13 +53,13 @@ class SupportMessage {
 
   factory SupportMessage.fromJson(Map<String, dynamic> json) {
     return SupportMessage(
-      id: json['id'],
-      userId: json['user_id'],
-      message: json['message'],
-      attachmentUrl: json['attachment_url'],
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      userId: (json['user_id'] as num?)?.toInt() ?? 0,
+      message: json['message']?.toString() ?? '',
+      attachmentUrl: json['attachment_url']?.toString(),
       isAdmin: json['is_admin'] == 1 || json['is_admin'] == true,
-      createdAt: DateTime.parse(json['created_at']),
-      userName: json['user']?['name'],
+      createdAt: DateTime.tryParse(json['created_at']?.toString() ?? '') ?? DateTime.now(),
+      userName: json['user']?['name']?.toString(),
     );
   }
 }

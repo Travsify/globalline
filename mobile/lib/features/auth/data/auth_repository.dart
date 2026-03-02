@@ -1,6 +1,4 @@
-
 import 'package:dio/dio.dart';
-import '../../../../core/network/api_client.dart';
 import '../../../../core/storage/secure_storage_service.dart';
 import '../../../../core/exceptions/app_exceptions.dart';
 import './models/auth_models.dart';
@@ -10,7 +8,8 @@ abstract class AuthRepository {
   Future<AuthResponse> register(String name, String email, String password, String passwordConfirmation);
   Future<void> logout();
   Future<void> forgotPassword(String email);
-  Future<void> resetPassword(String email, String token, String password, String passwordConfirmation);
+  Future<void> verifyOtp(String email, String otp);
+  Future<void> resetPassword(String email, String otp, String password, String passwordConfirmation);
 }
 
 class RealAuthRepository implements AuthRepository {
@@ -74,11 +73,23 @@ class RealAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> resetPassword(String email, String token, String password, String passwordConfirmation) async {
+  Future<void> verifyOtp(String email, String otp) async {
+    try {
+      await _dio.post('auth/verify-otp', data: {
+        'email': email,
+        'otp': otp,
+      });
+    } on DioException catch (e) {
+      throw e.error!;
+    }
+  }
+
+  @override
+  Future<void> resetPassword(String email, String otp, String password, String passwordConfirmation) async {
     try {
       await _dio.post('auth/reset-password', data: {
         'email': email,
-        'token': token,
+        'otp': otp,
         'password': password,
         'password_confirmation': passwordConfirmation,
       });

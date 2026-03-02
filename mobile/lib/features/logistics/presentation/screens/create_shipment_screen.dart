@@ -3,13 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/logistics/presentation/providers/logistics_provider.dart';
 import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
-import 'package:mobile/features/auth/presentation/providers/auth_state.dart';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const _kNavy = Color(0xFF002366);
 const _kNavyDark = Color(0xFF001540);
 const _kGold = Color(0xFFFFD700);
-const _kGoldDark = Color(0xFFD4A900);
 
 const _kStepTitles = ['Route', 'Package', 'Contacts', 'Service', 'Review'];
 const _kStepIcons = [

@@ -1,10 +1,10 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/logistics/presentation/providers/logistics_provider.dart';
 import 'package:mobile/features/logistics/data/models/logistics_models.dart';
 import 'package:mobile/shared/widgets/status_widgets.dart';
+import 'package:mobile/features/logistics/application/volumetric_service.dart';
 
 class ConsolidationScreen extends ConsumerStatefulWidget {
   const ConsolidationScreen({super.key});
@@ -23,6 +23,12 @@ class _ConsolidationScreenState extends ConsumerState<ConsolidationScreen> {
   @override
   Widget build(BuildContext context) {
     final shipmentsAsync = ref.watch(userShipmentsProvider);
+    final volumetricService = ref.read(volumetricServiceProvider);
+    
+    final selectedList = _selectedShipments.values.toList();
+    final efficiencyScore = volumetricService.calculateEfficiencyScore(selectedList);
+    final isPayingForAir = volumetricService.isPayingForAir(selectedList);
+    final optimizationTip = volumetricService.getOptimizationSuggestion(selectedList);
 
     return Scaffold(
       backgroundColor: const Color(0xFF001540),
@@ -39,12 +45,14 @@ class _ConsolidationScreenState extends ConsumerState<ConsolidationScreen> {
           return Column(
             children: [
               _buildAggregatorStats(),
+              if (isPayingForAir) _buildVolumetricDefenderAlert(),
+              _buildEfficiencyBar(efficiencyScore),
               Expanded(
                 child: eligibleShipments.isEmpty 
                   ? _buildEmptyState()
                   : _buildShipmentGrid(eligibleShipments),
               ),
-              _buildActionFooter(),
+              _buildActionFooter(optimizationTip),
             ],
           );
         },
@@ -153,7 +161,7 @@ class _ConsolidationScreenState extends ConsumerState<ConsolidationScreen> {
     );
   }
 
-  Widget _buildActionFooter() {
+  Widget _buildActionFooter(String? tip) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -162,8 +170,8 @@ class _ConsolidationScreenState extends ConsumerState<ConsolidationScreen> {
       ),
       child: Column(
         children: [
-          if (_totalWeight > 0 && _totalWeight < 10) 
-            _buildOptimizationTip("Add 2.4kg more to unlock Wholesale Rates (7% off)"),
+          if (tip != null) 
+            _buildOptimizationTip(tip),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: _selectedShipments.length < 2 || _isSubmitting 
@@ -179,6 +187,66 @@ class _ConsolidationScreenState extends ConsumerState<ConsolidationScreen> {
             child: _isSubmitting 
               ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF001540)))
               : Text("AGGREGATE ${_selectedShipments.length} SHIPMENTS", style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.1)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVolumetricDefenderAlert() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.redAccent.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.redAccent.withOpacity(0.3)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.warning_amber_rounded, color: Colors.redAccent),
+          const SizedBox(width: 12),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("VOLUMETRIC DEFENDER DETECTED AIR", 
+                  style: TextStyle(color: Colors.redAccent, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                SizedBox(height: 4),
+                Text("You are paying for empty space. Add high-density small items (e.g., Phone Cases) to ship them for FREE.", 
+                  style: TextStyle(color: Colors.white, fontSize: 12)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEfficiencyBar(double score) {
+    final Color barColor = score > 80 ? Colors.greenAccent : (score > 50 ? const Color(0xFFFFD700) : Colors.orangeAccent);
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("SMART STACKING EFFICIENCY", style: TextStyle(color: Colors.white30, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1)),
+              Text("${score.toInt()}%", style: TextStyle(color: barColor, fontWeight: FontWeight.bold, fontSize: 12)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: score / 100,
+              backgroundColor: Colors.white.withOpacity(0.05),
+              valueColor: AlwaysStoppedAnimation<Color>(barColor),
+              minHeight: 6,
+            ),
           ),
         ],
       ),

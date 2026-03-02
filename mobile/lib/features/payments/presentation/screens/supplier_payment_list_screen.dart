@@ -80,7 +80,7 @@ class _SupplierPaymentListScreenState extends ConsumerState<SupplierPaymentListS
 
   Widget _buildPaymentCard(dynamic payment) {
     final currency = payment['currency'] ?? 'USD';
-    final amount = double.tryParse(payment['amount'].toString()) ?? 0.0;
+    final amount = double.tryParse(payment['amount']?.toString() ?? '0') ?? 0.0;
     final date = DateTime.tryParse(payment['created_at']) ?? DateTime.now();
     final status = payment['status'] ?? 'pending';
 

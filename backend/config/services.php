@@ -35,4 +35,23 @@ return [
         ],
     ],
 
+    'fincra' => [
+        'base_url' => env('FINCRA_BASE_URL', 'https://api.fincra.com/'),
+        'secret_key' => env('FINCRA_SECRET_KEY'),
+        'webhook_secret' => env('FINCRA_WEBHOOK_SECRET'),
+        'business_id' => env('FINCRA_BUSINESS_ID'),
+    ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
+    'paystack' => [
+        'public_key' => env('PAYSTACK_PUBLIC_KEY'),
+        'secret_key' => env('PAYSTACK_SECRET_KEY'),
+        'merchant_email' => env('PAYSTACK_MERCHANT_EMAIL'),
+    ],
+
 ];

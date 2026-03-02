@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
+import 'package:mobile/features/wallet/presentation/providers/wallet_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -80,6 +81,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
   }
 
   Widget _buildDynamicHeader() {
+    final authState = ref.watch(authControllerProvider);
+    final userName = authState.user?.name.split(' ').first ?? 'User';
+
     return SliverPadding(
       padding: const EdgeInsets.all(24.0),
       sliver: SliverToBoxAdapter(
@@ -93,8 +97,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                   style: TextStyle(color: Color(0xFFFFD700), 
                   fontSize: 10, letterSpacing: 4, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
-                const Text("Welcome, Alexander", 
-                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Outfit')),
+                Text("Welcome, $userName", 
+                  style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, fontFamily: 'Outfit')),
               ],
             ),
             _buildNotificationNode(),
@@ -119,6 +123,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
   }
 
   Widget _buildPrioritySurgeCard() {
+    final wallet = ref.watch(walletControllerProvider).value;
+    final balance = wallet?.balance ?? 0.00;
+    final currency = wallet?.currency ?? 'USD';
+    final symbol = currency == 'NGN' ? '₦' : (currency == 'CNY' ? '¥' : '\$');
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
@@ -144,8 +153,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("\$82,450.00", 
-                        style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.w900, fontFamily: 'Outfit')),
+                      Text("$symbol${balance.toStringAsFixed(2)}", 
+                        style: const TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.w900, fontFamily: 'Outfit')),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(color: const Color(0xFFFFD700).withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
@@ -153,22 +162,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                           children: [
                             Icon(Icons.trending_up, color: Color(0xFFFFD700), size: 12),
                             SizedBox(width: 4),
-                            Text("2.4%", style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, fontWeight: FontWeight.bold)),
+                            Text("Node Active", style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const Text("CURRENT LIQUIDITY", 
+                  const Text("AVAILABLE FUNDS", 
                     style: TextStyle(color: Colors.white30, fontSize: 10, letterSpacing: 2, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 32),
                   Row(
                     children: [
-                      _buildQuickAction(Icons.add_circle_outline, "Top Up", const Color(0xFFFFD700)),
+                      _buildQuickAction(Icons.add_circle_outline, "Top Up", const Color(0xFFFFD700), () => context.push('/wallet')),
                       const SizedBox(width: 24),
-                      _buildQuickAction(Icons.send_outlined, "Transfer", Colors.white),
+                      _buildQuickAction(Icons.send_outlined, "Transfer", Colors.white, () => context.push('/wallet')),
                       const SizedBox(width: 24),
-                      _buildQuickAction(Icons.qr_code_scanner, "Scan", Colors.white),
+                      _buildQuickAction(Icons.qr_code_scanner, "Scan", Colors.white, () async {
+                        final result = await context.push<String>('/wallet/scan');
+                        if (result != null && mounted) {
+                          _showTransferDialog(context);
+                        }
+                      }),
                     ],
                   ),
                 ],
@@ -180,21 +194,156 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
     );
   }
 
-  Widget _buildQuickAction(IconData icon, String label, Color color) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.05),
-            shape: BoxShape.circle,
-            border: Border.all(color: color.withOpacity(0.1)),
+  void _showTransferDialog(BuildContext context) {
+    final recipientController = TextEditingController();
+    final amountController = TextEditingController();
+    String selectedCurrency = 'USD';
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setModalState) => Container(
+          padding: EdgeInsets.fromLTRB(24, 24, 24, MediaQuery.of(ctx).viewInsets.bottom + 24),
+          decoration: const BoxDecoration(
+            color: Color(0xFF001540),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
           ),
-          child: Icon(icon, color: color, size: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                "Peer-to-Peer Transfer",
+                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                "Transfer funds instantly and securely to any GlobalLine user via email or phone.",
+                style: TextStyle(color: Colors.white54, fontSize: 12),
+              ),
+              const SizedBox(height: 24),
+              TextField(
+                controller: recipientController,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  labelText: "Recipient Email or Phone",
+                  labelStyle: const TextStyle(color: Color(0xFFFFD700)),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.05),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextField(
+                      controller: amountController,
+                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      decoration: InputDecoration(
+                        labelText: "Amount",
+                        labelStyle: const TextStyle(color: Color(0xFFFFD700)),
+                        filled: true,
+                        fillColor: Colors.white.withOpacity(0.05),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: DropdownButton<String>(
+                        value: selectedCurrency,
+                        dropdownColor: const Color(0xFF001540),
+                        underline: const SizedBox(),
+                        isExpanded: true,
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        onChanged: (String? newValue) {
+                          setModalState(() {
+                            selectedCurrency = newValue!;
+                          });
+                        },
+                        items: <String>['USD', 'NGN', 'CNY'].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: () async {
+                  final amount = double.tryParse(amountController.text);
+                  final recipient = recipientController.text.trim();
+                  if (amount != null && amount > 0 && recipient.isNotEmpty) {
+                    try {
+                      // Note: HomeScreen uses the same walletControllerProvider logic
+                      await ref.read(walletControllerProvider.notifier).transfer(
+                        recipientIdentifier: recipient,
+                        amount: amount,
+                        fromCurrency: selectedCurrency,
+                      );
+                      if (context.mounted) {
+                        Navigator.pop(ctx);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Transfer successful!'), backgroundColor: Colors.green),
+                        );
+                      }
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Transfer failed: $e'), backgroundColor: Colors.red),
+                        );
+                      }
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFFD700),
+                  foregroundColor: const Color(0xFF001540),
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                child: const Text("SEND FUNDS", style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.1)),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: 8),
-        Text(label, style: TextStyle(color: color.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.bold)),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildQuickAction(IconData icon, String label, Color color, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.05),
+              shape: BoxShape.circle,
+              border: Border.all(color: color.withOpacity(0.1)),
+            ),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(height: 8),
+          Text(label, style: TextStyle(color: color.withOpacity(0.6), fontSize: 10, fontWeight: FontWeight.bold)),
+        ],
+      ),
     );
   }
 
@@ -215,25 +364,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
             onTap: () => context.push('/ship/for-me'),
           ),
           _BentoCard(
+            title: "Pay Suppliers",
+            subtitle: "Global Payouts",
+            icon: Icons.account_balance_wallet_outlined,
+            color: const Color(0xFFFFD700),
+            onTap: () => context.push('/pay-supplier'),
+          ),
+          _BentoCard(
             title: "Sourcing Hub",
             subtitle: "China Factories",
             icon: Icons.factory_outlined,
-            color: const Color(0xFFFFD700),
+            color: Colors.white,
             onTap: () => context.push('/sourcing'),
           ),
           _BentoCard(
             title: "The Oracle",
-            subtitle: "Quantum Calculator",
+            subtitle: "Trade Calculator",
             icon: Icons.blur_circular,
-            color: Colors.white,
-            onTap: () => context.push('/calculator'),
-          ),
-          _BentoCard(
-            title: "Global Suite",
-            subtitle: "Warehouse Nodes",
-            icon: Icons.hub_outlined,
             color: Colors.white70,
-            onTap: () => context.push('/logistics/virtual-addresses'),
+            onTap: () => context.push('/calculator'),
           ),
         ],
       ),

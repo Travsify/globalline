@@ -41,7 +41,7 @@ class _ShipForMeScreenState extends ConsumerState<ShipForMeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF001540),
       appBar: AppBar(
-        title: const Text('Agent Purchase & Ship', 
+        title: const Text('Shop For Me', 
           style: TextStyle(fontFamily: 'Outfit', fontWeight: FontWeight.bold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -61,7 +61,7 @@ class _ShipForMeScreenState extends ConsumerState<ShipForMeScreen> {
                     const SizedBox(height: 12),
                     _buildWarehouseSelector(),
                     const SizedBox(height: 32),
-                    _buildSectionHeader("ITEM IDENTIFICATION"),
+                    _buildSectionHeader("ITEM DETAILS"),
                     const SizedBox(height: 12),
                     _buildTextField(_urlController, "Product URL (1688, Taobao, Tmall, etc.)", Icons.link, hint: "Paste link for our agents to buy"),
                     const SizedBox(height: 16),
@@ -102,7 +102,7 @@ class _ShipForMeScreenState extends ConsumerState<ShipForMeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Global Proxy Buying",
+            "Concierge Buying",
             style: TextStyle(color: Color(0xFFFFD700), fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'Outfit'),
           ),
           const SizedBox(height: 8),
@@ -203,7 +203,7 @@ class _ShipForMeScreenState extends ConsumerState<ShipForMeScreen> {
       ),
       child: _isLoading 
         ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF001540)))
-        : const Text("INITIALIZE AGENT PURCHASE", style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.1)),
+        : const Text("START PURCHASE ORDER", style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.1)),
     );
   }
 

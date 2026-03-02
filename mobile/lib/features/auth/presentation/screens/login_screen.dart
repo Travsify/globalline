@@ -62,8 +62,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authControllerProvider);
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     ref.listen(authControllerProvider, (previous, next) {
       if (next.error != null && !next.isLoading) {

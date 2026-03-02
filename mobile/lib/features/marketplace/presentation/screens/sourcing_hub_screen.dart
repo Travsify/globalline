@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile/features/marketplace/presentation/providers/marketplace_provider.dart';
 import 'package:mobile/features/marketplace/presentation/providers/currency_provider.dart';
 import 'package:mobile/features/marketplace/presentation/screens/ai_sourcing_screen.dart';
+import 'package:mobile/features/marketplace/application/procurement_service.dart';
 
 class SourcingHubScreen extends ConsumerStatefulWidget {
   const SourcingHubScreen({super.key});
@@ -55,7 +56,13 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
             slivers: [
               _buildAppBar(context),
               SliverToBoxAdapter(
-                child: _buildCategoryList(),
+                child: Column(
+                  children: [
+                    _buildOpportunityRadar(context, ref),
+                    _buildCategoryList(),
+                    _buildRestockNudges(ref),
+                  ],
+                ),
               ),
               _buildProductGrid(productsAsync, currency),
               const SliverToBoxAdapter(child: SizedBox(height: 120)),
@@ -94,7 +101,7 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('NEURAL SOURCING', 
+                  const Text('AI PROCUREMENT', 
                     style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, letterSpacing: 4, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   const Text('Global Supply Hub', 
@@ -110,7 +117,7 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
                       controller: _searchController,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintText: 'Transmit sourcing intent...',
+                        hintText: 'What are you looking for?',
                         hintStyle: TextStyle(color: Colors.white.withOpacity(0.2)),
                         prefixIcon: const Icon(Icons.search, color: Color(0xFFFFD700)),
                         border: InputBorder.none,
@@ -181,10 +188,10 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
           ),
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              final product = (products as List)[index];
+              final product = products[index];
               return _SourcingCard(product: product);
             },
-            childCount: (products as List).length,
+            childCount: products.length,
           ),
         ),
       ),
@@ -207,7 +214,7 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
             children: [
               Expanded(
                 child: _ActionPill(
-                  label: 'NEURAL AGENT',
+                  label: 'SOURCING ASSISTANT',
                   icon: Icons.auto_awesome,
                   color: Colors.white.withOpacity(0.05),
                   borderColor: Colors.white.withOpacity(0.1),
@@ -217,7 +224,7 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
               const SizedBox(width: 12),
               Expanded(
                 child: _ActionPill(
-                  label: 'TRANSFORM TO RFQ',
+                  label: 'REQUEST QUOTE',
                   icon: Icons.flash_on,
                   color: const Color(0xFFFFD700),
                   textColor: const Color(0xFF001540),
@@ -247,6 +254,96 @@ class _SourcingHubScreenState extends ConsumerState<SourcingHubScreen> {
           ),
           child: const AiSourcingScreen(),
         ),
+      ),
+    );
+  }
+
+  Widget _buildOpportunityRadar(BuildContext context, WidgetRef ref) {
+    final service = ref.read(procurementServiceProvider);
+    return FutureBuilder<List<MarketOpportunity>>(
+      future: service.checkMarketOpportunities(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return const SizedBox.shrink();
+        final opps = snapshot.data!;
+        return Container(
+          height: 40,
+          margin: const EdgeInsets.only(bottom: 8),
+          color: const Color(0xFFFFD700).withOpacity(0.1),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: opps.length,
+            itemBuilder: (context, index) {
+              final opp = opps[index];
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Icon(
+                      opp.isGoodDeal ? Icons.trending_down : Icons.trending_up, 
+                      color: opp.isGoodDeal ? Colors.greenAccent : Colors.redAccent, 
+                      size: 14
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      "${opp.category.toUpperCase()}: ${opp.trend.toStringAsFixed(1)}% (${opp.region})",
+                      style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildRestockNudges(WidgetRef ref) {
+    final suggestions = ref.read(procurementServiceProvider).predictReStockNeeds();
+    if (suggestions.isEmpty) return const SizedBox.shrink();
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text("SUGGESTED RE-ORDERS", style: TextStyle(color: Colors.white30, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1)),
+          const SizedBox(height: 12),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: suggestions.map((s) => Container(
+                margin: const EdgeInsets.only(right: 12),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.blueAccent.withOpacity(0.3)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.history, color: Colors.blueAccent, size: 16),
+                    const SizedBox(width: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(s.itemName, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                        Text("${s.daysUntilStockout} days until stockout", style: const TextStyle(color: Colors.blueAccent, fontSize: 10)),
+                      ],
+                    ),
+                    const SizedBox(width: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.circular(8)),
+                      child: const Text("ORDER", style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              )).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

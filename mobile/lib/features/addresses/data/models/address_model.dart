@@ -23,14 +23,14 @@ class Address {
 
   factory Address.fromJson(Map<String, dynamic> json) {
     return Address(
-      id: json['id'] is int ? json['id'] : int.tryParse(json['id']?.toString() ?? ''),
-      label: json['label'] ?? '',
-      recipientName: json['recipient_name'] ?? '',
-      street: json['street'] ?? '',
-      city: json['city'] ?? '',
-      country: json['country'] ?? '',
-      zipCode: json['zip_code'],
-      phone: json['phone'] ?? '',
+      id: json['id'] is int ? json['id'] as int : int.tryParse(json['id']?.toString() ?? ''),
+      label: json['label']?.toString() ?? '',
+      recipientName: json['recipient_name']?.toString() ?? '',
+      street: json['street']?.toString() ?? '',
+      city: json['city']?.toString() ?? '',
+      country: json['country']?.toString() ?? '',
+      zipCode: json['zip_code']?.toString(),
+      phone: json['phone']?.toString() ?? '',
       isDefault: json['is_default'] == 1 || json['is_default'] == true,
     );
   }

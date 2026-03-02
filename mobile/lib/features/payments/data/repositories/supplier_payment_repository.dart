@@ -1,6 +1,5 @@
 
 import 'package:dio/dio.dart';
-import '../../../../core/network/api_client.dart';
 
 abstract class SupplierPaymentRepository {
   Future<List<dynamic>> getPayments(); // Using dynamic for now, ideally mapped to a Model

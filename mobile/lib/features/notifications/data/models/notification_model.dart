@@ -15,4 +15,15 @@ class AppNotification {
     required this.isRead,
     required this.type,
   });
+
+  factory AppNotification.fromJson(Map<String, dynamic> json) {
+    return AppNotification(
+      id: json['id']?.toString() ?? '',
+      title: json['title']?.toString() ?? '',
+      message: json['message']?.toString() ?? '',
+      date: DateTime.tryParse(json['created_at']?.toString() ?? '') ?? DateTime.now(),
+      isRead: json['is_read'] == 1 || json['is_read'] == true,
+      type: json['type']?.toString() ?? 'System',
+    );
+  }
 }

@@ -1,5 +1,4 @@
 import 'package:mobile/features/marketplace/presentation/providers/currency_provider.dart';
-import 'package:mobile/features/marketplace/presentation/screens/ai_sourcing_screen.dart';
 import 'package:mobile/features/marketplace/presentation/providers/marketplace_provider.dart';
 import 'package:mobile/features/marketplace/data/models/product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -90,7 +89,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                                   children: availableCurrencies.map((curr) {
                                     final isSelected = curr == selectedCurrency;
                                     return GestureDetector(
-                                      onTap: () => ref.read(selectedCurrencyProvider.notifier).state = curr,
+                                      onTap: () => ref.read(selectedCurrencyProvider.notifier).setCurrency(curr),
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                         decoration: BoxDecoration(
@@ -220,7 +219,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AiSourcingScreen())),
+        onPressed: () => context.push('/marketplace/ai-sourcing'),
         backgroundColor: const Color(0xFF002366),
         icon: const Icon(Icons.auto_awesome, color: Colors.white),
         label: const Text('AI SourcingAgent', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),

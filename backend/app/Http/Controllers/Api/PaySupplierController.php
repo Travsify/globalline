@@ -9,6 +9,7 @@ use App\Models\WalletBalance;
 use App\Models\WalletTransaction;
 use App\Services\FincraService;
 use App\Services\KlashaService;
+use App\Services\LedgerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,11 +19,13 @@ class PaySupplierController extends Controller
 {
     protected $fincraService;
     protected $klashaService;
+    protected $ledger;
 
-    public function __construct(FincraService $fincraService, KlashaService $klashaService)
+    public function __construct(FincraService $fincraService, KlashaService $klashaService, LedgerService $ledger)
     {
         $this->fincraService = $fincraService;
         $this->klashaService = $klashaService;
+        $this->ledger = $ledger;
     }
 
     public function store(Request $request)
@@ -60,26 +63,20 @@ class PaySupplierController extends Controller
             return response()->json(['message' => "Insufficient {$sourceCurrency} balance."], 400);
         }
 
-        return DB::transaction(function () use ($request, $user, $amount, $sourceCurrency, $destCurrency, $balanceRecord) {
-            // 2. Deduct from Source Wallet
-            if ($balanceRecord) {
-                $balanceRecord->decrement('amount', $amount);
-                $newBalance = $balanceRecord->amount;
-            } else {
-                $user->decrement('wallet_balance', $amount);
-                $newBalance = $user->wallet_balance;
-            }
-
-            // 3. Create Transaction Record (Debit)
-            WalletTransaction::create([
-                'user_id' => $user->id,
-                'type' => 'debit',
-                'amount' => $amount,
-                'balance_after' => $newBalance,
-                'description' => "Supplier Payment to {$request->beneficiary_name}",
-                'status' => 'pending', // Pending provider response
-                'reference' => 'PAY-' . strtoupper(substr(uniqid(), -8)),
-            ]);
+        return DB::transaction(function () use ($request, $user, $amount, $sourceCurrency, $destCurrency) {
+            // 2. Debit Source Wallet via Ledger
+            $groupId = $this->ledger->payout(
+                $user->id,
+                $amount,
+                $sourceCurrency,
+                "Supplier Payment to {$request->beneficiary_name}",
+                [
+                    'beneficiary_name' => $request->beneficiary_name,
+                    'account_number' => $request->account_number,
+                    'bank_name' => $request->bank_name,
+                    'currency' => $destCurrency,
+                ]
+            );
 
             // 4. Route to Payment Gateway
             $gatewayResponse = null;

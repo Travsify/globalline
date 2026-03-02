@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/support/data/repositories/support_repository.dart';
-import 'package:mobile/features/support/presentation/screens/create_ticket_screen.dart';
-import 'package:mobile/features/support/presentation/screens/ticket_detail_screen.dart';
 import 'package:mobile/shared/widgets/status_widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class SupportTicketListScreen extends ConsumerWidget {
   const SupportTicketListScreen({super.key});
@@ -18,10 +17,7 @@ class SupportTicketListScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.add_comment),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const CreateTicketScreen()),
-            ),
+            onPressed: () => context.push('/support/create'),
           ),
         ],
       ),
@@ -36,10 +32,7 @@ class SupportTicketListScreen extends ConsumerWidget {
                     const Text('No support tickets yet', style: TextStyle(color: Colors.grey)),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const CreateTicketScreen()),
-                      ),
+                      onPressed: () => context.push('/support/create'),
                       child: const Text('Create Ticket'),
                     ),
                   ],
@@ -54,10 +47,7 @@ class SupportTicketListScreen extends ConsumerWidget {
                     final ticket = tickets[index];
                     return Card(
                       child: ListTile(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => TicketDetailScreen(ticketId: ticket.id)),
-                        ),
+                        onTap: () => context.push('/support/ticket/${ticket.id}'),
                         title: Text(ticket.subject, style: const TextStyle(fontWeight: FontWeight.bold)),
                         subtitle: Text('${ticket.category} • ${ticket.createdAt.day}/${ticket.createdAt.month}/${ticket.createdAt.year}'),
                         trailing: _buildStatusChip(ticket.status),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/support/data/repositories/support_repository.dart';
+import 'package:mobile/features/support/data/models/support_model.dart';
 
 class TicketDetailScreen extends ConsumerStatefulWidget {
   final int ticketId;
@@ -66,7 +67,7 @@ class _TicketDetailScreenState extends ConsumerState<TicketDetailScreen> {
     );
   }
 
-  Widget _buildHeader(dynamic ticket) {
+  Widget _buildHeader(SupportTicket ticket) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -84,7 +85,7 @@ class _TicketDetailScreenState extends ConsumerState<TicketDetailScreen> {
     );
   }
 
-  Widget _buildMessageBubble(dynamic message) {
+  Widget _buildMessageBubble(SupportMessage message) {
     final isAdmin = message.isAdmin;
     return Container(
       margin: const EdgeInsets.only(bottom: 16),

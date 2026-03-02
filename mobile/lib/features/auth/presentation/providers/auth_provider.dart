@@ -53,10 +53,22 @@ class AuthController extends Notifier<AuthState> {
     }
   }
 
-  Future<bool> resetPassword(String email, String token, String password, String passwordConfirmation) async {
+  Future<bool> verifyOtp(String email, String otp) async {
     state = state.copyWith(isLoading: true, error: null);
     try {
-      await _repository.resetPassword(email, token, password, passwordConfirmation);
+      await _repository.verifyOtp(email, otp);
+      state = state.copyWith(isLoading: false);
+      return true;
+    } catch (e) {
+      state = state.copyWith(isLoading: false, error: e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> resetPassword(String email, String otp, String password, String passwordConfirmation) async {
+    state = state.copyWith(isLoading: true, error: null);
+    try {
+      await _repository.resetPassword(email, otp, password, passwordConfirmation);
       state = state.copyWith(isLoading: false);
       return true;
     } catch (e) {

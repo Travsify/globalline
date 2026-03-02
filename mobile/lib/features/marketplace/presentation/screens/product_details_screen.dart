@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/marketplace/presentation/providers/marketplace_provider.dart';
 import 'package:mobile/features/marketplace/presentation/providers/cart_provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/shared/widgets/status_widgets.dart';
 
 class ProductDetailsScreen extends ConsumerWidget {
   final String productId;
@@ -35,7 +34,7 @@ class ProductDetailsScreen extends ConsumerWidget {
                               .map((img) => Image.network(
                                     img,
                                     fit: BoxFit.cover,
-                                    errorBuilder: (_, __, ___) => const Center(
+                                    errorBuilder: (_, e, s) => const Center(
                                         child: Icon(Icons.image_not_supported,
                                             size: 64, color: Colors.white54)),
                                   ))
@@ -272,11 +271,8 @@ class ProductDetailsScreen extends ConsumerWidget {
             ),
           ],
         ),
-        loading: () => const AppLoadingWidget(),
-        error: (err, stack) => AppErrorWidget(
-          message: err.toString(),
-          onRetry: () => ref.invalidate(productDetailsProvider(productId)),
-        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, _) => Center(child: Text('Error: $err')),
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/core/network/api_client.dart';
-import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
 
 final virtualAddressesProvider = FutureProvider((ref) async {
   final dio = ref.read(dioProvider);

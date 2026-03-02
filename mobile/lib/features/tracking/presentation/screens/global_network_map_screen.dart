@@ -94,9 +94,7 @@ class NetworkMapPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.blue.withOpacity(0.1)
-      ..style = PaintingStyle.fill;
+    canvas.drawRect(Offset.zero & size, Paint()..color = Colors.blue.withOpacity(0.1));
 
     // Draw stylized "Grid" or dots for world map
     final dotPaint = Paint()..color = Colors.white.withOpacity(0.05);

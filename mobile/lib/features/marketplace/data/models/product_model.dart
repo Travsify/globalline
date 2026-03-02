@@ -32,19 +32,19 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'].toString(),
-      title: json['title'] as String,
-      imageUrl: json['image_url'] as String,
-      price: (json['price'] as num).toDouble(),
-      baseUsdPrice: (json['base_usd_price'] as num).toDouble(),
-      displayPrice: (json['display_price'] as num).toDouble(),
-      symbol: json['symbol'] as String? ?? '\$',
-      currency: json['currency'] as String,
-      supplierName: json['supplier_name'] as String,
-      moq: json['moq'] as String,
-      description: json['description'] as String,
-      images: (json['images'] as List).map((e) => e as String).toList(),
-      category: json['category'] as String? ?? 'General',
+      id: json['id']?.toString() ?? '',
+      title: json['title']?.toString() ?? '',
+      imageUrl: json['image_url']?.toString() ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      baseUsdPrice: (json['base_usd_price'] as num?)?.toDouble() ?? 0.0,
+      displayPrice: (json['display_price'] as num?)?.toDouble() ?? 0.0,
+      symbol: json['symbol']?.toString() ?? r'$',
+      currency: json['currency']?.toString() ?? 'USD',
+      supplierName: json['supplier_name']?.toString() ?? '',
+      moq: json['moq']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      images: (json['images'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      category: json['category']?.toString() ?? 'General',
     );
   }
 

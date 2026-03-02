@@ -4,10 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile/features/auth/presentation/providers/auth_provider.dart';
 import 'package:mobile/features/wallet/presentation/providers/wallet_provider.dart';
 import 'package:mobile/features/orders/data/repositories/order_repository.dart';
-import 'package:mobile/features/addresses/presentation/screens/address_list_screen.dart';
-import 'package:mobile/features/support/presentation/screens/support_ticket_list_screen.dart';
-import 'package:mobile/features/kyc/presentation/screens/kyc_upload_screen.dart';
-import 'package:mobile/features/loyalty/presentation/screens/loyalty_dashboard_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -123,7 +119,7 @@ class ProfileScreen extends ConsumerWidget {
                         ordersAsync.when(
                           data: (orders) => orders.length.toString(), 
                           loading: () => "...", 
-                          error: (_,__) => "0"
+                          error: (e, _) => "0"
                         ), 
                         Icons.local_shipping
                       ),
@@ -133,7 +129,7 @@ class ProfileScreen extends ConsumerWidget {
                         walletAsync.when(
                           data: (w) => "\$${w.balance.toStringAsFixed(2)}", 
                           loading: () => "...", 
-                          error: (_,__) => "\$0.00"
+                          error: (e, _) => "\$0.00"
                         ), 
                         Icons.account_balance_wallet
                       ),
@@ -156,13 +152,14 @@ class ProfileScreen extends ConsumerWidget {
                       _buildMenuItem(context, "My Orders", Icons.history, () => context.push('/orders')),
                       _buildMenuItem(context, "Edit Profile", Icons.person_outline, () => context.push('/profile/edit')),
                       _buildMenuItem(context, "Change Password", Icons.lock_outline, () => context.push('/profile/password')),
-                      _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddressListScreen()))),
-                      _buildMenuItem(context, "Loyalty & Tiers", Icons.stars, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const LoyaltyDashboardScreen()))),
+                      _buildMenuItem(context, "Saved Addresses", Icons.location_on, () => context.push('/addresses')),
+                      _buildMenuItem(context, "Loyalty & Tiers", Icons.stars, () => context.push('/loyalty')),
+                      _buildMenuItem(context, "Security & Settings", Icons.security_outlined, () => context.push('/profile/security')),
                       // Temporary navigation to existing PaymentMethodScreen for management (or TODO: create separate list)
                       _buildMenuItem(context, "Payment Methods", Icons.credit_card, () => context.push('/checkout/payment', extra: {'amount': 0.0, 'currency': 'USD', 'email': user?.email ?? '', 'isFunding': true})), 
                       Divider(color: Colors.white.withOpacity(0.1), height: 32),
-                      _buildMenuItem(context, "Help & Support", Icons.help_outline, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportTicketListScreen()))),
-                      _buildMenuItem(context, "KYC Verification", Icons.verified_user_outlined, () => Navigator.push(context, MaterialPageRoute(builder: (_) => const KycUploadScreen()))),
+                      _buildMenuItem(context, "Help & Support", Icons.help_outline, () => context.push('/support')),
+                      _buildMenuItem(context, "KYC Verification", Icons.verified_user_outlined, () => context.push('/kyc/upload')),
                       _buildMenuItem(context, "Privacy Policy", Icons.privacy_tip_outlined, () => _showPrivacyPolicy(context)),
                       const SizedBox(height: 24),
                       TextButton(

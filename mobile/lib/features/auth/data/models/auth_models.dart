@@ -27,11 +27,11 @@ class User {
 
     return User(
       id: json['id']?.toString() ?? '',
-      email: (json['email'] as String?) ?? '',
-      name: (json['name'] as String?) ?? '',
-      avatarUrl: json['avatar_url'] as String?,
+      email: json['email']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      avatarUrl: json['avatar_url']?.toString(),
       loyaltyPoints: parsePoints(json['loyalty_points']),
-      tier: (json['tier'] as String?) ?? 'bronze',
+      tier: json['tier']?.toString() ?? 'bronze',
     );
   }
 

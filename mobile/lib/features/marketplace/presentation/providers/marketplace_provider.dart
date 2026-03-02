@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/marketplace/data/models/product_model.dart';
-import 'package:mobile/features/marketplace/data/repositories/marketplace_repository.dart';
 
 import 'package:mobile/features/marketplace/presentation/providers/currency_provider.dart';
 import 'package:mobile/features/marketplace/presentation/providers/marketplace_repository_provider.dart';

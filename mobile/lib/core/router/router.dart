@@ -11,6 +11,7 @@ import 'package:mobile/features/tracking/presentation/screens/tracking_screen.da
 import 'package:mobile/features/profile/presentation/screens/profile_screen.dart';
 import 'package:mobile/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:mobile/features/profile/presentation/screens/change_password_screen.dart';
+import 'package:mobile/features/profile/presentation/screens/security_settings_screen.dart';
 import 'package:mobile/shared/widgets/scaffold_with_navbar.dart';
 import 'package:mobile/features/logistics/presentation/screens/shipping_calculator_screen.dart';
 import 'package:mobile/features/logistics/presentation/screens/create_shipment_screen.dart';
@@ -31,12 +32,25 @@ import 'package:mobile/features/marketplace/presentation/screens/cart_screen.dar
 import 'package:mobile/features/marketplace/presentation/screens/checkout_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/create_sourcing_request_screen.dart';
 import 'package:mobile/features/marketplace/presentation/screens/sourcing_hub_screen.dart';
+import 'package:mobile/features/marketplace/presentation/screens/sourcing_list_screen.dart';
 
 import 'package:mobile/features/wallet/presentation/screens/wallet_screen.dart';
 import 'package:mobile/features/wallet/presentation/screens/currency_conversion_screen.dart';
+import 'package:mobile/features/wallet/presentation/screens/fund_with_virtual_account_screen.dart';
 
 import 'package:mobile/features/onboarding/presentation/screens/splash_screen.dart';
 import 'package:mobile/features/onboarding/presentation/screens/onboarding_screen.dart';
+
+import 'package:mobile/features/wallet/presentation/screens/qr_scan_screen.dart';
+import 'package:mobile/features/kyc/presentation/screens/kyc_upload_screen.dart';
+import 'package:mobile/features/loyalty/presentation/screens/loyalty_dashboard_screen.dart';
+import 'package:mobile/features/support/presentation/screens/support_ticket_list_screen.dart';
+import 'package:mobile/features/support/presentation/screens/create_ticket_screen.dart';
+import 'package:mobile/features/support/presentation/screens/ticket_detail_screen.dart';
+import 'package:mobile/features/marketplace/presentation/screens/ai_sourcing_screen.dart';
+import 'package:mobile/features/addresses/presentation/screens/add_edit_address_screen.dart';
+import 'package:mobile/features/tracking/presentation/screens/global_network_map_screen.dart';
+import 'package:mobile/features/auth/presentation/screens/forgot_password_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -73,6 +87,16 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/wallet/convert',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const CurrencyConversionScreen(),
+      ),
+      GoRoute(
+        path: '/wallet/virtual-account',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const FundWithVirtualAccountScreen(),
+      ),
+      GoRoute(
+        path: '/wallet/scan',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const QRScanScreen(),
       ),
       GoRoute(
         path: '/calculator',
@@ -168,7 +192,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         ],
       ),
       GoRoute(
-        path: '/wallet/pay-supplier',
+        path: '/pay-supplier',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const PaySupplierScreen(),
       ),
@@ -176,6 +200,56 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/logistics/virtual-addresses',
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const MyAddressesScreen(),
+      ),
+      GoRoute(
+        path: '/logistics/map',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const GlobalNetworkMapScreen(),
+      ),
+      GoRoute(
+        path: '/kyc/upload',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const KycUploadScreen(),
+      ),
+      GoRoute(
+        path: '/loyalty',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const LoyaltyDashboardScreen(),
+      ),
+      GoRoute(
+        path: '/support',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const SupportTicketListScreen(),
+        routes: [
+          GoRoute(
+            path: 'create',
+            parentNavigatorKey: rootNavigatorKey,
+            builder: (context, state) => const CreateTicketScreen(),
+          ),
+          GoRoute(
+            path: 'ticket/:id',
+            parentNavigatorKey: rootNavigatorKey,
+            builder: (context, state) {
+              final id = int.tryParse(state.pathParameters['id'] ?? '0') ?? 0;
+              return TicketDetailScreen(ticketId: id);
+            },
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/marketplace/ai-sourcing',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const AiSourcingScreen(),
+      ),
+      GoRoute(
+        path: '/addresses/manage',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const AddEditAddressScreen(),
+      ),
+      GoRoute(
+        path: '/forgot-password',
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const ForgotPasswordScreen(),
       ),
       ShellRoute(
         navigatorKey: shellNavigatorKey,
@@ -208,6 +282,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: 'password',
                 parentNavigatorKey: rootNavigatorKey,
                 builder: (context, state) => const ChangePasswordScreen(),
+              ),
+              GoRoute(
+                path: 'security',
+                parentNavigatorKey: rootNavigatorKey,
+                builder: (context, state) => const SecuritySettingsScreen(),
               ),
             ],
           ),

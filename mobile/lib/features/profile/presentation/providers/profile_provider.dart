@@ -1,9 +1,6 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/network/api_client.dart';
-import '../../data/repositories/profile_repository.dart';
-import '../../../auth/data/models/auth_models.dart';
-import '../../../auth/presentation/providers/auth_state.dart'; // Reuse auth state or create new one? Let's use simplified state.
+import 'package:mobile/core/network/api_client.dart';
+import 'package:mobile/features/profile/data/repositories/profile_repository.dart';
 
 class ProfileState {
   final bool isLoading;

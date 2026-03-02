@@ -4,11 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\SupplierPayment;
+use App\Services\CurrencyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SupplierPaymentController extends Controller
 {
+    protected CurrencyService $currencyService;
+
+    public function __construct(CurrencyService $currencyService)
+    {
+        $this->currencyService = $currencyService;
+    }
     public function index()
     {
         $payments = SupplierPayment::where('user_id', Auth::id())
@@ -30,15 +37,7 @@ class SupplierPaymentController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $localAmount = 0;
-        // Simple mock conversion for demo purposes
-        if ($request->currency === 'USD') {
-            $localAmount = $request->amount * 1500; // NGN
-        } else if ($request->currency === 'CNY') {
-            $localAmount = $request->amount * 210; // NGN
-        } else {
-             $localAmount = $request->amount;
-        }
+        $localAmount = $this->currencyService->convert($request->amount, $request->currency, 'NGN');
 
         $payment = SupplierPayment::create([
             'user_id' => Auth::id(),

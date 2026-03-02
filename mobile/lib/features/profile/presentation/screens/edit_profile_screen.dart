@@ -1,10 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/profile_provider.dart';
-import '../../../auth/data/models/auth_models.dart';
-import '../../../auth/presentation/providers/auth_repository_provider.dart'; // To get current user? Or from auth state?
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen({super.key});

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/features/marketplace/data/repositories/marketplace_repository.dart';
 import 'package:mobile/features/marketplace/presentation/providers/marketplace_repository_provider.dart';
 import 'package:mobile/features/marketplace/presentation/providers/marketplace_provider.dart';
 
@@ -62,7 +61,7 @@ class _CreateSourcingRequestScreenState extends ConsumerState<CreateSourcingRequ
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Expanded(child: _buildTextField(_priceController, "Target Price (e.g. $2.50)", Icons.monetization_on_outlined)),
+                  Expanded(child: _buildTextField(_priceController, "Target Price (e.g. \$2.50)", Icons.monetization_on_outlined)),
                   const SizedBox(width: 16),
                   Expanded(child: _buildTextField(_qtyController, "Target Quantity", Icons.production_quantity_limits_outlined)),
                 ],

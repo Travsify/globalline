@@ -75,4 +75,55 @@ class FincraService
     {
         // Implement get banks logic
     }
+
+    /**
+     * Create a Virtual Account for a user.
+     * 
+     * @param \App\Models\User $user
+     * @param string $currency
+     * @return array
+     */
+    public function createVirtualAccount($user, string $currency = 'NGN')
+    {
+        if (empty($this->secretKey)) {
+            Log::info('Fincra Virtual Account Mock for user: ' . $user->id);
+            return [
+                'status' => 'success',
+                'data' => [
+                    'account_number' => '0123456789',
+                    'bank_name' => 'Wema Bank (Mock)',
+                    'account_name' => $user->name,
+                    'currency' => $currency,
+                ]
+            ];
+        }
+
+        try {
+            $response = Http::withHeaders([
+                'api-key' => $this->secretKey,
+                'Content-Type' => 'application/json',
+            ])->post($this->baseUrl . 'core/virtual-accounts', [
+                'currency' => $currency,
+                'accountType' => 'individual',
+                'KYCInformation' => [
+                    'firstName' => $user->name, // Simplification
+                    'lastName' => 'User',
+                    'email' => $user->email,
+                    'bvn' => $user->bvn ?? '00000000000', // BVN needed for NGN
+                ],
+                'channel' => 'vfd', // or 'wema'
+            ]);
+
+            if ($response->successful()) {
+                return $response->json();
+            }
+
+            Log::error('Fincra Virtual Account Creation Failed: ' . $response->body());
+            throw new \Exception('Fincra Virtual Account Failed: ' . ($response->json()['message'] ?? 'Unknown error'));
+
+        } catch (\Exception $e) {
+            Log::error('Fincra Service Error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

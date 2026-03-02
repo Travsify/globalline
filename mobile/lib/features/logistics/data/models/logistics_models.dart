@@ -67,38 +67,37 @@ class Shipment {
   factory Shipment.fromJson(Map<String, dynamic> json) {
     return Shipment(
       id: json['id']?.toString() ?? '',
-      trackingNumber: json['tracking_number'] as String? ?? '',
-      origin: json['origin'] as String? ?? '',
-      destination: json['destination'] as String? ?? '',
-      status: json['status'] as String? ?? 'pending',
-      estimatedDelivery: json['estimated_delivery'] != null
-          ? DateTime.parse(json['estimated_delivery'] as String)
-          : DateTime.now(),
-      history: json['history'] != null
-          ? (json['history'] as List).map((e) => ShipmentEvent.fromJson(e)).toList()
-          : [],
-      originCountry: json['origin_country'] as String?,
-      destinationCountry: json['destination_country'] as String?,
-      senderName: json['sender_name'] as String?,
-      senderPhone: json['sender_phone'] as String?,
-      senderEmail: json['sender_email'] as String?,
-      receiverName: json['receiver_name'] as String?,
-      receiverPhone: json['receiver_phone'] as String?,
-      receiverEmail: json['receiver_email'] as String?,
+      trackingNumber: json['tracking_number']?.toString() ?? '',
+      origin: json['origin']?.toString() ?? '',
+      destination: json['destination']?.toString() ?? '',
+      status: json['status']?.toString() ?? 'pending',
+      estimatedDelivery: DateTime.tryParse(json['estimated_delivery']?.toString() ?? '') ?? DateTime.now(),
+      history: (json['history'] as List?)
+              ?.map((e) => ShipmentEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      originCountry: json['origin_country']?.toString(),
+      destinationCountry: json['destination_country']?.toString(),
+      senderName: json['sender_name']?.toString(),
+      senderPhone: json['sender_phone']?.toString(),
+      senderEmail: json['sender_email']?.toString(),
+      receiverName: json['receiver_name']?.toString(),
+      receiverPhone: json['receiver_phone']?.toString(),
+      receiverEmail: json['receiver_email']?.toString(),
       weight: (json['weight'] as num?)?.toDouble(),
-      weightUnit: json['weight_unit'] as String?,
+      weightUnit: json['weight_unit']?.toString(),
       length: (json['length'] as num?)?.toDouble(),
       width: (json['width'] as num?)?.toDouble(),
       height: (json['height'] as num?)?.toDouble(),
-      packageType: json['package_type'] as String?,
+      packageType: json['package_type']?.toString(),
       declaredValue: (json['declared_value'] as num?)?.toDouble(),
-      description: json['description'] as String?,
-      serviceName: json['service_name'] as String?,
+      description: json['description']?.toString(),
+      serviceName: json['service_name']?.toString(),
       price: (json['price'] as num?)?.toDouble(),
-      currency: json['currency'] as String?,
+      currency: json['currency']?.toString(),
       isInsured: json['is_insured'] == true,
       insurancePremium: (json['insurance_premium'] as num?)?.toDouble(),
-      pickupType: json['pickup_type'] as String?,
+      pickupType: json['pickup_type']?.toString(),
     );
   }
 }
@@ -116,9 +115,9 @@ class ShipmentEvent {
 
   factory ShipmentEvent.fromJson(Map<String, dynamic> json) {
     return ShipmentEvent(
-      location: json['location'] as String,
-      description: json['description'] as String,
-      timestamp: DateTime.parse(json['timestamp'] as String),
+      location: json['location']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      timestamp: DateTime.tryParse(json['timestamp']?.toString() ?? '') ?? DateTime.now(),
     );
   }
 }
@@ -138,10 +137,10 @@ class ShippingRate {
 
   factory ShippingRate.fromJson(Map<String, dynamic> json) {
     return ShippingRate(
-      serviceName: json['service_name'] as String,
-      price: (json['price'] as num).toDouble(),
-      currency: json['currency'] as String,
-      estimatedDays: json['estimated_days'] as String,
+      serviceName: json['service_name']?.toString() ?? '',
+      price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      currency: json['currency']?.toString() ?? 'USD',
+      estimatedDays: json['estimated_days']?.toString() ?? '',
     );
   }
 }

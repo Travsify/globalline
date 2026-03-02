@@ -1,6 +1,5 @@
 
 import 'package:dio/dio.dart';
-import '../../../../core/network/api_client.dart';
 import '../../../../features/auth/data/models/auth_models.dart';
 
 abstract class ProfileRepository {

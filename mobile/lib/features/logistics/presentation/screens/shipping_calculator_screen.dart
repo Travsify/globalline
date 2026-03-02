@@ -5,7 +5,6 @@ import 'package:mobile/features/logistics/data/models/logistics_models.dart';
 import 'package:mobile/features/logistics/presentation/providers/logistics_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/core/utils/validation_utils.dart';
-import 'package:mobile/shared/widgets/status_widgets.dart';
 
 class ShippingCalculatorScreen extends ConsumerStatefulWidget {
   const ShippingCalculatorScreen({super.key});

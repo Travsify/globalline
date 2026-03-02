@@ -2,25 +2,19 @@ import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile/features/marketplace/presentation/providers/ai_sourcing_provider.dart';
 
-class AiSourcingScreen extends StatefulWidget {
+class AiSourcingScreen extends ConsumerStatefulWidget {
   const AiSourcingScreen({super.key});
 
   @override
-  State<AiSourcingScreen> createState() => _AiSourcingScreenState();
+  ConsumerState<AiSourcingScreen> createState() => _AiSourcingScreenState();
 }
 
-class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProviderStateMixin {
+class _AiSourcingScreenState extends ConsumerState<AiSourcingScreen> with TickerProviderStateMixin {
   late AnimationController _neuralController;
-  final List<Map<String, dynamic>> _messages = [
-    {
-      'isAi': true,
-      'text': 'NEURAL LINK ESTABLISHED. I am your GlobalLine Sourcing Agent. I have active pipelines to Shenzhen, Istanbul, and Dubai. What procurement node shall we activate today?',
-    }
-  ];
   final _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  bool _isTyping = false;
 
   @override
   void initState() {
@@ -41,42 +35,15 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
 
   void _sendMessage() {
     if (_controller.text.trim().isEmpty) return;
-
-    setState(() {
-      _messages.add({'isAi': false, 'text': _controller.text.trim()});
-      _isTyping = true;
-    });
-
-    final input = _controller.text.toLowerCase();
+    
+    final text = _controller.text.trim();
     _controller.clear();
+    ref.read(aiSourcingProvider.notifier).sendMessage(text);
     _scrollToBottom();
-
-    // Neural Processing Simulation
-    Future.delayed(const Duration(seconds: 2), () {
-      String response = "SUPPLIER NODES SCANNED. I've found 4 potential high-fidelity matches for your request. Initial verification suggests we can achieve a 12% margin below market average. Should I finalize the RFQ parameters?";
-      
-      if (input.contains('iphone') || input.contains('phone') || input.contains('laptop')) {
-        response = "ELECTRONICS GRID ACCESSED. 22 verified manufacturers in Shenzhen are active. One factory has a surplus of A-Grade components ready for immediate dispatch. Shall we bridge to an official RFQ?";
-      } else if (input.contains('shoe') || input.contains('cloth')) {
-        response = "TEXTILE AGGREGATOR SYNCED. Turkey and China nodes show optimal price-to-quality ratios for this quantity. I suggest the Turkey node for faster lead times. Confirm target MOQ?";
-      }
-
-      if (mounted) {
-        setState(() {
-          _isTyping = false;
-          _messages.add({
-            'isAi': true, 
-            'text': response,
-            'hasAction': true,
-          });
-        });
-        _scrollToBottom();
-      }
-    });
   }
 
   void _scrollToBottom() {
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
@@ -89,6 +56,15 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
+    final aiState = ref.watch(aiSourcingProvider);
+    
+    // Auto-scroll on new message
+    ref.listen(aiSourcingProvider, (previous, next) {
+      if (previous?.messages.length != next.messages.length) {
+        _scrollToBottom();
+      }
+    });
+
     return Scaffold(
       backgroundColor: const Color(0xFF001540), // GlobalLine Deep Navy
       body: Stack(
@@ -113,15 +89,16 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
                 child: ListView.builder(
                   controller: _scrollController,
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                  itemCount: _messages.length,
+                  itemCount: aiState.messages.length,
                   itemBuilder: (context, index) {
-                    final msg = _messages[index];
+                    final msg = aiState.messages[index];
                     return _buildNeuralBubble(msg);
                   },
                 ),
               ),
-              if (_isTyping) _buildScanningIndicator(),
-              _buildInputMatrix(),
+              if (aiState.isLoading) _buildScanningIndicator(),
+              if (aiState.error != null) _buildErrorIndicator(aiState.error!),
+              _buildInputMatrix(aiState.isLoading),
             ],
           ),
         ],
@@ -151,9 +128,9 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('NEURAL AGENT v1.0', 
+              Text('SOURCING ASSISTANT v1.1', 
                 style: TextStyle(color: Color(0xFFFFD700), fontSize: 10, letterSpacing: 3, fontWeight: FontWeight.bold)),
-              Text('Syncing Global Nodes...', 
+              Text('Live Procurement Node', 
                 style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'Outfit')),
             ],
           ),
@@ -199,15 +176,22 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
             ),
           ),
         ),
-        if (isAi && msg['hasAction'] == true) ...[
+        if (isAi && (msg['hasAction'] == true || msg['suggestions'] != null)) ...[
           Padding(
             padding: const EdgeInsets.only(bottom: 24, left: 8),
-            child: Row(
-              children: [
-                _buildNodeAction("FINALIZE RFQ", Icons.assignment_turned_in),
-                const SizedBox(width: 12),
-                _buildNodeAction("SCAN TURKEY", Icons.gps_fixed, isSecondary: true),
-              ],
+            child: Wrap(
+               spacing: 12,
+               runSpacing: 12,
+               children: [
+                  if (msg['suggestions'] != null)
+                    for (var sug in (msg['suggestions'] as List))
+                      _buildNodeAction(sug.toString().toUpperCase(), Icons.bolt, isSecondary: true, onTap: () {
+                        _controller.text = sug.toString();
+                        _sendMessage();
+                      }),
+                  if (msg['hasAction'] == true)
+                    _buildNodeAction("VIEW MATCHES", Icons.grid_view),
+               ],
             ),
           ),
         ]
@@ -215,25 +199,29 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
     );
   }
 
-  Widget _buildNodeAction(String label, IconData icon, {bool isSecondary = false}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isSecondary ? Colors.transparent : const Color(0xFFFFD700),
-        borderRadius: BorderRadius.circular(12),
-        border: isSecondary ? Border.all(color: const Color(0xFFFFD700).withOpacity(0.5)) : null,
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 14, color: isSecondary ? const Color(0xFFFFD700) : const Color(0xFF001540)),
-          const SizedBox(width: 8),
-          Text(label, style: TextStyle(
-            color: isSecondary ? const Color(0xFFFFD700) : const Color(0xFF001540), 
-            fontWeight: FontWeight.bold, 
-            fontSize: 10,
-            letterSpacing: 1,
-          )),
-        ],
+  Widget _buildNodeAction(String label, IconData icon, {bool isSecondary = false, VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSecondary ? Colors.transparent : const Color(0xFFFFD700),
+          borderRadius: BorderRadius.circular(12),
+          border: isSecondary ? Border.all(color: const Color(0xFFFFD700).withOpacity(0.5)) : null,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 14, color: isSecondary ? const Color(0xFFFFD700) : const Color(0xFF001540)),
+            const SizedBox(width: 8),
+            Text(label, style: TextStyle(
+              color: isSecondary ? const Color(0xFFFFD700) : const Color(0xFF001540), 
+              fontWeight: FontWeight.bold, 
+              fontSize: 10,
+              letterSpacing: 1,
+            )),
+          ],
+        ),
       ),
     );
   }
@@ -249,14 +237,22 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
             child: CircularProgressIndicator(strokeWidth: 1, color: Color(0xFFFFD700)),
           ),
           const SizedBox(width: 12),
-          Text("DECRYPTING SUPPLIER FREQUENCIES...", 
+          Text("QUERYING SOURCING NODE...", 
             style: TextStyle(color: const Color(0xFFFFD700).withOpacity(0.6), fontSize: 10, letterSpacing: 2, fontWeight: FontWeight.bold)),
         ],
       ),
     );
   }
 
-  Widget _buildInputMatrix() {
+  Widget _buildErrorIndicator(String error) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      child: Text(error, 
+        style: const TextStyle(color: Colors.redAccent, fontSize: 10, fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Widget _buildInputMatrix(bool isLoading) {
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
@@ -278,9 +274,10 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
                   ),
                   child: TextField(
                     controller: _controller,
+                    enabled: !isLoading,
                     style: const TextStyle(color: Colors.white, fontSize: 14),
                     decoration: InputDecoration(
-                      hintText: 'Transmit procurement intent...',
+                      hintText: isLoading ? 'Syncing...' : 'What are you looking for?',
                       hintStyle: TextStyle(color: Colors.white.withOpacity(0.2), fontSize: 14),
                       border: InputBorder.none,
                     ),
@@ -290,12 +287,12 @@ class _AiSourcingScreenState extends State<AiSourcingScreen> with TickerProvider
               ),
               const SizedBox(width: 16),
               GestureDetector(
-                onTap: _sendMessage,
+                onTap: isLoading ? null : _sendMessage,
                 child: Container(
                   width: 52,
                   height: 52,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFD700),
+                    color: isLoading ? Colors.grey : const Color(0xFFFFD700),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(color: const Color(0xFFFFD700).withOpacity(0.3), blurRadius: 20, spreadRadius: -5),
